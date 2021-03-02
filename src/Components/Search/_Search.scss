@@ -7,16 +7,7 @@
 .noVisible { display: none; }
 
 .history-search-container  {
- display: flex;
- flex-direction: row;
-}
-
-.react-dropdown-select-input {
-
-
-  &::placeholder {
-    color: black;
-  }
+  @include flex-structure(row, none, none, none);
 }
 
 .search-values {
@@ -51,11 +42,29 @@
 }
 
 .brand-select { grid-area: element1 }
-.model-select {grid-area: element2 }
-.year-select {grid-area: element3 }
+.model-select { grid-area: element2 }
+.seller-select {grid-area: element3 }
 .km-select {grid-area: element4 }
-.seller-select {grid-area: element5 }
+.year-select { grid-area: element5 }
 .price-select {grid-area: element6 }
+
+.input {
+  &.input-search {
+    height: .8rem;
+    width: 100%;
+    margin-bottom: .6rem;
+    border: 1px solid $grey-light-color;
+  }
+
+  &::placeholder {
+    color: $grey-darker;
+    font-weight: 400;
+  }
+
+  &:hover {
+    border: .1rem solid blue;
+  }
+}
 
 .select-buttons {
   grid-area: element7;

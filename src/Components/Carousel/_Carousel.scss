@@ -19,14 +19,13 @@
 .arrowHover {
   &:hover {
     color: $primary-color;
-    transform: scale(1.1);
     cursor: pointer;
   }
 }
-.left { left: 1rem; }
-.right { right: 4rem; }
+.left { left: 0rem; bottom: -0.6rem;}
+.right { right: 3rem; bottom: -0.6rem; }
 
-svg {
-  background-color: rgb(234, 239, 243);
+.arrow-style {
+  background-color: $bg-red-light;
   background-size: auto;
 }

@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
 import { Select } from 'react-dropdown-select';
-import { Button } from '../Generic';
+import { Button, Input } from '../Generic';
 
 const Search = ( { pathName, showResults, className } ) => {
   const { data, setData } = useContext(Context);
@@ -50,7 +50,7 @@ const Search = ( { pathName, showResults, className } ) => {
             showResults && (
               <>
                 { Object.values(data.searchValues).map((value, key) => {
-                    return  (
+                    return (
                       value && <p className='search-values' key={key}>{value}</p>
                     )
                   })
@@ -73,7 +73,7 @@ const Search = ( { pathName, showResults, className } ) => {
           />
           <Select
             name='models'
-            className='brand-select grey-color'
+            className='model-select grey-color'
             placeholder='Modelo'
             values={modelsValue}
             onChange={(modelsValue) => {
@@ -83,30 +83,8 @@ const Search = ( { pathName, showResults, className } ) => {
             options={data.select.models}
           />
           <Select
-            name='years'
-            className='brand-select grey-color'
-            placeholder='Año'
-            values={yearsValue}
-            onChange={(yearsValue) => {
-              setYearsValue(yearsValue)
-              handleChange(yearsValue)
-            }}
-            options={data.select.years}
-          />
-          <Select
-            name='kms'
-            className='brand-select grey-color'
-            placeholder='Km'
-            values={kmsValue}
-            onChange={(kmsValue) => {
-              setKmsValue(kmsValue)
-              handleChange(kmsValue)
-            }}
-            options={data.select.kms}
-          />
-          <Select
             name='sellers'
-            className='brand-select grey-color'
+            className='seller-select grey-color'
             placeholder='Vendedor'
             values={sellersValue}
             onChange={(sellersValue) => {
@@ -115,16 +93,23 @@ const Search = ( { pathName, showResults, className } ) => {
             }}
             options={data.select.sellers}
           />
-          <Select
-            name='prices'
-            className='brand-select grey-color'
-            placeholder='Precio'
-            values={pricesValue}
-            onChange={(pricesValue) => {
-              setPricesValue(pricesValue)
-              handleChange(pricesValue)
-            }}
-            options={data.select.prices}
+          <Input
+            containerClassName='km-select'
+            InputClassName='input-search'
+            placeholder='Introduce Km'
+            type='number'
+          />
+          <Input
+            containerClassName='year-select'
+            InputClassName='input-search'
+            placeholder='Introduce Año'
+            type='number'
+          />
+          <Input
+            containerClassName='price-select'
+            InputClassName='input-search'
+            placeholder='Introduce Precio'
+            type='number'
           />
           <div className='select-buttons'>
             <Button

@@ -48,7 +48,7 @@ const Carousel = ({
       setCurrentPosition((prev) => {
         return prev + 1 === 5 ? 0 : prev + 1;
       });
-    }, 3800);
+    }, 4000);
     return () => {
       clearInterval(intervalId);
     };
@@ -61,7 +61,7 @@ const Carousel = ({
           <div
             className={`arrow left ${currentPosition === 0 ? 'grey-color' : 'arrowHover'}`}
             onClick={arrowLeftClick}>
-            <AiOutlineLeftSquare />
+            <AiOutlineLeftSquare className='arrow-style' />
           </div>
           <img
             src={currentSlide.source}
@@ -72,7 +72,7 @@ const Carousel = ({
           <div
             className={`arrow right ${currentPosition === 4 ? 'grey-color' : 'arrowHover'}`}
             onClick={arrowRightClick}>
-            <AiOutlineRightSquare />
+            <AiOutlineRightSquare className='arrow-style' />
           </div>
         </div>
       </div>
