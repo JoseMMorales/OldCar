@@ -1,0 +1,26 @@
+.insurance-car {
+  @include flex-structure(row, none, none, space-around);
+  margin: 1rem 3rem 4rem;
+}
+
+.insurance-calculator {
+  @include flex-structure(column, none, center, center);
+}
+
+.image-insurance { margin: 1rem; }
+
+@media(max-width: $medium-device) {
+  .insurance-car { margin: 1rem; }
+}
+
+@media(max-width: $change-device) {
+  .insurance-car {
+    @include flex-structure(column, none, none, none);
+    margin: 1rem 0;
+  }
+
+  .insurance-calculator {
+   width: 100%;
+   text-align: center;
+  }
+}

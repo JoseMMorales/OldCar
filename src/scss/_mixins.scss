@@ -1,0 +1,36 @@
+//General
+@mixin flex-structure($direction, $flow, $align, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  flex-flow: $flow;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+//About and Contact
+@mixin separator-style($width, $height, $margin, $top-padding) {
+  content: '';
+  display: block;
+  margin: $margin;
+  width: $width;
+  height: $height;
+  padding-top: $top-padding;
+  background-color: $primary-color;
+}
+
+//Footer
+@mixin footer-headings-style($color-heading, $font-size-heading, $margin) {
+  color: $color-heading;
+  font-size: $font-size-heading;
+  margin: $margin;
+}
+
+@mixin menu-content-separator {
+  content: "|";
+  font-weight: 300;
+  font-size: 1.1rem;
+  left: 0;
+  color: $light-color;
+  display: inline-block;
+  padding-right: .3rem;
+}

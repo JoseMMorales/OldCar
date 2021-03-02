@@ -1,0 +1,16 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  height: 93vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+.search-home {
+  width: 75%;
+  margin-top: .5rem;
+}

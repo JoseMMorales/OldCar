@@ -1,0 +1,17 @@
+.btn {
+  color: $light-color;
+  border: none;
+  padding: .9rem;
+  outline: none;
+  cursor: pointer;
+  background-size: 100% 200%;
+  background-image: linear-gradient(to bottom, #c73f3f 50%, #000 50%);
+  transition:
+    background-position .3s ease-in-out,
+    color .3s ease-in-out;
+
+  &:hover {
+    background-position: 0 100%;
+    color: $light-color;
+  }
+}

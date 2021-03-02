@@ -1,0 +1,82 @@
+.contact-container {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 450px minmax(250px, 1fr);
+  grid-template-rows: 70px 1fr;
+  gap: 1rem;
+  grid-template-areas:
+      ' . element1 . '
+  'element2 element3 element4';
+
+  margin: 2rem 0;
+  overflow: hidden;
+
+  h1 {
+    text-align: center;
+
+    &::after { @include separator-style(45%, 0, .6rem auto, .1rem); }
+  }
+
+  img {
+    position: relative;
+    max-width: 100%;
+  }
+}
+
+.contact-heading { grid-area: element1 }
+
+.contact-image-left {
+  grid-area: element2;
+
+  img {
+    left: -70px;
+    height: 100%;
+  }
+}
+
+.form-row {
+  @include flex-structure(column, none, stretch, none);
+}
+
+.contact-image-right {
+  grid-area: element4;
+  @include flex-structure(none, none, none, flex-end);
+
+  img { right: -70px }
+}
+
+@media (max-width: $large-device) {
+  .contact-container {
+    grid-template-columns: 1fr 450px;
+    gap: none;
+    grid-template-areas:
+    'element2 element1 '
+    'element2 element3';
+  }
+
+  .contact-image-right { display: none }
+}
+
+@media (max-width: $medium-device) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    'element1'
+    'element3';
+
+    margin: 2rem 3rem;
+  }
+  .contact-image-left { display: none }
+  .contact-image-right { display: none }
+}
+
+@media (max-width: $small-device) {
+  .contact-container {
+    margin: 2rem 0.5rem;
+
+    h1 { font-size: 1.5rem }
+  }
+
+  .form-row {
+    @include flex-structure(none, none, none, center);
+  }
+}

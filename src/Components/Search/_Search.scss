@@ -1,0 +1,89 @@
+.search-container {
+  @include flex-structure(column, none, none, center);
+  padding: .6rem;
+  border: 1px solid $grey-light-color;
+}
+
+.noVisible { display: none; }
+
+.history-search-container  {
+ display: flex;
+ flex-direction: row;
+}
+
+.react-dropdown-select-input {
+
+
+  &::placeholder {
+    color: black;
+  }
+}
+
+.search-values {
+  margin: 0 .6rem;
+  padding: .1rem .4rem;
+  border: 1px solid $grey-color;
+  font-weight: 400;
+}
+
+.search-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+  "element1 element2 element3 element4"
+  "element5 element6 element7 element7";
+
+  padding: .5rem;
+
+  > div {
+    display: flex;
+    align-items: center;
+    margin: .1rem;
+  }
+
+  .react-dropdown-select {
+    height: 3rem;
+    border-radius: 0;
+    border: 1px solid $grey-light-color;
+    outline: none;
+  }
+}
+
+.brand-select { grid-area: element1 }
+.model-select {grid-area: element2 }
+.year-select {grid-area: element3 }
+.km-select {grid-area: element4 }
+.seller-select {grid-area: element5 }
+.price-select {grid-area: element6 }
+
+.select-buttons {
+  grid-area: element7;
+
+  @include flex-structure(none, none, center, center);
+
+  .btn-filter ,
+  .btn-reset {
+    margin: .5rem .1rem;
+  }
+}
+
+@media (max-width: $medium-device) {
+  .search-container .search-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+    "element1 element2 element3"
+    "element4 element5 element6"
+    "element7 element7 element7";
+  }
+}
+
+//SMALL DEVICE
+@media (max-width: 480px) {
+  .search-container { padding: 0; }
+
+  .search-wrapper {
+    @include flex-structure(column, none, none, none);
+  }
+}

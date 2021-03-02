@@ -1,0 +1,16 @@
+.contact-form {
+  grid-area: element3;
+  @include flex-structure(column, none, none, center);
+}
+
+@media (max-width: $large-device) {
+  .contact-form {
+    margin-right: 1.5rem;
+  }
+}
+
+@media (max-width: $small-device) {
+  .contact-form {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,69 @@
+.heading-details {
+  margin: 2rem 0;
+}
+
+.top-heading-details {
+  @include flex-structure(none, none, none, space-between);
+}
+
+.title {
+  font-weight: 600;
+}
+
+.main-details {
+  @include flex-structure(row, none, none, space-around);
+}
+
+.details-description {
+  @include flex-structure(column, none, none, space-between);
+  width: 35%;
+}
+
+.owner-paragraph {
+  line-height: 1.5rem;
+  text-align: justify;
+}
+
+.seller-details {
+  @include flex-structure(row, none, none, space-between);
+  padding: 1rem 0 3rem 0;
+  border-bottom: 1px solid $grey-light-color;
+
+  > div { width: 45%; }
+}
+
+@media(max-width: $large-device) {
+  .details-description {
+    width: 25%;
+    margin-left: 1rem;
+  }
+
+  .form-marging {
+    margin-right: 0;
+  }
+}
+
+@media(max-width: $medium-device) {
+  .main-details {
+    @include flex-structure(column, none, none, none);
+  }
+
+  .seller-details {
+    padding: 1rem 0 3rem 0;
+
+    > div {
+      width: 45%;
+    }
+  }
+}
+
+@media(max-width: $change-device) {
+  .seller-details {
+    @include flex-structure(column, none, none, none);
+    margin-left: 0;
+
+    > div {
+      width: 100%;
+    }
+  }
+}

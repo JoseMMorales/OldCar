@@ -1,0 +1,26 @@
+.slider {
+  position: relative;
+  display: flex;
+  flex-shrink: 1;
+  margin-bottom: 2rem;
+}
+
+.slider-img {
+  width: 100%;
+}
+
+.arrow {
+  position: relative;
+  width: 0;
+  align-self: center;
+  font-size: 3rem;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-color;
+    transform: scale(1.1);
+  }
+}
+
+.left { left: 1rem; }
+.right { right: 4rem; }

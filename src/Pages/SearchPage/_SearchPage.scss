@@ -1,0 +1,123 @@
+.searchPage-container {
+  .search-container {
+    margin: 1.8rem 0;
+  }
+}
+
+.search-results {
+  font-weight: bolder;
+}
+
+.search-car-container {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+
+  margin-bottom: 1.8rem;
+  padding: .6rem;
+  border: .1rem solid $grey-light-color;
+}
+
+.search-car-image {
+  @include flex-structure(none, none, center, none);
+
+  img {
+    width: 265px;
+    height: 190px;
+  }
+}
+
+.search-car-features {
+  @include flex-structure(column, none, none, center);
+  padding-left: .9rem;
+
+  p:first-child {
+    margin: inherit;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: x-large;
+  }
+}
+
+.search-price-car {
+  font-weight: bolder;
+  font-size: large;
+}
+
+.search-additional-features {
+  @include flex-structure(row, none, center, space-between);
+}
+
+.search-tags {
+  @include flex-structure(row, none, none, none);
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    padding: .6rem 1rem;
+    margin-right: .6rem;
+    border: .1rem solid $grey-light-color;
+  }
+}
+
+//MEDIUM DEVICE
+@media (max-width: $medium-device) {
+  .search-car-container {
+    grid-template-columns: 18rem 1fr;
+    grid-template-rows: 12.5rem 1fr;
+  }
+
+  .search-car-image { grid-column: 1; grid-row: 1 }
+  .search-car-features { grid-column: 2;}
+
+  .search-additional-features {
+    li {
+      padding: .2rem .5rem;
+    }
+  }
+}
+
+// //SMALL DEVICE
+@media (max-width: $change-device) {
+  .search-car-container {
+    @include flex-structure(column, none, none, none);
+
+    p:nth-child(2) {
+      margin-top: .2rem;
+      line-height: 1.2rem;
+    }
+  }
+
+  .search-car-image {
+    img {
+      width: 100%;
+      height: 350px;
+    }
+  }
+
+  .search-car-features {
+    margin-top: 1rem;
+    padding-left: 0;
+  }
+
+  .search-additional-features {
+    @include flex-structure(column, none, flex-start, none);
+
+    .search-tags { margin-bottom: 1rem; }
+
+    li { padding: .6rem .5rem; }
+  }
+
+  .search-price-car { font-size: large }
+  .btn-search { width: 100% }
+}
+
+@media (max-width: $small-device) {
+
+  .search-car-image {
+    img {
+      height: 250px;
+    }
+  }
+}
+

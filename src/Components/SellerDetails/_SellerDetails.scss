@@ -1,0 +1,19 @@
+.seller-description {
+  @include flex-structure(column, none, none, space-between);
+  width: 35%;
+  height: 300px;
+}
+
+@media(max-width: $large-device) {
+  .seller-description {
+    width: 25%;
+    margin-left: 1rem;
+  }
+}
+
+@media(max-width: $change-device) {
+  .seller-description {
+    width: 100%;
+    margin-left: 0;
+  }
+}

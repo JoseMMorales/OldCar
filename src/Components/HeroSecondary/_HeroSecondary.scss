@@ -1,0 +1,65 @@
+.heroSecondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100%;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.car-hero {
+  width: 110px;
+}
+
+.caption-hero {
+  z-index: 1;
+  font-size: 4.2rem;
+  color: $light-color;
+  font-weight: 300;
+
+  &::after {
+    @include separator-style(128%, .1rem, .6rem 0, 0);
+   }
+}
+
+@media(max-width: $medium-device){
+  .car-hero {
+    width: 90px;
+  }
+
+  .caption-hero {
+    font-size: 3.1rem;
+  }
+}
+
+@media(max-width: $change-device){
+  .car-hero {
+    width: 60px;
+  }
+
+  .caption-hero {
+    font-size: 2.1rem;
+
+    &::after {
+      @include separator-style(128%, .1rem, .6rem 0, 0);
+     }
+  }
+}
+
+@media(max-width: $extra-small-device){
+  .car-hero {
+   display: none;
+  }
+
+  .caption-hero {
+    font-size: 1.8rem;
+
+    &::after {
+      @include separator-style(100%, .1rem, .6rem 0, 0);
+     }
+  }
+}
+

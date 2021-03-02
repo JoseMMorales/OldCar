@@ -1,0 +1,79 @@
+.about-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-areas:
+    "element1 element1 element1 element1"
+    "element2 element3 element4 element5";
+
+  gap: 2.2rem;
+  justify-content: center;
+
+  margin: 4.2rem;
+  text-align: center;
+
+  h6 {
+    text-transform: uppercase;
+
+    &::after {
+      @include separator-style(15%, 0, .6rem auto, .1rem);
+    }
+  }
+
+  svg { font-size: 2.8rem }
+}
+
+.about-heading {
+  grid-area: element1;
+
+  h1 {
+    font-weight: 500;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    letter-spacing: 0;
+    margin-bottom: .6rem;
+  }
+
+  p {
+    line-height: 1.5rem;
+    margin: 2.6rem 3rem;
+  }
+}
+
+.separator {
+  &::before { @include separator-style(10%, 0, .2rem auto, .1rem) }
+}
+
+.brands { grid-area: element2 }
+.support{ grid-area: element3 }
+.dealership { grid-area: element4 }
+.affordable { grid-area: element5 }
+
+@media (max-width: $medium-device) {
+  .about-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr repeat(2, 200px);
+    grid-template-areas:
+      "element1 element1"
+      "element2 element3"
+      "element4 element5";
+
+    margin: 4.2rem 0.5rem;
+  }
+
+  .about-heading p { margin: 1.6rem 0 }
+}
+
+@media (max-width: $small-device) {
+  .about-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(4, 170px);
+    grid-template-areas:
+      "element1"
+      "element2"
+      "element3"
+      "element4"
+      "element5";
+  }
+  .about-heading p { text-align: justify }
+}

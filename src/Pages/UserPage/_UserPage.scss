@@ -1,0 +1,36 @@
+.user-container {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  height: 100vh;
+}
+
+.user-sidebar {
+  border-right: .1rem solid $grey-color;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  margin: 2rem;
+  padding: 0;
+  box-shadow: .1rem .2rem .2rem .2rem $grey-color;
+}
+
+.user-list-element {
+  width: 90%;
+  padding: 1rem;
+  border-bottom: .1rem solid $grey-light-color;
+
+  &:hover, &:active {
+    border-left: .5rem solid $grey-light-color;
+  }
+}
+
+// .user-content {
+//   // margin: 2rem;
+//   // padding: 0;
+//   // box-shadow: .1rem .2rem .2rem .2rem $grey-color;
+// }

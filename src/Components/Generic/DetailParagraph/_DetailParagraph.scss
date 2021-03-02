@@ -1,0 +1,11 @@
+.feature-detail {
+  @include flex-structure(row, none, none, space-between);
+  width: 100%;
+  padding-bottom: .5rem;
+  margin-top: 1.6rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: .1rem solid $grey-light-color;
+
+  span { text-transform:none; }
+}

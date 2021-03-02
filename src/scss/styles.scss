@@ -1,0 +1,133 @@
+//Sass Resources
+@import '_variables', '_mixins';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+li {
+  list-style-type: none;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.main-color {
+  color: $primary-color;
+}
+
+.light-color {
+  color: $light-color;
+}
+
+.dark-color {
+  color: $dark-color;
+}
+
+.grey-color {
+  color: $grey-color;
+}
+
+.grey-light-color {
+  color: $grey-light-color;
+}
+
+.additional-color {
+  color: $additional-color;
+}
+
+.bg-light {
+  background-color: $bg-light;
+}
+
+.bg-dark {
+  background-color: $bg-dark;
+}
+
+.bg-grey {
+  background-color: $bg-grey;
+}
+
+.bg-grey-light {
+  background-color: $bg-grey-light;
+}
+
+.bg-red-light {
+  background-color: $bg-red-light;
+}
+
+.bg-grey-Slight {
+  background-color: $bg-grey-Slight;
+}
+
+.total-width {
+  width: 100%;
+}
+
+.container {
+  width: 90%;
+  max-width: 2100px;
+  margin: 0 auto;
+}
+
+.container-centered {
+  @include flex-structure(flex, column, center, none);
+}
+
+.primary-color {
+  color: $primary-color;
+}
+
+//Modules
+@import '../Components/Navbar/Navbar';
+@import '../Components/Generic/Button/Button';
+@import '../Components/Generic/Input/Input';
+@import '../Components/Generic/Carousel/Carousel';
+@import '../Components/Generic/Dropdown/Dropdown';
+@import '../Components/Generic/DetailParagraph/DetailParagraph';
+@import '../Components/HeroHome/HeroHome';
+@import '../Components/HeroSecondary/HeroSecondary';
+@import '../Components/About/About';
+@import '../Components/Contact/Contact';
+@import '../Components/ContactForm/ContactForm';
+@import '../Components/CarDetails/CarDetails';
+@import '../Components/SellerDetails/SellerDetails';
+@import '../Components/Insurance/Insurance';
+@import '../Components/Search/Search';
+@import '../Pages/SearchPage/SearchPage';
+@import '../Pages/PublishPage/PublishPage';
+@import '../Pages/DetailsPage/DetailsPage';
+@import '../Pages/UserPage/UserPage';
+@import '../Pages/LoginPage/LoginPage';
+@import '../Pages/EditPage/EditPage';
+@import '../Components/BackToTop/BackToTop';
+@import '../Components/Footer/Footer';
+
+@media (max-width: 1200px) {
+	.container {
+    width: 95%;
+	}
+}
+
+
