@@ -1,7 +1,7 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Context } from '../../Context';
 import { useContext, useEffect } from 'react';
-import { Carousel } from '../../Components/Generic';
+import Carousel from '../../Components/Carousel/Carousel';
 import CarDetails from '../../Components/CarDetails/CarDetails';
 import SellerDetails from '../../Components/SellerDetails/SellerDetails';
 import Insurance from '../../Components/Insurance/Insurance';
@@ -27,7 +27,7 @@ const DetailsPage = (props) => {
         setData(prevState => ({...prevState, detailsCar: json}))
       })
       .catch(error => console.log(error));
-  }, []);
+  }, [id]);
 
   //Adding dots in integers received in data
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -46,7 +46,7 @@ const DetailsPage = (props) => {
                 <div className="heading-details">
                   <div className="top-heading-details">
                     <h1 className="title">
-                    {`${numberWithDots(`${ car.year}`)}`} {car.brand}
+                    {`${numberWithDots(`${ car.year}`)}`} {car.brand} {car.model}
                     </h1>
                     <h1 className="price main-color">
                     {`${numberWithDots(`${ car.price}`)}`}€
@@ -55,8 +55,14 @@ const DetailsPage = (props) => {
                   <p className="grey-color">{`${numberWithDots(`${car.description}`)}`}</p>
                 </div>
                 <div className="main-details">
-                  <Carousel />
-                  <CarDetails car={car}/>
+                  <Carousel
+                    mainImage={car.mainImage}
+                    secondImage={car.secondImage}
+                    thirdImage={car.thirdImage}
+                    fourthImage={car.fourthImage}
+                    fifthImage={car.fifthImage}
+                  />
+                  <CarDetails car={car} />
                 </div>
                 <div className="heading-details">
                   <h1 className='title grey-color'>

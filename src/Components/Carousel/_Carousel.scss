@@ -12,15 +12,21 @@
 .arrow {
   position: relative;
   width: 0;
-  align-self: center;
+  align-self: flex-end;
   font-size: 3rem;
-  cursor: pointer;
+}
 
+.arrowHover {
   &:hover {
     color: $primary-color;
     transform: scale(1.1);
+    cursor: pointer;
   }
 }
-
 .left { left: 1rem; }
 .right { right: 4rem; }
+
+svg {
+  background-color: rgb(234, 239, 243);
+  background-size: auto;
+}
