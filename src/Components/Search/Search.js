@@ -14,7 +14,6 @@ const Search = ( { pathName, showResults, className } ) => {
 
   //Handling change of values for context
   const handleChange = (value) => {
-    console.log(value);
     if (value.length === 0) {
       setSelectState({brand:'', model:'', seller:'', km:'', year:'', price:''})
     } else {

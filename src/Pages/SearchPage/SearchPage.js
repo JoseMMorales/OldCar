@@ -15,11 +15,11 @@ const SearchPage = () => {
 
   //Fetch data to display in SearchPage
   const defaultBrand = 'Ford';
-  const brandURL = data.searchValues.brands;
-  const modelURL = data.searchValues.models;
+  const brandURL = data.searchValues.brand;
+  const modelURL = data.searchValues.model;
 
   const USER_URL = `http://localhost:8000/search/${brandURL ? `${brandURL}` : `${defaultBrand}`}/${modelURL ? `${modelURL}` : ''}`;
-
+  console.log(USER_URL);
   useEffect(() => {
     fetch(USER_URL)
       .then(response => {
@@ -32,7 +32,7 @@ const SearchPage = () => {
         setData(prevState => ({...prevState, searchCars: json}))
       })
       .catch(error => console.log(error));
-  }, [data.searchValues.brands, data.searchValues.models]);
+  }, [data.searchValues.brand, data.searchValues.model]);
 
   //Adding dots in integers received in data
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
