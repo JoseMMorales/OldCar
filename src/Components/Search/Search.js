@@ -14,8 +14,9 @@ const Search = ( { pathName, showResults, className } ) => {
 
   //Handling change of values for context
   const handleChange = (value) => {
+    console.log(value);
     if (value.length === 0) {
-      setSelectState([]);
+      setSelectState({brand:'', model:'', seller:'', km:'', year:'', price:''})
     } else {
       setSelectState(prevState => ({
         ...prevState,
@@ -23,6 +24,14 @@ const Search = ( { pathName, showResults, className } ) => {
       }));
     }
   }
+
+  //Handle Input change in Inputs
+  const handleInput = e => {
+		const { name, value } = e.target;
+		setSelectState(prevState => ({
+      ...prevState, [name]: value
+    }));
+	}
 
   //Update Context when SelectState Change
   useEffect(() => {
@@ -37,10 +46,7 @@ const Search = ( { pathName, showResults, className } ) => {
   //States to clean the values up when click remove button
   const [brandsValue, setBrandsValue] = useState([]);
   const [modelsValue, setModelsValue] = useState([]);
-  const [yearsValue, setYearsValue] = useState([]);
-  const [kmsValue, setKmsValue] = useState([]);
   const [sellersValue, setSellersValue] = useState([]);
-  const [pricesValue, setPricesValue] = useState([]);
 
   return (
     <>
@@ -61,7 +67,7 @@ const Search = ( { pathName, showResults, className } ) => {
         </div>
         <div className='search-wrapper' key='search-wrapper'>
           <Select
-            name='brands'
+            name='brand'
             className='brand-select grey-color'
             placeholder='Marca'
             values={brandsValue}
@@ -69,10 +75,10 @@ const Search = ( { pathName, showResults, className } ) => {
               setBrandsValue(brandsValue)
               handleChange(brandsValue)
             }}
-            options={data.select.brands}
+            options={data.select.brand}
           />
           <Select
-            name='models'
+            name='model'
             className='model-select grey-color'
             placeholder='Modelo'
             values={modelsValue}
@@ -80,10 +86,10 @@ const Search = ( { pathName, showResults, className } ) => {
               setModelsValue(modelsValue)
               handleChange(modelsValue)
             }}
-            options={data.select.models}
+            options={data.select.model}
           />
           <Select
-            name='sellers'
+            name='seller'
             className='seller-select grey-color'
             placeholder='Vendedor'
             values={sellersValue}
@@ -91,31 +97,47 @@ const Search = ( { pathName, showResults, className } ) => {
               setSellersValue(sellersValue)
               handleChange(sellersValue)
             }}
-            options={data.select.sellers}
+            options={data.select.seller}
           />
           <Input
             containerClassName='km-select'
             InputClassName='input-search'
-            placeholder='Introduce Km'
+            placeholder='Km de 1 a 179.000'
             type='number'
+            inputName='km'
+            // labelName='Desde 1 a 179.000'
+            value={selectState.km}
+            labelClassName='label-input-name'
+            onChange={handleInput}
           />
           <Input
             containerClassName='year-select'
             InputClassName='input-search'
-            placeholder='Introduce Año'
+            placeholder='Año de 1.919 a 1.985'
             type='number'
+            inputName='year'
+            // labelName='Desde 1.919 a 1.985'
+            value={selectState.year}
+            labelClassName='label-input-name'
+            onChange={handleInput}
           />
           <Input
             containerClassName='price-select'
             InputClassName='input-search'
-            placeholder='Introduce Precio'
+            placeholder='Precio de 5.500 a 280.000'
             type='number'
+            inputName='price'
+            // labelName='Desde 5.500 a 280.000'
+            value={selectState.price}
+            labelClassName='label-input-name'
+            onChange={handleInput}
           />
           <div className='select-buttons'>
             <Button
               onClick={handleSearch}
               className='bn-filter btn total-width'
               name='Filtrar'
+              value={selectState.name}
             />
             <Button
               className='btn-reset total-width'
@@ -123,11 +145,8 @@ const Search = ( { pathName, showResults, className } ) => {
               onClick={() => {
                 setBrandsValue([])
                 setModelsValue([])
-                setYearsValue([])
-                setKmsValue([])
                 setSellersValue([])
-                setPricesValue([])
-                handleChange([])
+                setSelectState({brand:'', model:'', seller:'', km:'', year:'', price:''})
               }}
             />
           </div>

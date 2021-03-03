@@ -50,8 +50,8 @@
 
 .input {
   &.input-search {
-    height: .8rem;
-    width: 100%;
+    height: .9rem;
+    width: 99%;
     margin-bottom: .6rem;
     border: 1px solid $grey-light-color;
   }
@@ -62,13 +62,20 @@
   }
 
   &:hover {
-    border: .1rem solid blue;
+    border: 1px solid $additional-color;
   }
 }
 
+// .label {
+//   &.label-input-name {
+//     // margin: 0;
+//     // font-weight: 100;
+//     // color: $dark-color;
+//   }
+// }
+
 .select-buttons {
   grid-area: element7;
-
   @include flex-structure(none, none, center, center);
 
   .btn-filter ,
@@ -94,5 +101,18 @@
 
   .search-wrapper {
     @include flex-structure(column, none, none, none);
+  }
+
+  .input {
+    &.input-search {
+      width: 100%;
+      margin-bottom: 0rem;
+    }
+  }
+
+  .label {
+    &.label-input-name {
+      margin: 0;
+    }
   }
 }
