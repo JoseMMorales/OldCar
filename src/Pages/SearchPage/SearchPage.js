@@ -1,10 +1,9 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import Search from '../../Components/Search/Search';
 import { FaCalendarAlt, FaGasPump } from 'react-icons/fa';
-import { Button } from '../../Components/Generic';
 import { useContext, useEffect, useState } from 'react';
+import Search from '../../Components/Search/Search';
+import { Button } from '../../Components/Generic';
 import { Context } from '../../Context';
-// import { NavHashLink as Link} from 'react-router-hash-link';
 import { Link} from 'react-router-dom';
 
 const search_URL = `url('/img/bg-search.jpg')`;
@@ -14,11 +13,23 @@ const SearchPage = () => {
   const cars = data.searchCars;
 
   //Fetch data to display in SearchPage
-  const defaultBrand = 'Ford';
+  const defaultBrand = '/Ford';
   const brandURL = data.searchValues.brand;
   const modelURL = data.searchValues.model;
+  const sellerURL = data.searchValues.seller;
+  const kmURL = data.searchValues.km;
+  const yearURL = data.searchValues.year;
+  const priceURL = data.searchValues.price;
 
-  const USER_URL = `http://localhost:8000/search/${brandURL ? `${brandURL}` : `${defaultBrand}`}/${modelURL ? `${modelURL}` : ''}`;
+  const USER_URL = `http://localhost:8000/search${brandURL ?
+  `/${brandURL}` : `${defaultBrand}`}${modelURL ?
+  `/${modelURL}` : ''}${sellerURL ?
+  `/${sellerURL}` : ''}${kmURL ?
+  `/${kmURL}` : ''}${yearURL ?
+  `/${yearURL}` : ''}${priceURL ?
+  `/${priceURL}` : ''}`;
+
+
   console.log(USER_URL);
   useEffect(() => {
     fetch(USER_URL)
