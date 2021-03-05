@@ -1,5 +1,5 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../../Components/Generic';
 
 const login_URL = `url('/img/bg-login.jpg')`;
@@ -21,17 +21,17 @@ const LoginPage= () => {
               <Input
                 htmlFor='loginUsername'
                 Inputid='loginUsername'
-                labelName='Nombre usuario o email*'
+                // labelName='Email usuario*'
                 InputClassName={false}
                 labelClassName='grey-color'
                 type='text'
-                placeholder='Usuario'
+                placeholder='Email usuario'
                 required={true}
               />
               <Input
                 htmlFor='Loginpassword'
                 Inputid='Loginpassword'
-                labelName='Contraseña*'
+                // labelName='Contraseña*'
                 InputClassName={false}
                 labelClassName='grey-color'
                 type='password'
@@ -39,15 +39,12 @@ const LoginPage= () => {
                 required={true}
               />
               <div className='bottom-form total-width'>
-                {/* <Link  to='/Pages/UserPage/UserPage/#user'> */}
                   <Button
                     name='Login'
                     className='btn-login'
                     type='submit'
                     onClick={() => navigate.push('/Pages/UserPage/UserPage/#user')}
-
                   />
-                {/* </Link> */}
                 <label className='label-login grey-color'>
                   <input className='input' type='checkbox' name='remember' />
                   <span className='total-width'>Recordar Cuenta</span>
