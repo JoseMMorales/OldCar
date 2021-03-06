@@ -1,7 +1,7 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { useHistory } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Context } from '../../Context';
 import jwt_decode from "jwt-decode";
 
@@ -14,8 +14,8 @@ const LoginPage= () => {
   let navigate = useHistory();
 
   //Login credentials
-  const credentials = { username: '', password: '' };
-  const [login, setLogin] = useState(credentials);
+  const Logincredentials = { email: '', password: '' };
+  const [login, setLogin] = useState(Logincredentials);
 
   //Login handleChange in inputs to make DDBB call
   const handleLoginChange = (e) => {
@@ -24,14 +24,14 @@ const LoginPage= () => {
   }
 
   //Login call to DDBB to check credentials and get user details
-  const submitCredentials = (e) => {
+  const submitLoginCredentials = (e) => {
     e.preventDefault();
 
     const config = {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({username: login.username, password: login.password})
+      body: JSON.stringify({username: login.email, password: login.password})
     };
 
     const request = new Request('http://localhost:8000/login', config);
@@ -50,13 +50,9 @@ const LoginPage= () => {
           var decoded = jwt_decode(response.token);
           console.log(decoded);
 
-          // setDropdown(true);
-            setLogin(credentials);
-
-          setData(prevState => ({ ...prevState, isAuthenticated: true }))
-
-          navigate.push('/Pages/UserPage/UserPage/#user')
-
+          setLogin(Logincredentials);
+          setData(prevState => ({ ...prevState, isAuthenticated: true }));
+          navigate.push('/Pages/UserPage/UserPage/#user');
 
           // getUserData(response.id);
       }).catch( error => console.log('Error: ', error));
@@ -83,14 +79,43 @@ const LoginPage= () => {
   }
 
   //Register credentials
-  // const credentials = { username: '', password: '' };
-  // const [login, setLogin] = useState(credentials);
+  const Registercredentials = { username: '', email: '', password: '' };
+  const [register, setRegister] = useState(Registercredentials);
 
   //Upload user in DDBB
-  const handleRegisterChange = () => {
-
+  const handleRegisterChange = (e) => {
+    const { name, value } = e.target;
+    setRegister(prevState => ({ ...prevState, [name]: value }));
   }
 
+  const submitRegisterCredentials = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('username', register.username);
+    formData.append('email', register.email);
+    formData.append('password', register.password);
+
+    fetch('http://localhost:8000/user/add', {
+      method: 'POST',
+      body: formData,
+      mode: 'cors'
+    })
+    .then(response => {
+      if (!response.ok)
+        throw new Error(response.statusText);
+
+      return response.json();
+    })
+    .then(
+      resp => {
+        console.log("ok done" , resp);
+        setRegister(Registercredentials);
+        setData(prevState => ({ ...prevState, isAuthenticated: true }));
+        navigate.push('/Pages/UserPage/UserPage/#user');
+      }
+    ).catch(error => console.log(error));
+  }
 
   return (
     <div id='login'>
@@ -111,8 +136,8 @@ const LoginPage= () => {
                 labelClassName='grey-color'
                 onChange={handleLoginChange}
                 type='text'
-                inputName='username'
-                value={login.username}
+                inputName='email'
+                value={login.email}
                 placeholder='Email'
                 required={true}
               />
@@ -134,7 +159,7 @@ const LoginPage= () => {
                     name='Login'
                     className='btn-login'
                     type='submit'
-                    onClick={submitCredentials}
+                    onClick={submitLoginCredentials}
                   />
                 <label className='label-login grey-color'>
                   <input className='input' type='checkbox' name='remember' />
@@ -147,7 +172,7 @@ const LoginPage= () => {
             </form>
           </div>
           <div className='login-register-container'>
-            <form className='login-form'>
+            <form className='login-form' onSubmit={submitRegisterCredentials} >
               <h2 className='heading-login'>Registrar</h2>
               <Input
                 htmlFor='registerUsername'
@@ -155,8 +180,8 @@ const LoginPage= () => {
                 // labelName='Nombre usuario*'
                 InputClassName={false}
                 onChange={handleRegisterChange}
-                // name=''
-                // value={}
+                inputName='username'
+                value={register.username}
                 labelClassName='grey-color'
                 type='text'
                 placeholder='Usuario'
@@ -169,8 +194,8 @@ const LoginPage= () => {
                 labelClassName='grey-color'
                 InputClassName={false}
                 onChange={handleRegisterChange}
-                // name=''
-                // value={}
+                inputName='email'
+                value={register.email}
                 type='email'
                 placeholder='usuario@email'
                 required={true}
@@ -182,8 +207,8 @@ const LoginPage= () => {
                 labelClassName='grey-color'
                 InputClassName={false}
                 onChange={handleRegisterChange}
-                // name=''
-                // value={}
+                inputName='password'
+                value={register.password}
                 type='password'
                 placeholder='Contraseña'
                 required={true}
@@ -193,7 +218,7 @@ const LoginPage= () => {
                   name='Registrar'
                   className='btn-login'
                   type='submit'
-                  onClick={() => navigate.push('/Pages/EditPage/EditPage#edit')}
+                  // onClick={() => navigate.push('/Pages/EditPage/EditPage#edit')}
                 />
               </div>
               <p className='register-privacy grey-color'>
