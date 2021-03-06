@@ -1,9 +1,13 @@
 import { Button, DetailParagraph } from '../../Components/Generic';
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '../../Context';
 
 //Adding dots in integers received in data
 const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
 const CarDetails = ({ car }) => {
+  const { data, setData } = useContext(Context);
+
   return (
     <div className='car-description'>
       <h3 className='heading-description'>DESCRIPTION</h3>
@@ -31,12 +35,15 @@ const CarDetails = ({ car }) => {
         text='Precio:'
         detail= {`${numberWithDots(`${ car.price}`)}€`}
       />
-      <div className='favourite-car'>
-        <Button
-          className='btn-search'
-          name='Añadir a favoritos'
-        />
-      </div>
+      {
+        data.isAuthenticated &&
+          <div className='favourite-car'>
+            <Button
+              className='btn-search'
+              name='Añadir a favoritos'
+            />
+          </div>
+      }
     </div>
   )
 }

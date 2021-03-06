@@ -15,19 +15,19 @@ const SearchPage = () => {
   //Fetch data to display in SearchPage
   const defaultBrand = '/Ford';
   const brandURL = data.searchValues.brand;
-  const modelURL = data.searchValues.model;
-  const sellerURL = data.searchValues.seller;
-  const kmURL = data.searchValues.km;
-  const yearURL = data.searchValues.year;
-  const priceURL = data.searchValues.price;
+  // const modelURL = data.searchValues.model;
+  // const sellerURL = data.searchValues.seller;
+  // const kmURL = data.searchValues.km;
+  // const yearURL = data.searchValues.year;
+  // const priceURL = data.searchValues.price;
 
-  const USER_URL = `http://localhost:8000/search${brandURL ?
-  `/${brandURL}` : `${defaultBrand}`}${modelURL ?
-  `/${modelURL}` : ''}${sellerURL ?
-  `/${sellerURL}` : ''}${kmURL ?
-  `/${kmURL}` : ''}${yearURL ?
-  `/${yearURL}` : ''}${priceURL ?
-  `/${priceURL}` : ''}`;
+  const USER_URL = `http://localhost:8000/search${brandURL ? `/${brandURL}` : `${defaultBrand}`}`;
+  // ${modelURL ?
+  // `/${modelURL}` : ''}${sellerURL ?
+  // `/${sellerURL}` : ''}${kmURL ?
+  // `/${kmURL}` : ''}${yearURL ?
+  // `/${yearURL}` : ''}${priceURL ?
+  // `/${priceURL}` : ''}`;
 
 
   console.log(USER_URL);

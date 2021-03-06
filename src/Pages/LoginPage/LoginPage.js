@@ -1,27 +1,33 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import jwt_decode from "jwt-decode";
 import { Button, Input } from '../../Components/Generic';
+import { useHistory } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { Context } from '../../Context';
+import jwt_decode from "jwt-decode";
 
 const login_URL = `url('/img/bg-login.jpg')`;
 
 const LoginPage= () => {
+  const { data, setData } = useContext(Context);
+
+  //Change page when access as an user
   let navigate = useHistory();
 
+  //Login credentials
   const credentials = { username: '', password: '' };
-
   const [login, setLogin] = useState(credentials);
 
-  const handleChange = (e) => {
+  //Login handleChange in inputs to make DDBB call
+  const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setLogin(prevState => ({ ...prevState, [name]: value }));
   }
 
+  //Login call to DDBB to check credentials and get user details
   const submitCredentials = (e) => {
     e.preventDefault();
 
-  const config = {
+    const config = {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
@@ -30,22 +36,60 @@ const LoginPage= () => {
 
     const request = new Request('http://localhost:8000/login', config);
     fetch(request)
-    .then( response => response.json()
-    .then(
-      response => {
-        // console.log('Answer ok: ', response)
-        localStorage.setItem('UserToken', response.token);
-        var decoded = jwt_decode(response.token);
-        console.log(decoded);
-        setLogin(credentials);
-        navigate.push('/Pages/UserPage/UserPage/#user')
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+
+        return response.json();
+      })
+      .then(
+        response => {
+          // console.log('Answer ok: ', response)
+          localStorage.setItem('UserToken', response.token);
+
+          var decoded = jwt_decode(response.token);
+          console.log(decoded);
+
+          // setDropdown(true);
+            setLogin(credentials);
+
+          setData(prevState => ({ ...prevState, isAuthenticated: true }))
+
+          navigate.push('/Pages/UserPage/UserPage/#user')
 
 
-      }
-    )
-    .catch( error => console.log('Error: ', error)));
+          // getUserData(response.id);
+      }).catch( error => console.log('Error: ', error));
   }
 
+  const getUserData = (id) => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    fetch(`http://localhost:8000/user/${id}`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+
+        return response.json();
+      })
+      .then( res => {
+        setData(prevState => ({ ...prevState, userLoginData: res}))
+      })
+      .catch( e => console.log(e))
+  }
+
+  //Register credentials
+  // const credentials = { username: '', password: '' };
+  // const [login, setLogin] = useState(credentials);
+
+  //Upload user in DDBB
+  const handleRegisterChange = () => {
+
+  }
 
 
   return (
@@ -65,7 +109,7 @@ const LoginPage= () => {
                 // labelName='Email usuario*'
                 InputClassName={false}
                 labelClassName='grey-color'
-                onChange={handleChange}
+                onChange={handleLoginChange}
                 type='text'
                 inputName='username'
                 value={login.username}
@@ -81,7 +125,7 @@ const LoginPage= () => {
                 type='password'
                 inputName='password'
                 value={login.password}
-                onChange={handleChange}
+                onChange={handleLoginChange}
                 placeholder='Contraseña'
                 required={true}
               />
@@ -110,6 +154,9 @@ const LoginPage= () => {
                 Inputid='registerUsername'
                 // labelName='Nombre usuario*'
                 InputClassName={false}
+                onChange={handleRegisterChange}
+                // name=''
+                // value={}
                 labelClassName='grey-color'
                 type='text'
                 placeholder='Usuario'
@@ -121,6 +168,9 @@ const LoginPage= () => {
                 // labelName='Email*'
                 labelClassName='grey-color'
                 InputClassName={false}
+                onChange={handleRegisterChange}
+                // name=''
+                // value={}
                 type='email'
                 placeholder='usuario@email'
                 required={true}
@@ -131,6 +181,9 @@ const LoginPage= () => {
                 // labelName='Contraseña*'
                 labelClassName='grey-color'
                 InputClassName={false}
+                onChange={handleRegisterChange}
+                // name=''
+                // value={}
                 type='password'
                 placeholder='Contraseña'
                 required={true}

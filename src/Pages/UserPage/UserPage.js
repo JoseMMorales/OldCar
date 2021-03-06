@@ -1,8 +1,12 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-
+import { Context } from '../../Context';
+import { useState, useContext, useEffect } from 'react';
 const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
+  const { data, setData } = useContext(Context);
+
+
   return (
     <div id='user'>
       <HeroSecondary

@@ -1,6 +1,6 @@
 import HeroHome from '../../Components/HeroHome/HeroHome';
-import About from '../../Components/About/About';
 import Contact from '../../Components/Contact/Contact';
+import About from '../../Components/About/About';
 
 const Home = () => {
 	return (

@@ -1,11 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Context } from '../../Context';
 import { Select } from 'react-dropdown-select';
+import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../Generic';
+import { Context } from '../../Context';
 
 const Search = ( { pathName, showResults, className } ) => {
   const { data, setData } = useContext(Context);
+  // console.log(data);
 
   let searchHistory = useHistory();
   const handleSearch = () => searchHistory.push('/Pages/SearchPage/SearchPage');

@@ -36,7 +36,7 @@ const DetailsPage = (props) => {
     <div id="details">
       <HeroSecondary
         src={details_URL}
-        text='Añádelo a Favoritos'
+        text='Descubre los detalles'
       />
       {
         Object.values(data.detailsCar).map((car, key) => {

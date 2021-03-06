@@ -30,8 +30,8 @@ const App = () => {
     <>
       <Router>
         <ScrollToTopOnMount />
-        <Navbar />
         <ContextProvider>
+          <Navbar />
           <Switch>
             <Route exact path='/'>
               <Redirect to= '/Pages/Home/Home'/>

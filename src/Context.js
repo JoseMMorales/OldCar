@@ -3,6 +3,7 @@ import { createContext, useState } from 'react';
 export const Context = createContext();
 
 const initialValue = {
+  isAuthenticated: false,
   select: {
     brand: [
       {name:'brand', label: 'Aston Martin', value: 'Aston Martin'},
@@ -71,9 +72,15 @@ const initialValue = {
     ],
   },
   searchCars: [],
-  searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:'' },
-  detailsCar: [
-  {
+  searchValues: {
+    brand:'',
+    model:'',
+    seller:'',
+    km:'',
+    year:'',
+    price:''
+  },
+  detailsCar: [{
     // id:1,
     // brand: 'Rolls Royce',
     // model: 'Phantom II',
@@ -87,8 +94,14 @@ const initialValue = {
     // sellerName: 'Jose MMorales',
     // sellerAddress: 'CodeSpace MALAGA',
     // sellerPhone: '(+34) 952- 23-34-34'
+  }],
+  userLoginData:{
+    name: '',
+    email: '',
+    address: '',
+    city: '',
+    phone: ''
   }
-]
 }
 
 const ContextProvider = (props) => {

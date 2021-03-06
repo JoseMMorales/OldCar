@@ -1,22 +1,29 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
 import { NavHashLink } from 'react-router-hash-link';
-// import { Dropdown } from '../Generic';
+import { useHistory } from 'react-router-dom';
+import { Context } from '../../Context';
+import { Dropdown } from '../Generic';
 
 const Navbar = () => {
+  const { data, setData } = useContext(Context);
+  // console.log(data.dropdown);
+
   const [toggle, setToggle] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
   let history = useHistory();
 
+  //Dropdown toggle when clicking in the window
 	const handleClick = () => history.push('/Pages/Home/Home#home');
 	const handleToggle = () => setToggle(!toggle);
 
+  //Offset when scrolling from section
   const scrollWidthOffset = (el) => {
       const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
       const yOffset = -80;
       window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
   }
 
+  //Scroll to section in homePage
   useEffect(() => {
       const handleScroll = () => {
           const currentScrollY = window.scrollY;
@@ -94,17 +101,24 @@ const Navbar = () => {
                 Publicar
               </NavHashLink>
             </li>
-            <li className='li-navbar'>
-              <NavHashLink
-                className='nav-link dark-color'
-                to='/Pages/LoginPage/LoginPage#login'
-                scroll={scrollWidthOffset}>
-                Login
-              </NavHashLink>
-            </li>
-            {/* <li className="li-navbar">
-              <Dropdown />
-            </li> */}
+            {
+              !data.isAuthenticated &&
+                <li className='li-navbar'>
+                  <NavHashLink
+                    className='nav-link dark-color'
+                    to='/Pages/LoginPage/LoginPage#login'
+                    scroll={scrollWidthOffset}>
+                    Login
+                  </NavHashLink>
+                </li>
+            }
+
+            {
+              data.isAuthenticated &&
+                <li className='li-navbar'>
+                  <Dropdown />
+                </li>
+            }
           </ul>
         </div>
       </nav>
