@@ -100,7 +100,7 @@ const initialValue = {
     address: '',
     city: '',
     phone: ''
-  }
+  },
 }
 
 const ContextProvider = (props) => {

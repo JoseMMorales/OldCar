@@ -1,9 +1,6 @@
 import { Button, DetailParagraph } from '../../Components/Generic';
 import { useState, useEffect } from 'react';
 
-//Adding dots in integers received in data
-const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
 const CarDetails = ({ car }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -11,6 +8,8 @@ const CarDetails = ({ car }) => {
     setIsAuthenticated(window.localStorage.getItem('isAuthenticated'));
   }, [])
 
+  //Adding dots in integers received in data
+  const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
   return (
     <div className='car-description'>

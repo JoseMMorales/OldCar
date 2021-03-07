@@ -1,22 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { NavHashLink } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
+import { Context } from '../../Context';
 import { Dropdown } from '../Generic';
 
 const Navbar = () => {
+  const { data, setData } = useContext(Context);
 
-  window.onstorage = () => {
-    // When local storage changes, dump the list to
-    // the console.
-    console.log(JSON.parse(window.localStorage.getItem('isAuthenticated')));
-  };
-
-  window.addEventListener('storage', () => {
-    // When local storage changes, dump the list to
-    // the console.
-    console.log(JSON.parse(window.localStorage.getItem('isAuthenticated')));
-  });
-
+  const isAuthenticated =  localStorage.isAuthenticated;
 
   const [toggle, setToggle] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -27,20 +18,26 @@ const Navbar = () => {
 	const handleToggle = () => setToggle(!toggle);
 
   //Offset when scrolling from section
-  const scrollWidthOffset = (el) => {
-      const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
-      const yOffset = -80;
-      window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+  const scrollWithOffset = (el, offset) => {
+    const elementPosition = el.offsetTop - offset;
+    window.scroll({
+      top: elementPosition,
+      left: 0,
+      behavior: "smooth"
+    });
   }
 
   //Scroll to section in homePage
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    setCurrentScrollY(currentScrollY);
+  };
+
   useEffect(() => {
-      const handleScroll = () => {
-          const currentScrollY = window.scrollY;
-          setCurrentScrollY(currentScrollY);
+      window.addEventListener('scroll', handleScroll, true);
+      return () => {
+        window.removeEventListener('scroll', handleScroll, true)
       };
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -66,7 +63,7 @@ const Navbar = () => {
                   currentScrollY < 500 && true
                 }
                 to='/Pages/Home/Home#home'
-                scroll={scrollWidthOffset}>
+                scroll={el => scrollWithOffset(el, 80)}>
                 Inicio
               </NavHashLink>
             </li>
@@ -79,7 +76,7 @@ const Navbar = () => {
                   true
                 }
                 smooth to='/Pages/Home/Home#about'
-                scroll={scrollWidthOffset}>
+                scroll={el => scrollWithOffset(el, 80)}>
                 Acerca de
               </NavHashLink>
             </li>
@@ -91,43 +88,40 @@ const Navbar = () => {
                   currentScrollY > 1000 && true
                 }
                 smooth to='/Pages/Home/Home#contact'
-                scroll={scrollWidthOffset}>
+                scroll={el => scrollWithOffset(el, 80)}>
                 Contacto
               </NavHashLink>
             </li>
             <li className='li-navbar'>
               <NavHashLink
                 className='nav-link dark-color'
-                to='/Pages/SearchPage/SearchPage#search'
-                scroll={scrollWidthOffset}>
+                to='/Pages/SearchPage/SearchPage#search'>
                 Buscar
               </NavHashLink>
             </li>
             <li className='li-navbar'>
               <NavHashLink
                 className='nav-link dark-color'
-                to='/Pages/PublishPage/PublishPage#publish'
-                scroll={scrollWidthOffset}>
+                to='/Pages/PublishPage/PublishPage#publish'>
                 Publicar
               </NavHashLink>
             </li>
             {
-              // isAuthenticated === 'false' &&
+              isAuthenticated === 'false' &&
                 <li className='li-navbar'>
                   <NavHashLink
                     className='nav-link dark-color'
-                    to='/Pages/LoginPage/LoginPage#login'
-                    scroll={scrollWidthOffset}>
+                    to='/Pages/LoginPage/LoginPage#login'>
                     Login
                   </NavHashLink>
                 </li>
             }
-            {/* {
+            {
               isAuthenticated === 'true' &&
                 <li className='li-navbar'>
                   <Dropdown />
                 </li>
-            } */}
+            }
           </ul>
         </div>
       </nav>

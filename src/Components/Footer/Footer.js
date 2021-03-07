@@ -1,20 +1,15 @@
+import { NavHashLink } from 'react-router-hash-link';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaTwitterSquare } from 'react-icons/fa';
-import { FaLinkedin } from 'react-icons/fa';
 import { FaGithubSquare } from 'react-icons/fa';
+import { FaLinkedin } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { NavHashLink } from 'react-router-hash-link';
+
 
 const linkedin = 'https://www.linkedin.com/in/jose-m-369686b9/';
 const github = 'https://github.com/JoseMMorales/';
 const facebook = 'https://es-es.facebook.com/Codespaceacademy/';
 const twitter = 'https://twitter.com/codespaceacade?lang=en/';
-
-const scrollWidthOffset = (el) => {
-    const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
-    const yOffset = -80;
-    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
-}
 
 const Footer = () => {
   const [linkURL, setLinkURL] = useState('')
@@ -23,6 +18,16 @@ const Footer = () => {
       linkURL && window.open(linkURL, '_blank');
       setLinkURL('');
   }, [linkURL]);
+
+   //Offset when scrolling from section
+   const scrollWithOffset = (el, offset) => {
+    const elementPosition = el.offsetTop - offset;
+    window.scroll({
+      top: elementPosition,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
 
   return (
     <>
@@ -38,7 +43,7 @@ const Footer = () => {
                   className='light-color'
                   activeClassName='none'
                   to='/Pages/Home/Home#home'
-                  scroll={scrollWidthOffset}>
+                  scroll={el => scrollWithOffset(el, 80)}>
                   Inicio
                 </NavHashLink>
               </li>
@@ -47,7 +52,7 @@ const Footer = () => {
                   className='light-color'
                   activeClassName='none'
                   to='/Pages/Home/Home#about'
-                  scroll={scrollWidthOffset}>
+                  scroll={el => scrollWithOffset(el, 80)}>
                   Acerca de
                 </NavHashLink>
               </li>
@@ -56,7 +61,7 @@ const Footer = () => {
                   className='light-color'
                   activeClassName='none'
                   to='/Pages/Home/Home#contact'
-                  scroll={scrollWidthOffset}>
+                  scroll={el => scrollWithOffset(el, 80)}>
                   Contacto
                 </NavHashLink>
               </li>
@@ -64,8 +69,7 @@ const Footer = () => {
                 <NavHashLink
                   className='light-color'
                   activeClassName='none'
-                  to= '/Pages/SearchPage/SearchPage#search'
-                  scroll={scrollWidthOffset}>
+                  to= '/Pages/SearchPage/SearchPage#search'>
                   Buscar
                 </NavHashLink>
               </li>
@@ -73,8 +77,7 @@ const Footer = () => {
                 <NavHashLink
                   className='light-color'
                   activeClassName='none'
-                  to= '/Pages/PublishPage/PublishPage#publish'
-                  scroll={scrollWidthOffset}>
+                  to= '/Pages/PublishPage/PublishPage#publish'>
                   Publicar
                 </NavHashLink>
               </li>
@@ -82,8 +85,7 @@ const Footer = () => {
                 <NavHashLink
                   className='light-color'
                   activeClassName='none'
-                  to='/Pages/LoginPage/LoginPage#login'
-                  scroll={scrollWidthOffset}>
+                  to='/Pages/LoginPage/LoginPage#login'>
                   Login
                 </NavHashLink>
               </li>
