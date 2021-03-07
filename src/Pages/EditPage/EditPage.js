@@ -16,7 +16,6 @@ const EditPage = () => {
       city: '',
       password: ''
     });
-  console.log(editForm);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

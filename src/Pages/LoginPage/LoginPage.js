@@ -52,7 +52,6 @@ const LoginPage= () => {
           console.log(decoded);
 
           setLogin(Logincredentials);
-          // setData(prevState => ({ ...prevState, isAuthenticated: true }));
           navigate.push('/Pages/UserPage/UserPage/#user');
 
           // getUserData(response.id);
@@ -112,7 +111,7 @@ const LoginPage= () => {
       resp => {
         console.log("ok done" , resp);
         setRegister(Registercredentials);
-        setData(prevState => ({ ...prevState, isAuthenticated: true }));
+        localStorage.setItem('isAuthenticated', true);
         navigate.push('/Pages/UserPage/UserPage/#user');
       }
     ).catch(error => console.log(error));
