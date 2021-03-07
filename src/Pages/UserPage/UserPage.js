@@ -1,11 +1,9 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { Context } from '../../Context';
-import { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
-  const { data, setData } = useContext(Context);
-
 
   return (
     <div id='user'>
@@ -16,9 +14,17 @@ const UserPage = () => {
       <div className="user-container">
         <div className="user-sidebar">
           <ul className='user-list'>
-            <li className="user-list-element">Perfil</li>
+            <li className="user-list-element">
+              <Link to={'/Pages/EditPage/EditPage'}>Perfil</Link>
+            </li>
             <li className="user-list-element">Favoritos</li>
-            <li className="user-list-element">Salir</li>
+            <li
+              className="user-list-element"
+              onClick={() => {
+                localStorage.setItem('isAuthenticated', false);
+              }}>
+              <Link to={'/'}>Salir</Link>
+            </li>
           </ul>
         </div>
         <div className='user-content'>

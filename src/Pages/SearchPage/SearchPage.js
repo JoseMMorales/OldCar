@@ -29,8 +29,7 @@ const SearchPage = () => {
   // `/${yearURL}` : ''}${priceURL ?
   // `/${priceURL}` : ''}`;
 
-
-  console.log(USER_URL);
+  // console.log(USER_URL);
   useEffect(() => {
     fetch(USER_URL)
       .then(response => {

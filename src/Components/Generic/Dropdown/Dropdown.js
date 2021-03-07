@@ -1,9 +1,13 @@
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
+import { Context } from '../../../Context';
+import { Link } from 'react-router-dom';
+
 
 const Dropdown = () => {
   const ref = useRef(null);
   const [active, setActive] = useState(false);
+  const { data, setData } = useContext(Context);
 
   const handleToggle = () => { setActive(!active) };
   const handleClickOutside = (event) => {
@@ -38,18 +42,14 @@ const Dropdown = () => {
         </button>
         <ul className={`dropdown-list ${active && 'active'}`}>
           <li className='profile-list-element bg-light'>
-            <a
-              className='dark-color'
-              href='#'>
-              Ir a tu Perfil
-            </a>
+          <Link to={'/Pages/UserPage/UserPage'}>Ir a tu Perfil</Link>
           </li>
-          <li className='profile-list-element bg-light'>
-            <a
-              className='dark-color'
-              href='#'>
-              Salir
-            </a>
+          <li
+            className='profile-list-element bg-light'
+            onClick={() => {
+              localStorage.setItem('isAuthenticated', false);
+            }}>
+            <Link to={'/'}>Salir</Link>
           </li>
         </ul>
       </div>

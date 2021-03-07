@@ -3,7 +3,6 @@ import { createContext, useState } from 'react';
 export const Context = createContext();
 
 const initialValue = {
-  isAuthenticated: false,
   select: {
     brand: [
       {name:'brand', label: 'Aston Martin', value: 'Aston Martin'},

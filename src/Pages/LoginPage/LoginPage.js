@@ -46,12 +46,13 @@ const LoginPage= () => {
         response => {
           // console.log('Answer ok: ', response)
           localStorage.setItem('UserToken', response.token);
+          localStorage.setItem('isAuthenticated', true);
 
           var decoded = jwt_decode(response.token);
           console.log(decoded);
 
           setLogin(Logincredentials);
-          setData(prevState => ({ ...prevState, isAuthenticated: true }));
+          // setData(prevState => ({ ...prevState, isAuthenticated: true }));
           navigate.push('/Pages/UserPage/UserPage/#user');
 
           // getUserData(response.id);
@@ -129,11 +130,6 @@ const LoginPage= () => {
             <form className='login-form'>
               <h2 className='heading-login'>Login</h2>
               <Input
-                htmlFor='loginUsername'
-                Inputid='loginUsername'
-                // labelName='Email usuario*'
-                InputClassName={false}
-                labelClassName='grey-color'
                 onChange={handleLoginChange}
                 type='text'
                 inputName='email'
@@ -142,11 +138,6 @@ const LoginPage= () => {
                 required={true}
               />
               <Input
-                htmlFor='Loginpassword'
-                Inputid='Loginpassword'
-                // labelName='Contraseña*'
-                InputClassName={false}
-                labelClassName='grey-color'
                 type='password'
                 inputName='password'
                 value={login.password}
@@ -175,10 +166,6 @@ const LoginPage= () => {
             <form className='login-form' onSubmit={submitRegisterCredentials} >
               <h2 className='heading-login'>Registrar</h2>
               <Input
-                htmlFor='registerUsername'
-                Inputid='registerUsername'
-                // labelName='Nombre usuario*'
-                InputClassName={false}
                 onChange={handleRegisterChange}
                 inputName='username'
                 value={register.username}
@@ -188,10 +175,6 @@ const LoginPage= () => {
                 required={true}
               />
               <Input
-                htmlFor='registerEmail'
-                Inputid='registerEmail'
-                // labelName='Email*'
-                labelClassName='grey-color'
                 InputClassName={false}
                 onChange={handleRegisterChange}
                 inputName='email'
@@ -201,10 +184,6 @@ const LoginPage= () => {
                 required={true}
               />
                <Input
-                htmlFor='registerPassword'
-                Inputid='registerPassword'
-                // labelName='Contraseña*'
-                labelClassName='grey-color'
                 InputClassName={false}
                 onChange={handleRegisterChange}
                 inputName='password'
@@ -218,7 +197,6 @@ const LoginPage= () => {
                   name='Registrar'
                   className='btn-login'
                   type='submit'
-                  // onClick={() => navigate.push('/Pages/EditPage/EditPage#edit')}
                 />
               </div>
               <p className='register-privacy grey-color'>

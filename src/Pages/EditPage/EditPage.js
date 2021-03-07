@@ -17,7 +17,7 @@ const EditPage = () => {
             <div className="heading-edit">
               <h1 className='edit-heading grey-color'>Información de Usuario</h1>
               <p>
-                INTRODUCE TUS DATOS PARA PODER ACCEDER A TU CUENTA OLD
+                EDITA TUS DATOS DE TU CUENTA OLD
                 <span className="main-color">CAR</span>
               </p>
             </div>
@@ -32,15 +32,6 @@ const EditPage = () => {
                   htmlFor='editName'
                   Inputid='editName'
                   labelName='Nombre'
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editSurname'
-                  Inputid='editSurname'
-                  labelName='Apellidos'
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -88,6 +79,15 @@ const EditPage = () => {
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='tlf'
+                />
+                 <Input
+                  containerClassName='edit-form-container'
+                  htmlFor='editCity'
+                  Inputid='editCity'
+                  labelName='Ciudad'
+                  InputClassName={false}
+                  labelClassName='grey-color'
+                  type='text'
                 />
               </div>
             </div>

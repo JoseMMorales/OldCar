@@ -1,12 +1,22 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { NavHashLink } from 'react-router-hash-link';
 import { useHistory } from 'react-router-dom';
-import { Context } from '../../Context';
 import { Dropdown } from '../Generic';
 
 const Navbar = () => {
-  const { data, setData } = useContext(Context);
-  // console.log(data.dropdown);
+
+  window.onstorage = () => {
+    // When local storage changes, dump the list to
+    // the console.
+    console.log(JSON.parse(window.localStorage.getItem('isAuthenticated')));
+  };
+
+  window.addEventListener('storage', () => {
+    // When local storage changes, dump the list to
+    // the console.
+    console.log(JSON.parse(window.localStorage.getItem('isAuthenticated')));
+  });
+
 
   const [toggle, setToggle] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -102,7 +112,7 @@ const Navbar = () => {
               </NavHashLink>
             </li>
             {
-              !data.isAuthenticated &&
+              // isAuthenticated === 'false' &&
                 <li className='li-navbar'>
                   <NavHashLink
                     className='nav-link dark-color'
@@ -112,13 +122,12 @@ const Navbar = () => {
                   </NavHashLink>
                 </li>
             }
-
-            {
-              data.isAuthenticated &&
+            {/* {
+              isAuthenticated === 'true' &&
                 <li className='li-navbar'>
                   <Dropdown />
                 </li>
-            }
+            } */}
           </ul>
         </div>
       </nav>

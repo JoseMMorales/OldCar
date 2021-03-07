@@ -1,12 +1,16 @@
 import { Button, DetailParagraph } from '../../Components/Generic';
-import { useState, useEffect, useContext } from 'react';
-import { Context } from '../../Context';
+import { useState, useEffect } from 'react';
 
 //Adding dots in integers received in data
 const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
 const CarDetails = ({ car }) => {
-  const { data, setData } = useContext(Context);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(window.localStorage.getItem('isAuthenticated'));
+  }, [])
+
 
   return (
     <div className='car-description'>
@@ -36,7 +40,7 @@ const CarDetails = ({ car }) => {
         detail= {`${numberWithDots(`${ car.price}`)}€`}
       />
       {
-        data.isAuthenticated &&
+        isAuthenticated === 'true' &&
           <div className='favourite-car'>
             <Button
               className='btn-search'
