@@ -94,17 +94,12 @@ const initialValue = {
     // sellerAddress: 'CodeSpace MALAGA',
     // sellerPhone: '(+34) 952- 23-34-34'
   }],
-  userLoginData:{
-    name: '',
-    email: '',
-    address: '',
-    city: '',
-    phone: ''
-  },
+  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
 }
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
+  console.log(data.userLoginData);
 
   return (
     <Context.Provider value={{data, setData}}>

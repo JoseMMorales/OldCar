@@ -3,7 +3,6 @@ import { useState, useRef, useEffect, useContext } from 'react';
 import { Context } from '../../../Context';
 import { Link } from 'react-router-dom';
 
-
 const Dropdown = () => {
   const ref = useRef(null);
   const [active, setActive] = useState(false);
@@ -24,9 +23,7 @@ const Dropdown = () => {
   });
 
   return (
-    <div
-      className='profile-container bg-grey-Slight'
-      ref={ref}>
+    <div className='profile-container bg-grey-Slight' ref={ref}>
       <div className='dropdown'>
         <button
           className='profile-box'
@@ -48,6 +45,10 @@ const Dropdown = () => {
             className='profile-list-element bg-light'
             onClick={() => {
               localStorage.setItem('isAuthenticated', false);
+              setData(prevState => ({
+                ...prevState,
+                userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
+               }))
             }}>
             <Link to={'/'}>Salir</Link>
           </li>

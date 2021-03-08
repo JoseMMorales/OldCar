@@ -1,7 +1,7 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { useHistory } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from '../../Context';
 import jwt_decode from "jwt-decode";
 
@@ -23,7 +23,7 @@ const LoginPage= () => {
     setLogin(prevState => ({ ...prevState, [name]: value }));
   }
 
-  //Login call to DDBB to check credentials and get user details
+  //Submit Login credentials to call DDBB
   const submitLoginCredentials = (e) => {
     e.preventDefault();
 
@@ -54,40 +54,21 @@ const LoginPage= () => {
           setLogin(Logincredentials);
           navigate.push('/Pages/UserPage/UserPage/#user');
 
-          // getUserData(response.id);
+          getUserData();
       }).catch( error => console.log('Error: ', error));
-  }
-
-  const getUserData = (id) => {
-    const token = localStorage.getItem('UserToken');
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    };
-    fetch(`http://localhost:8000/user/${id}`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-
-        return response.json();
-      })
-      .then( res => {
-        setData(prevState => ({ ...prevState, userLoginData: res}))
-      })
-      .catch( e => console.log(e))
   }
 
   //Register credentials
   const Registercredentials = { username: '', email: '', password: '' };
   const [register, setRegister] = useState(Registercredentials);
 
-  //Upload user in DDBB
+  //Upload user in DDBB //Login handleChange in inputs to make DDBB call
   const handleRegisterChange = (e) => {
     const { name, value } = e.target;
     setRegister(prevState => ({ ...prevState, [name]: value }));
   }
 
+  //Register Login credentials to call DDBB
   const submitRegisterCredentials = (e) => {
     e.preventDefault();
 
@@ -111,10 +92,32 @@ const LoginPage= () => {
       resp => {
         console.log("ok done" , resp);
         setRegister(Registercredentials);
+        setData(prevState => ({ ...prevState, userLoginData: resp}))
         localStorage.setItem('isAuthenticated', true);
         navigate.push('/Pages/UserPage/UserPage/#user');
       }
     ).catch(error => console.log(error));
+  }
+
+  //Get user data when login or register
+  const getUserData = () => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    fetch(`http://localhost:8000/user/data`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+
+        return response.json();
+      })
+      .then( res => {
+        setData(prevState => ({ ...prevState, userLoginData: res}));
+      })
+      .catch( e => console.log(e))
   }
 
   return (

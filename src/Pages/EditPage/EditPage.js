@@ -8,13 +8,13 @@ const edit_URL = `url('/img/bg-edit.jpg')`;
 const EditPage = () => {
   const [editForm, setEditForm] = useState(
     {
-      name: null,
-      type: null,
-      email: null,
-      phone: null,
-      address: null,
-      city: null,
-      password: null
+      name: '',
+      type: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      password: ''
     });
 
   const handleChange = (e) => {
@@ -34,13 +34,15 @@ const EditPage = () => {
     formData.append('city', editForm.city);
     formData.append('password', editForm.password);
 
-    const id = 54;
+    const token = localStorage.getItem('UserToken');
 
-    fetch(`http://localhost:8000/user/update/${id}`, {
-      method: 'PUT',
+    fetch(`http://localhost:8000/user/update`, {
+      method: 'POST',
       body: formData,
-      // headers: { 'Content-Type': 'application/json' },
-      mode: 'cors'
+      mode: 'cors',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     })
     .then(response => {
       if (!response.ok)

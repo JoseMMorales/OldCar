@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const HeroHome = () => {
 
-  const pathName = location.pathname;
+  const pathName = window.location.pathname;
 
   return (
     <>

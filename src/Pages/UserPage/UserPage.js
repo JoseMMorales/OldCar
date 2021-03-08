@@ -1,28 +1,27 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
+import { Context } from '../../Context';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
 const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
+  const { data, setData } = useContext(Context);
 
-  const id = 63;
-
-  const deleteUser = (id) => {
+  const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
     const config = {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}`}
     };
-    fetch(`http://localhost:8000/user/delete/${id}`, config)
+    fetch(`http://localhost:8000/user/delete`, config)
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
 
         return response.json();
       })
-      .then( res => {
-        console.log(`La cuenta ${res.message} ha sido eliminada`);
-      })
+      .then( res => console.log(res))
       .catch( e => console.log(e));
   };
 
@@ -42,7 +41,11 @@ const UserPage = () => {
             <li
               className="user-list-element"
               onClick={() => {
-                deleteUser(id);
+                deleteUser();
+                setData(prevState => ({
+                  ...prevState,
+                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
+                 }))
                 localStorage.setItem('isAuthenticated', false);
                 alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
               }}>
@@ -52,6 +55,10 @@ const UserPage = () => {
               className="user-list-element"
               onClick={() => {
                 localStorage.setItem('isAuthenticated', false);
+                setData(prevState => ({
+                  ...prevState,
+                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
+                 }))
               }}>
               <Link to={'/'}>Salir</Link>
             </li>
