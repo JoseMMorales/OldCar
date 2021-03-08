@@ -8,13 +8,13 @@ const edit_URL = `url('/img/bg-edit.jpg')`;
 const EditPage = () => {
   const [editForm, setEditForm] = useState(
     {
-      name: '',
-      type: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      password: ''
+      name: null,
+      type: null,
+      email: null,
+      phone: null,
+      address: null,
+      city: null,
+      password: null
     });
 
   const handleChange = (e) => {
@@ -34,9 +34,12 @@ const EditPage = () => {
     formData.append('city', editForm.city);
     formData.append('password', editForm.password);
 
-    fetch('http://localhost:8000/user/update', {
-      method: 'POST',
+    const id = 54;
+
+    fetch(`http://localhost:8000/user/update/${id}`, {
+      method: 'PUT',
       body: formData,
+      // headers: { 'Content-Type': 'application/json' },
       mode: 'cors'
     })
     .then(response => {
@@ -47,7 +50,7 @@ const EditPage = () => {
     })
     .then(
       resp => {
-        console.log("ok done" , resp);
+        console.log("ok done in Update" , resp);
         // setRegister(Registercredentials);
         // setData(prevState => ({ ...prevState, isAuthenticated: true }));
         // navigate.push('/Pages/UserPage/UserPage/#user');

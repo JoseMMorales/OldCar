@@ -5,6 +5,27 @@ const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
 
+  const id = 63;
+
+  const deleteUser = (id) => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}`}
+    };
+    fetch(`http://localhost:8000/user/delete/${id}`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+
+        return response.json();
+      })
+      .then( res => {
+        console.log(`La cuenta ${res.message} ha sido eliminada`);
+      })
+      .catch( e => console.log(e));
+  };
+
   return (
     <div id='user'>
       <HeroSecondary
@@ -18,6 +39,15 @@ const UserPage = () => {
               <Link to={'/Pages/EditPage/EditPage'}>Perfil</Link>
             </li>
             <li className="user-list-element">Favoritos</li>
+            <li
+              className="user-list-element"
+              onClick={() => {
+                deleteUser(id);
+                localStorage.setItem('isAuthenticated', false);
+                alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
+              }}>
+              <Link to={'/'}>Eliminar cuenta</Link>
+            </li>
             <li
               className="user-list-element"
               onClick={() => {
