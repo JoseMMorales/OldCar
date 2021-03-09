@@ -48,7 +48,7 @@ const Carousel = ({
       setCurrentPosition((prev) => {
         return prev + 1 === 5 ? 0 : prev + 1;
       });
-    }, 4000);
+    }, 3500);
     return () => {
       clearInterval(intervalId);
     };
