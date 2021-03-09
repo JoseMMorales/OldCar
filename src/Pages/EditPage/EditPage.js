@@ -1,11 +1,18 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
-import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useState , useContext} from 'react';
+import { Context } from '../../Context';
 
 const edit_URL = `url('/img/bg-edit.jpg')`;
 
 const EditPage = () => {
+  const { data, setData } = useContext(Context);
+
+  //Change page when access as an user
+  let navigate = useHistory();
+
   const [editForm, setEditForm] = useState(
     {
       name: '',
@@ -53,9 +60,8 @@ const EditPage = () => {
     .then(
       resp => {
         console.log("ok done in Update" , resp);
-        // setRegister(Registercredentials);
-        // setData(prevState => ({ ...prevState, isAuthenticated: true }));
-        // navigate.push('/Pages/UserPage/UserPage/#user');
+        setData(prevState => ({ ...prevState, userLoginData: resp}));
+        navigate.push('/Pages/UserPage/UserPage/#user');
       }
     ).catch(error => console.log(error));
   }
@@ -89,7 +95,7 @@ const EditPage = () => {
                   labelName='Nombre'
                   onChange={handleChange}
                   inputName='name'
-                  value={editForm.name}
+                  value={editForm.name ? editForm.name : data.userLoginData.name}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -99,7 +105,7 @@ const EditPage = () => {
                   htmlFor='editSeller'
                   Inputid='editSeller'
                   inputName='type'
-                  value={editForm.type}
+                  value={editForm.type ? editForm.type : data.userLoginData.type}
                   labelName='Particular o Concesionario'
                   onChange={handleChange}
                   InputClassName={false}
@@ -121,7 +127,7 @@ const EditPage = () => {
                   labelName='Email'
                   onChange={handleChange}
                   inputName='email'
-                  value={editForm.email}
+                  value={editForm.email ? editForm.email : data.userLoginData.email}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='email'
@@ -134,7 +140,7 @@ const EditPage = () => {
                   onChange={handleChange}
                   InputClassName={false}
                   inputName='address'
-                  value={editForm.address}
+                  value={editForm.address ? editForm.address : data.userLoginData.address}
                   labelClassName='grey-color'
                   type='text'
                 />
@@ -145,7 +151,7 @@ const EditPage = () => {
                   labelName='Teléfono'
                   onChange={handleChange}
                   inputName='phone'
-                  value={editForm.phone}
+                  value={editForm.phone ? editForm.phone : data.userLoginData.phone}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='tlf'
@@ -157,7 +163,7 @@ const EditPage = () => {
                   labelName='Ciudad'
                   onChange={handleChange}
                   inputName='city'
-                  value={editForm.city}
+                  value={editForm.city ? editForm.city : data.userLoginData.city}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'

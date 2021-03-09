@@ -71,30 +71,9 @@ const initialValue = {
     ],
   },
   searchCars: [],
-  searchValues: {
-    brand:'',
-    model:'',
-    seller:'',
-    km:'',
-    year:'',
-    price:''
-  },
-  detailsCar: [{
-    // id:1,
-    // brand: 'Rolls Royce',
-    // model: 'Phantom II',
-    // year: '1957',
-    // km: '25.000',
-    // price: '15.000',
-    // image: "/img/img1-test.jpg",
-    // description: '1957 ROLLS ROYCE PHANTOM CONVERTIBLE! POCOS KILOMETROS! FINANCIACIÓN DISPONIBLE!',
-    // sellerDescription: 'Rolls Royce Phantom. Año 1957. Fabricado en Europa Se trata del 1303 una de las versiones mas apreciadas del Rolls Royce, esta unidad en concreto se encuentra en muy buen estado de conservación. Combustible gasolina. Un clásico con merecida reputación de fiabilidad y estética entrañable.',
-    // seller: 'Concesionario',
-    // sellerName: 'Jose MMorales',
-    // sellerAddress: 'CodeSpace MALAGA',
-    // sellerPhone: '(+34) 952- 23-34-34'
-  }],
-  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
+  searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:''},
+  detailsCar: [{}],
+  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
 }
 
 const ContextProvider = (props) => {

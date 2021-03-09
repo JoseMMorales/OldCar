@@ -7,6 +7,12 @@ const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
   const { data, setData } = useContext(Context);
+  const userName = data.userLoginData.name;
+  const userEmail = data.userLoginData.email;
+  const userCity = data.userLoginData.city;
+  const userAddress = data.userLoginData.address;
+  const userPhone = data.userLoginData.phone;
+  const userType = data.userLoginData.type;
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -44,7 +50,7 @@ const UserPage = () => {
                 deleteUser();
                 setData(prevState => ({
                   ...prevState,
-                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
+                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
                  }))
                 localStorage.setItem('isAuthenticated', false);
                 alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
@@ -57,7 +63,7 @@ const UserPage = () => {
                 localStorage.setItem('isAuthenticated', false);
                 setData(prevState => ({
                   ...prevState,
-                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
+                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
                  }))
               }}>
               <Link to={'/'}>Salir</Link>
@@ -65,7 +71,14 @@ const UserPage = () => {
           </ul>
         </div>
         <div className='user-content'>
-          <h1>Perfil Jose</h1>
+          <h2 className='heading-details-user'>{userName}</h2>
+          <div className='user-details'>
+            <p className='details'><strong>Tipo:</strong> {userType}</p>
+            <p className='details'><strong>Dirección:</strong> {userAddress}</p>
+            <p className='details'><strong>Ciudad:</strong> {userCity}</p>
+            <p className='details'><strong>Teléfono:</strong> {userPhone}</p>
+            <p className='details'><strong>Email:</strong> {userEmail}</p>
+          </div>
         </div>
       </div>
     </div>

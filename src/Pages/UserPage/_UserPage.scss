@@ -1,7 +1,6 @@
 .user-container {
   display: grid;
-  grid-template-columns: 400px 1fr;
-  height: 100vh;
+  grid-template-columns: minmax(50px, 300px)  1fr;
 }
 
 .user-sidebar {
@@ -9,18 +8,13 @@
 }
 
 .user-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
   margin: 2rem;
   padding: 0;
   box-shadow: .1rem .2rem .2rem .2rem $grey-color;
 }
 
 .user-list-element {
-  width: 90%;
+  // width: 90%;
   padding: 1rem;
   border-bottom: .1rem solid $grey-light-color;
 
@@ -29,8 +23,25 @@
   }
 }
 
-// .user-content {
-//   // margin: 2rem;
-//   // padding: 0;
-//   // box-shadow: .1rem .2rem .2rem .2rem $grey-color;
-// }
+.user-content {
+  margin: 2rem;
+  padding: 0;
+  box-shadow: .1rem .2rem .2rem .2rem $grey-color;
+
+  .heading-details-user {
+    padding: 1rem;
+
+    &::after {
+      @include separator-style(30%, .1rem, .3rem 0, 0);
+     }
+  }
+}
+
+.user-details {
+  display: flex;
+  flex-flow: row wrap;
+
+  .details {
+    padding: 1rem;
+  }
+}
