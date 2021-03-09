@@ -73,12 +73,12 @@ const initialValue = {
   searchCars: [],
   searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:''},
   detailsCar: [{}],
-  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
+  userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
 }
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
-  console.log(data.userLoginData);
+  // console.log(data.userLoginData);
 
   return (
     <Context.Provider value={{data, setData}}>

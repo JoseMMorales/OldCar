@@ -15,12 +15,12 @@ const EditPage = () => {
 
   const [editForm, setEditForm] = useState(
     {
-      name: '',
-      type: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
+      name: data.userLoginData.name,
+      type: data.userLoginData.type,
+      email: data.userLoginData.email,
+      phone: data.userLoginData.phone,
+      address: data.userLoginData.address,
+      city: data.userLoginData.city,
       password: ''
     });
 
@@ -205,10 +205,6 @@ const EditPage = () => {
             <div className="edit-buttons">
               <Button
                 name='Confirmar'
-                className='btn-edit'
-                type='submit' />
-                <Button
-                name='Borrar Campos'
                 className='btn-edit'
                 type='submit' />
             </div>

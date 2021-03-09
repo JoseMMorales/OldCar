@@ -45,3 +45,14 @@
     padding: 1rem;
   }
 }
+
+@media(max-width: $change-device) {
+  .user-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .user-list {
+    margin: 0;
+  }
+}

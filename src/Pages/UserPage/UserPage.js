@@ -52,7 +52,7 @@ const UserPage = () => {
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
                  }))
-                localStorage.setItem('isAuthenticated', false);
+                 window.localStorage.removeItem('isAuthenticated');
                 alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
               }}>
               <Link to={'/'}>Eliminar cuenta</Link>
@@ -60,7 +60,7 @@ const UserPage = () => {
             <li
               className="user-list-element"
               onClick={() => {
-                localStorage.setItem('isAuthenticated', false);
+                window.localStorage.removeItem('isAuthenticated');
                 setData(prevState => ({
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },

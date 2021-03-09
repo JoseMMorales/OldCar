@@ -107,7 +107,7 @@ const Navbar = () => {
               </NavHashLink>
             </li>
             {
-              isAuthenticated === 'false' &&
+              !isAuthenticated &&
                 <li className='li-navbar'>
                   <NavHashLink
                     className='nav-link dark-color'
@@ -117,7 +117,7 @@ const Navbar = () => {
                 </li>
             }
             {
-              isAuthenticated === 'true' &&
+              isAuthenticated &&
                 <li className='li-navbar'>
                   <Dropdown />
                 </li>

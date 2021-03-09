@@ -37,10 +37,14 @@ const LoginPage= () => {
     const request = new Request('http://localhost:8000/login', config);
     fetch(request)
       .then(response => {
-        if (!response.ok)
+        if (!response.ok) {
+          if (response.status === 401) {
+            alert('Credenciales incorrectas, inténtalo de nuevo!!')
+          }
           throw new Error(response.statusText);
-
-        return response.json();
+        } else {
+          return response.json();
+        }
       })
       .then(
         response => {

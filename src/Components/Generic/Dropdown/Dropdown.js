@@ -44,7 +44,7 @@ const Dropdown = () => {
           <li
             className='profile-list-element bg-light'
             onClick={() => {
-              localStorage.setItem('isAuthenticated', false);
+              window.localStorage.removeItem('isAuthenticated');
               setData(prevState => ({
                 ...prevState,
                 userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
