@@ -12,24 +12,30 @@ const SearchPage = () => {
   const { data, setData } = useContext(Context);
   const cars = data.searchCars;
 
-  //Fetch data to display in SearchPage
-  const defaultBrand = '/Ford';
   const brandURL = data.searchValues.brand;
-  // const modelURL = data.searchValues.model;
-  // const sellerURL = data.searchValues.seller;
-  // const kmURL = data.searchValues.km;
-  // const yearURL = data.searchValues.year;
-  // const priceURL = data.searchValues.price;
+  const modelURL = data.searchValues.model;
+  const sellerURL = data.searchValues.seller;
 
-  const USER_URL = `http://localhost:8000/search${brandURL ? `/${brandURL}` : `${defaultBrand}`}`;
-  // ${modelURL ?
-  // `/${modelURL}` : ''}${sellerURL ?
-  // `/${sellerURL}` : ''}${kmURL ?
-  // `/${kmURL}` : ''}${yearURL ?
-  // `/${yearURL}` : ''}${priceURL ?
-  // `/${priceURL}` : ''}`;
+  let URLCarSearch = '';
 
-  // console.log(USER_URL);
+  if (brandURL) {
+    URLCarSearch += `&brand=${brandURL}`;
+  }
+
+  if (modelURL) {
+    URLCarSearch += `&model=${modelURL}`;
+  }
+
+  if (sellerURL) {
+    URLCarSearch += `&seller=${sellerURL}`;
+  }
+
+  const URLCarSearchAmended = URLCarSearch.slice(1);
+
+  const USER_URL = `http://localhost:8000/search?${URLCarSearchAmended}`;
+
+  console.log(USER_URL);
+
   useEffect(() => {
     fetch(USER_URL)
       .then(response => {
@@ -42,7 +48,7 @@ const SearchPage = () => {
         setData(prevState => ({...prevState, searchCars: json}))
       })
       .catch(error => console.log(error));
-  }, [data.searchValues.brand, data.searchValues.model]);
+  }, [brandURL, modelURL, sellerURL]);
 
   //Adding dots in integers received in data
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
