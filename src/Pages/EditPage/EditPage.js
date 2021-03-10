@@ -122,18 +122,6 @@ const EditPage = () => {
               <div className="input-edit">
                 <Input
                   containerClassName='edit-form-container'
-                  htmlFor='editEmail'
-                  Inputid='editEmail'
-                  labelName='Email'
-                  onChange={handleChange}
-                  inputName='email'
-                  value={editForm.email ? editForm.email : data.userLoginData.email}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='email'
-                />
-                <Input
-                  containerClassName='edit-form-container'
                   htmlFor='editAddress'
                   Inputid='editAddress'
                   labelName='Dirección'

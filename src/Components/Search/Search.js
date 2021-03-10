@@ -6,7 +6,6 @@ import { Context } from '../../Context';
 
 const Search = ( { pathName, showResults, className } ) => {
   const { data, setData } = useContext(Context);
-  // console.log(data);
 
   let searchHistory = useHistory();
   const handleSearch = () => searchHistory.push('/Pages/SearchPage/SearchPage');
