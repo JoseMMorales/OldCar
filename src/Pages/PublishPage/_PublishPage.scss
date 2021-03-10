@@ -25,6 +25,7 @@
 }
 
 .main-text-heading-form {
+  padding: .8rem;
   margin: 0;
   text-transform: uppercase;
   font-weight: 400;
@@ -45,31 +46,42 @@
 .description-container {
   @include flex-structure(column, none, center, none);
   border-top: .1rem solid $grey-light-color;
-  margin: 2rem;
-
-  .main-text-heading-form { padding: .6rem; }
+  margin: 1rem 2rem;
 }
 
 .textarea-publish {
   width: 50%;
   border: .1rem solid $grey-light-color;
   box-shadow: 0 0 0 .9rem $light-color, 0 0 0 1rem  $grey-light-color;
-  margin-bottom: 1rem;
+  margin: 1.5rem 1rem;
+}
+
+.files-section {
+  margin: 2rem;
+  font-weight: 300;
 }
 
 .file-container {
   @include flex-structure(none, none, center, none);
-  border: .1rem solid $grey-light-color;
-  padding: 0 3rem;
 
   label {
     width: 100px;
     @include flex-structure(none, none, center, space-between);
     cursor: pointer;
+    border: .1rem solid $grey-light-color;
+    padding: .2rem 3rem;
   }
 }
 
+.file {
+  padding: .2rem;
+}
+
 input[type="file"] { display: none; }
+
+.files-uploaded {
+  @include flex-structure(column, none, center, center);
+}
 
 .upload-icon { font-size: 1.6rem; }
 

@@ -1,11 +1,79 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
+import { useState , useContext} from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
 
 const publish_URL = `url('/img/bg-publish.jpg')`;
 
 const PublishPage = () => {
+
+  const [userInput, setUserInput] = useState(
+    {
+    username: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    type: '',
+    brand:'',
+    model: '',
+    km: '',
+    price: '',
+    year: '',
+    shortDescription: '',
+    longDescription: '',
+    files: ''
+  });
+
+  console.log(userInput);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInput({...userInput, [name]: value});
+  }
+
+  const handleFiles = (e) => {
+    const file  = e.target.files[0].name;
+    setUserInput(prevState => ({
+      ...prevState,
+      files: [...prevState.files, file]
+    }))
+  }
+
+  const addContact = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('username', userInput.name);
+    formData.append('email', userInput.email);
+    formData.append('phone', userInput.phone);
+    formData.append('address', userInput.address);
+    formData.append('city', userInput.city);
+    formData.append('type', userInput.type);
+    formData.append('brand', userInput.brand);
+    formData.append('model', userInput.model);
+    formData.append('km', userInput.km);
+    formData.append('price', userInput.price);
+    formData.append('year', userInput.year);
+    formData.append('shortDescription', userInput.shortDescription);
+    formData.append('longDescription', userInput.longDescription);
+    formData.append('file', userInput.file);
+
+    fetch('http://localhost:8000/publish', {
+      method: 'POST',
+      body: formData,
+      mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(
+      resp => {
+        // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
+        console.log(resp);
+      }
+    ).catch(error => console.log(error));
+  }
+
   return (
     <div id='publish'>
       <HeroSecondary
@@ -29,7 +97,7 @@ const PublishPage = () => {
               <b>*Campos obligarorios</b>
             </p>
           </div>
-          <form className='form-publish'>
+          <form className='form-publish' onSubmit={addContact}>
             <div className='personal-details-publish'>
               <div className='heading-section-form bg-grey-Slight'>
                 <h3 className='main-text-heading-form main-color'>1. Tus Datos</h3>
@@ -41,6 +109,9 @@ const PublishPage = () => {
                   htmlFor='publishName'
                   Inputid='publishName'
                   labelName='Nombre*'
+                  onChange={handleChange}
+                  inputName='username'
+                  value={userInput.username}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -50,6 +121,9 @@ const PublishPage = () => {
                   htmlFor='publishEmail'
                   Inputid='publishEmail'
                   labelName='Email*'
+                  onChange={handleChange}
+                  inputName='email'
+                  value={userInput.email}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='email'
@@ -59,6 +133,9 @@ const PublishPage = () => {
                   htmlFor='publishPhone'
                   Inputid='publishPhone'
                   labelName='Teléfono'
+                  onChange={handleChange}
+                  inputName='phone'
+                  value={userInput.phone}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='tlf'
@@ -68,6 +145,9 @@ const PublishPage = () => {
                   htmlFor='publishAddress'
                   Inputid='publishAddress'
                   labelName='Dirección'
+                  onChange={handleChange}
+                  inputName='address'
+                  value={userInput.address}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -77,6 +157,9 @@ const PublishPage = () => {
                   htmlFor='publishCity'
                   Inputid='publishCity'
                   labelName='Ciudad*'
+                  onChange={handleChange}
+                  inputName='city'
+                  value={userInput.city}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -86,6 +169,9 @@ const PublishPage = () => {
                   htmlFor='publishSeller'
                   Inputid='publishSeller'
                   labelName='Vendedor*'
+                  onChange={handleChange}
+                  inputName='type'
+                  value={userInput.type}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -103,6 +189,9 @@ const PublishPage = () => {
                   htmlFor='publishBrand'
                   Inputid='publishBrand'
                   labelName='Marca*'
+                  onChange={handleChange}
+                  inputName='brand'
+                  value={userInput.brand}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -112,6 +201,9 @@ const PublishPage = () => {
                   htmlFor='publishModel'
                   Inputid='publishModel'
                   labelName='Modelo*'
+                  onChange={handleChange}
+                  inputName='model'
+                  value={userInput.model}
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -121,27 +213,56 @@ const PublishPage = () => {
                   htmlFor='publishKm'
                   Inputid='publishKm'
                   labelName='Km'
+                  onChange={handleChange}
+                  inputName='km'
+                  value={userInput.km}
                   InputClassName={false}
                   labelClassName='grey-color'
-                  type='text'
+                  type='number'
                 />
                 <Input
                   containerClassName='publish-form-container'
                   htmlFor='publishPrice'
                   Inputid='publishPrice'
                   labelName='Precio*'
+                  onChange={handleChange}
+                  inputName='price'
+                  value={userInput.price}
                   InputClassName={false}
                   labelClassName='grey-color'
-                  type='text'
+                  type='number'
+                />
+                <Input
+                  containerClassName='publish-form-container'
+                  htmlFor='publishPrice'
+                  Inputid='publishPrice'
+                  labelName='Año*'
+                  onChange={handleChange}
+                  inputName='year'
+                  value={userInput.year}
+                  InputClassName={false}
+                  labelClassName='grey-color'
+                  type='number'
                 />
               </div>
               <div className='description-container'>
                 <h3 className='main-text-heading-form'>Tu vehiculo</h3>
                 <textarea
                   className='textarea-publish'
+                  rows='3'
+                  onChange={handleChange}
+                  value={userInput.shortDescription}
+                  placeholder='Descripción corta (Max 50)*'
+                  name='shortDescription'
+                  required
+                />
+                 <textarea
+                  className='textarea-publish'
                   rows='8'
-                  placeholder='Descripción de tu coche...'
-                  name='textArea'
+                  onChange={handleChange}
+                  value={userInput.longDescription}
+                  placeholder='Descripción larga (Max 150)*'
+                  name='longDescription'
                   required
                 />
               </div>
@@ -151,7 +272,7 @@ const PublishPage = () => {
                 <h3 className='main-text-heading-form main-color'>Añade tus fotos</h3>
                 <RiArrowDownSFill className='main-color'/>
               </div>
-              <div className='inputs-section-form'>
+              <div className='files-section'>
                 <Input
                   containerClassName='file-container'
                   lableClassName= 'custom-file-upload'
@@ -164,9 +285,33 @@ const PublishPage = () => {
                   htmlFor='uploadImage'
                   Inputid='uploadImage'
                   InputClassName={false}
+                  onChange={handleFiles}
+                  inputName='files'
                   labelClassName='grey-color'
                   type='file'
                 />
+                <div className='files-uploaded'>
+                  {
+                    userInput.files[0] &&
+                    <div className='file'><b>Foto 1:</b> {userInput.files[0]}</div>
+                  }
+                  {
+                    userInput.files[1] &&
+                    <div className='file'><b>Foto 2:</b> {userInput.files[1]}</div>
+                  }
+                  {
+                    userInput.files[2] &&
+                    <div className='file'><b>Foto 3:</b> {userInput.files[2]}</div>
+                  }
+                  {
+                    userInput.files[3] &&
+                    <div className='file'><b>Foto 4:</b> {userInput.files[3]}</div>
+                  }
+                  {
+                    userInput.files[4] &&
+                    <div className='file'><b>Foto 5:</b> {userInput.files[4]}</div>
+                  }
+                </div>
               </div>
             </div>
             <div className='publish-button-container'>
