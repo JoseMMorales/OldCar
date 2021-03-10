@@ -25,7 +25,7 @@ const About = () => {
           </p>
         </div>
         <div className='brands'>
-          <AiOutlineCar className='grey-light-color' />
+          <AiOutlineCar className='grey-light-color'/>
           <h6 className='dark-color'>Variedad</h6>
           <p>
             Contamos con marcas exclusivas nacionales como
@@ -33,7 +33,7 @@ const About = () => {
           </p>
         </div>
         <div className='support'>
-          <AiOutlineLike className='grey-light-color' />
+          <AiOutlineLike className='grey-light-color'/>
           <h6 className='dark-color'>Calidad</h6>
           <p>
             Todos nuestros coches estan bajo un exhaustivo control de
