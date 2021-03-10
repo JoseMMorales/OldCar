@@ -45,7 +45,7 @@ const PublishPage = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('username', userInput.name);
+    formData.append('username', userInput.username);
     formData.append('email', userInput.email);
     formData.append('phone', userInput.phone);
     formData.append('address', userInput.address);
@@ -58,7 +58,7 @@ const PublishPage = () => {
     formData.append('year', userInput.year);
     formData.append('shortDescription', userInput.shortDescription);
     formData.append('longDescription', userInput.longDescription);
-    formData.append('file', userInput.file);
+    formData.append('file', userInput.files);
 
     fetch('http://localhost:8000/publish', {
       method: 'POST',
