@@ -71,7 +71,7 @@ const PublishPage = () => {
         // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
         console.log(resp);
       }
-    ).catch(error => console.log(error));
+    ).catch(error => console.log(error))
   }
 
   return (
