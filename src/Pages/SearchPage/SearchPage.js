@@ -61,9 +61,12 @@ const SearchPage = () => {
         />
       <div className='container searchPage-container'>
         <Search showResults />
-        <p className='search-results'>
-          Resultados encontrados: {data.searchCars.length}
-        </p>
+        {
+          data.searchCars.length === 0?  '' :
+            <p className='search-results'>
+              Resultados encontrados: {data.searchCars.length}
+            </p>
+        }
         {
           cars.map((car, key) => {
             return (
@@ -109,6 +112,16 @@ const SearchPage = () => {
           })
         }
       </div>
+      {
+        data.searchCars.length === 0 &&
+        <div className='noResults-container'>
+          <img
+            src='/img/noResults.png'
+            alt='No Results'
+            className='noResultsImage'
+          />
+        </div>
+      }
     </div>
   )
 }

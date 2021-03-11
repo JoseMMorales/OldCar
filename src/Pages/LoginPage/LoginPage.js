@@ -177,7 +177,7 @@ const LoginPage= () => {
                 value={register.username}
                 labelClassName='grey-color'
                 type='text'
-                placeholder='Usuario'
+                placeholder='Nombre'
                 required={true}
               />
               <Input
@@ -186,7 +186,7 @@ const LoginPage= () => {
                 inputName='email'
                 value={register.email}
                 type='email'
-                placeholder='usuario@email'
+                placeholder='Email'
                 required={true}
               />
                <Input
