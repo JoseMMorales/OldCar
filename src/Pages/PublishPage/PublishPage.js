@@ -23,10 +23,10 @@ const PublishPage = () => {
     year: '',
     shortDescription: '',
     longDescription: '',
-    files: ''
+    files: []
   });
 
-  // console.log(userInput);
+  console.log(userInput);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,10 +34,11 @@ const PublishPage = () => {
   }
 
   const handleFiles = (e) => {
-    const file  = e.target.files[0].name;
+    // const file  = e.target.files[0].name;
+    const fileObj = e.target.files[0];
     setUserInput(prevState => ({
       ...prevState,
-      files: [...prevState.files, file]
+      files: [...prevState.files, fileObj]
     }))
   }
 
@@ -58,7 +59,10 @@ const PublishPage = () => {
     formData.append('year', userInput.year);
     formData.append('shortDescription', userInput.shortDescription);
     formData.append('longDescription', userInput.longDescription);
-    formData.append('file', userInput.files);
+    formData.append('file0', userInput.files[0]);
+    formData.append('file1', userInput.files[1]);
+    // formData.append('file2', userInput.files[2]);
+    // formData.append('file3', userInput.files[3]);
 
     fetch('http://localhost:8000/publish', {
       method: 'POST',
@@ -293,23 +297,23 @@ const PublishPage = () => {
                 <div className='files-uploaded'>
                   {
                     userInput.files[0] &&
-                    <div className='file'><b>Foto 1:</b> {userInput.files[0]}</div>
+                    <div className='file'><b>Foto 1:</b> {userInput.files[0].name}</div>
                   }
                   {
                     userInput.files[1] &&
-                    <div className='file'><b>Foto 2:</b> {userInput.files[1]}</div>
+                    <div className='file'><b>Foto 2:</b> {userInput.files[1].name}</div>
                   }
                   {
                     userInput.files[2] &&
-                    <div className='file'><b>Foto 3:</b> {userInput.files[2]}</div>
+                    <div className='file'><b>Foto 3:</b> {userInput.files[2].name}</div>
                   }
                   {
                     userInput.files[3] &&
-                    <div className='file'><b>Foto 4:</b> {userInput.files[3]}</div>
+                    <div className='file'><b>Foto 4:</b> {userInput.files[3].name}</div>
                   }
                   {
                     userInput.files[4] &&
-                    <div className='file'><b>Foto 5:</b> {userInput.files[4]}</div>
+                    <div className='file'><b>Foto 5:</b> {userInput.files[4].name}</div>
                   }
                 </div>
               </div>

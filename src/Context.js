@@ -74,6 +74,7 @@ const initialValue = {
   searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:''},
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
+  favourites: []
 }
 
 const ContextProvider = (props) => {
