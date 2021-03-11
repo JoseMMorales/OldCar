@@ -26,7 +26,7 @@ const PublishPage = () => {
     files: ''
   });
 
-  console.log(userInput);
+  // console.log(userInput);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
