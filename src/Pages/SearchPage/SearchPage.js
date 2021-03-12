@@ -15,6 +15,9 @@ const SearchPage = () => {
   const brandURL = data.searchValues.brand;
   const modelURL = data.searchValues.model;
   const sellerURL = data.searchValues.seller;
+  const yearURL = data.searchValues.year;
+  const kmURL = data.searchValues.km;
+  const priceURL = data.searchValues.price;
 
   let URLCarSearch = '';
 
@@ -30,11 +33,21 @@ const SearchPage = () => {
     URLCarSearch += `&seller=${sellerURL}`;
   }
 
+  if (yearURL) {
+    URLCarSearch += `&year=${yearURL}`;
+  }
+
+  if (kmURL) {
+    URLCarSearch += `&km=${kmURL}`;
+  }
+
+  if (priceURL) {
+    URLCarSearch += `&price=${priceURL}`;
+  }
+
   const URLCarSearchAmended = URLCarSearch.slice(1);
 
   const USER_URL = `http://localhost:8000/search?${URLCarSearchAmended}`;
-
-  console.log(USER_URL);
 
   useEffect(() => {
     fetch(USER_URL)
@@ -48,7 +61,8 @@ const SearchPage = () => {
         setData(prevState => ({...prevState, searchCars: json}))
       })
       .catch(error => console.log(error));
-  }, [brandURL, modelURL, sellerURL]);
+  }, [brandURL, modelURL, sellerURL, yearURL, kmURL, priceURL]);
+
 
   //Adding dots in integers received in data
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');

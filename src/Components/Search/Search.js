@@ -132,12 +132,16 @@ const Search = ( { pathName, showResults, className } ) => {
             onChange={handleInput}
           />
           <div className='select-buttons'>
-            <Button
-              onClick={handleSearch}
-              className='bn-filter btn total-width'
-              name='Filtrar'
-              value={selectState.name}
-            />
+            {
+               !showResults &&
+                <Button
+                  onClick={handleSearch}
+                  className='bn-filter btn total-width'
+                  name='Buscar'
+                  value={selectState.name}
+                />
+
+            }
             <Button
               className='btn-reset total-width'
               name='Borrar'
