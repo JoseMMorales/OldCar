@@ -17,21 +17,15 @@
   font-weight: 400;
 }
 
+$btn-filter : '.bn-filter';
+
 .search-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-
-  // @if .bn-filter {
-  //   background-color: $light-background;
-  //   color: $light-text;
-  // } @else {
-  //   background-color: $dark-background;
-  //   color: $dark-text;
-  // }
   grid-template-areas:
-  "element1 element2 element3 element4"
-  "element5 element6 element7 element7";
+    "element1 element2 element3 element4"
+    "element5 element6 element7 element7";
 
   padding: .5rem;
 
