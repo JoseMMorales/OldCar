@@ -79,7 +79,7 @@ const initialValue = {
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
-  // console.log(data.userLoginData);
+  // console.log(data.favourites);
 
   return (
     <Context.Provider value={{data, setData}}>

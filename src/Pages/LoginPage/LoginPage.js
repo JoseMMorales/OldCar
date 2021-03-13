@@ -31,7 +31,7 @@ const LoginPage= () => {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({username: login.email, password: login.password})
+      body: JSON.stringify({ username: login.email, password: login.password })
     };
 
     const request = new Request('http://localhost:8000/login', config);
@@ -59,7 +59,6 @@ const LoginPage= () => {
           navigate.push('/Pages/UserPage/UserPage/#user');
 
           getUserData();
-          getUserFavourites();
       }).catch( error => console.log('Error: ', error));
   }
 
@@ -121,19 +120,18 @@ const LoginPage= () => {
       })
       .then( res => {
         setData(prevState => ({ ...prevState, userLoginData: res}));
+        getUserFavourites(res.id);
       })
       .catch( e => console.log(e))
   }
 
   //Get favourites cars when login or register
-  const getUserFavourites = () => {
+  const getUserFavourites = (id) => {
     const token = localStorage.getItem('UserToken');
     const config = {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     };
-    fetch(`http://localhost:8000/favourites`, config)
+    fetch(`http://localhost:8000/favourite/${id}`, config)
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);

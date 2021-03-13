@@ -2,6 +2,7 @@ import { Button, DetailParagraph } from '../../Components/Generic';
 import { useState, useEffect } from 'react';
 
 const CarDetails = ({ car }) => {
+  console.log(car);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -10,6 +11,25 @@ const CarDetails = ({ car }) => {
 
   //Adding dots in integers received in data
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  const handlefavourite = (carId) => {
+    console.log("get here");
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`}
+    };
+
+    fetch(`http://localhost:8000/addFavourite/${carId}`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+
+        return response.json();
+      })
+      .then( res => console.log(res))
+      .catch( e => console.log(e));
+  }
 
   return (
     <div className='car-description'>
@@ -44,6 +64,7 @@ const CarDetails = ({ car }) => {
             <Button
               className='btn-search'
               name='Añadir a favoritos'
+              onClick={() => handlefavourite(car.id)}
             />
           </div>
       }

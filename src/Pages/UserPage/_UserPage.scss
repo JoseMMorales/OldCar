@@ -1,10 +1,13 @@
 .user-container {
   display: grid;
-  grid-template-columns: minmax(50px, 300px)  1fr;
+  grid-template-columns: minmax(50px, 250px)  1fr;
+  grid-template-areas:
+    "element1 element2"
+    ". element3";
 }
 
 .user-sidebar {
-  border-right: .1rem solid $grey-color;
+  grid-area: element1;
 }
 
 .user-list {
@@ -14,7 +17,6 @@
 }
 
 .user-list-element {
-  // width: 90%;
   padding: 1rem;
   border-bottom: .1rem solid $grey-light-color;
 
@@ -23,7 +25,7 @@
   }
 }
 
-.user-content {
+.user-container-details {
   margin: 2rem;
   padding: 0;
   box-shadow: .1rem .2rem .2rem .2rem $grey-color;
@@ -32,10 +34,12 @@
     padding: 1rem;
 
     &::after {
-      @include separator-style(30%, .1rem, .3rem 0, 0);
+      @include separator-style(30%, .2rem, .3rem 0, 0);
      }
   }
 }
+
+.user-content { grid-area: element2; }
 
 .user-details {
   display: flex;
@@ -46,10 +50,50 @@
   }
 }
 
+.user-favourites {
+  grid-area: element3;
+}
+
+.user-details-favourites {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 40%;
+  border: 1px solid $grey-color;
+  margin: .3rem 2rem 4rem;
+}
+
+.favourite-image {
+  width: 100%;
+}
+
+.container-favourite-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favourites-button {
+  position: sticky;
+  margin: 1rem;
+}
+
+@media(max-width: $medium-device) {
+  .card {
+    width: 90%;
+  }
+}
+
 @media(max-width: $change-device) {
   .user-container {
-    display: grid;
     grid-template-columns: 1fr;
+    grid-template-areas:
+    "element1"
+    "element2"
+    "element3";
   }
 
   .user-list {
