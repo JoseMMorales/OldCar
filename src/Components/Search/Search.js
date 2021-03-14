@@ -10,12 +10,14 @@ const Search = ( { pathName, showResults, className } ) => {
   let searchHistory = useHistory();
   const handleSearch = () => searchHistory.push('/Pages/SearchPage/SearchPage');
 
-  let [selectState, setSelectState] = useState(data.searchValues);
+  const initalValues = {brand:'', model:'', seller:'', km:'', year:'', price:''};
+
+  let [selectState, setSelectState] = useState(initalValues);
 
   //Handling change of values for context
   const handleChange = (value) => {
     if (value.length === 0) {
-      setSelectState({brand:'', model:'', seller:'', km:'', year:'', price:''})
+      setSelectState(initalValues)
     } else {
       setSelectState(prevState => ({
         ...prevState,
@@ -39,7 +41,8 @@ const Search = ( { pathName, showResults, className } ) => {
 
   //Reset Search with context when go to HOME
   useEffect(() => {
-    pathName === '/Pages/Home/Home' && setSelectState([]);
+    pathName === '/Pages/Home/Home' &&
+      setSelectState(initalValues);
   }, [])
 
   //States to clean the values up when click remove button
@@ -145,11 +148,13 @@ const Search = ( { pathName, showResults, className } ) => {
             <Button
               className='btn-reset total-width'
               name='Borrar'
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
+                setBrandsValue([])
                 setBrandsValue([])
                 setModelsValue([])
                 setSellersValue([])
-                setSelectState({brand:'', model:'', seller:'', km:'', year:'', price:''})
+                setSelectState(initalValues)
               }}
             />
           </div>

@@ -21,7 +21,7 @@ const DetailsPage = (props) => {
           if (!response.ok)
               throw new Error("Something went wrong: " + response.status);
 
-              return response.json();
+            return response.json();
       })
       .then(json => {
         setData(prevState => ({...prevState, detailsCar: json}))
