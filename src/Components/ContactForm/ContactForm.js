@@ -1,30 +1,44 @@
-import emailjs  from 'emailjs-com';
 import { Button, Input } from '../Generic';
+import { useState } from 'react';
 
-const ContactForm = ({className}) => {
+const ContactForm = ({ className, sectionLocation }) => {
 
-  const sendEmail = (e) => {
+  const initalValue = {contactName: '', contactEmail: '', contactText: ''};
+  const [contact, setContact] = useState(initalValue);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setContact({...contact, [name]: value});
+  };
+
+  const contactSend = e => {
     e.preventDefault();
 
-    emailjs.sendForm('Gmail', 'contact-form', e.target, 'user_QjlSD5S1CVgV6vYT8bxx1')
-      .then((result) => {
-        console.log(`Email sent ${result.text} to Oldcar Team`);
-        alert('Tu email ha sido enviado correctamente ');
-      }, (error) => {
-        console.log(error.text);
-        alert('No se ha posido enviar tu email, por favor contacta con nuestro equipo de atención al cliente');
-      });
-      e.target.reset();
-  }
+    fetch(`http://localhost:8000/contact/${sectionLocation}`, {
+      method: 'POST',
+      mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(
+      resp => {
+        alert("Email enviado!!");
+        console.log(resp);
+      }
+    ).catch(error => console.log(error));
+    setContact(initalValue);
+  };
 
   return (
     <div className={`contact-form ${className}`}>
-      <form id='contact-form' onSubmit={sendEmail}>
+      <form id='contact-form' onSubmit={contactSend}>
         <Input
           htmlFor='contactName'
           Inputid='contactName'
           labelName={false}
           labelClassName={false}
+          onChange={handleChange}
+          inputName='contactName'
+          value={contact.contactName}
           type='text'
           placeholder='Nombre*'
           required={true}
@@ -34,8 +48,11 @@ const ContactForm = ({className}) => {
           Inputid='contactEmail'
           labelName={false}
           labelClassName={false}
+          onChange={handleChange}
+          inputName='contactEmail'
+          value={contact.contactEmail}
           inputClassName='total-width'
-          type='text'
+          type='email'
           placeholder='Usuario@email.com*'
           required={true}
         />
@@ -44,7 +61,9 @@ const ContactForm = ({className}) => {
             className='form-control textarea'
             rows='5'
             placeholder='Mensaje...'
-            name='textArea'
+            onChange={handleChange}
+            name='contactText'
+            value={contact.contactText}
             required
           />
         </div>

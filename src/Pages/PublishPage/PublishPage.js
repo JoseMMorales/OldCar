@@ -26,15 +26,12 @@ const PublishPage = () => {
     files: []
   });
 
-  // console.log(userInput);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInput({...userInput, [name]: value});
   }
 
   const handleFiles = (e) => {
-    // const file  = e.target.files[0].name;
     const fileObj = e.target.files[0];
     setUserInput(prevState => ({
       ...prevState,
@@ -283,7 +280,7 @@ const PublishPage = () => {
                   labelName= {
                     <>
                       {'Click aqui'}
-                      <MdAddAPhoto className='upload-icon'/>
+                      <MdAddAPhoto className='upload-icon' />
                     </>
                   }
                   htmlFor='uploadImage'

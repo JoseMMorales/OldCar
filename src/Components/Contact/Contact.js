@@ -30,7 +30,7 @@ const Contact = () => {
             variants={scaleVariants}
           />
         </div>
-       <ContactForm />
+       <ContactForm sectionLocation='contacts' />
         <div className='contact-image-right'>
           <motion.img
             src='/img/contact3.png'
