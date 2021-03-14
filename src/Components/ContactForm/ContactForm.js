@@ -14,15 +14,26 @@ const ContactForm = ({ className, sectionLocation }) => {
   const contactSend = e => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('username', contact.contactName);
+    formData.append('email', contact.contactEmail);
+    formData.append('text', contact.contactText);
+
     fetch(`http://localhost:8000/contact/${sectionLocation}`, {
       method: 'POST',
+      body: formData,
       mode: 'cors'
     })
-    .then(response => response.json())
+    .then( response => {
+        if (!response.ok)
+        throw new Error(response.statusText);
+
+      return response.json();
+    })
     .then(
       resp => {
+        console.log("ok done" , resp);
         alert("Email enviado!!");
-        console.log(resp);
       }
     ).catch(error => console.log(error));
     setContact(initalValue);

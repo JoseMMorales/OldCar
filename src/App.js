@@ -1,19 +1,19 @@
-import './scss/styles.scss';
-import Navbar from './Components/Navbar/Navbar';
-import Home from './Pages/Home/Home';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import PublishPage from './Pages/PublishPage/PublishPage';
+import DetailsPage from './Pages/DetailsPage/DetailsPage';
+import BackToTop from './Components/BackToTop/BackToTop';
 import SearchPage from './Pages/SearchPage/SearchPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import EditPage from './Pages/EditPage/EditPage';
-import PublishPage from './Pages/PublishPage/PublishPage';
-import DetailsPage from './Pages/DetailsPage/DetailsPage';
 import UserPage from './Pages/UserPage/UserPage';
-import BackToTop from './Components/BackToTop/BackToTop';
+import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
-
-import { useEffect } from 'react';
 import { useLocation } from "react-router-dom";
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { ContextProvider } from './Context';
+import Home from './Pages/Home/Home';
+import { useEffect } from 'react';
+import './scss/styles.scss';
+
 
 //Each time a page is open scroll to top
 const ScrollToTopOnMount = () => {

@@ -2,33 +2,12 @@ import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Context } from '../../Context';
 import { Link } from 'react-router-dom';
 import { Button } from '../../Components/Generic';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
   const { data, setData } = useContext(Context);
-
-  const userName = data.userLoginData.name;
-  // const detailsArray = ['Nombre:', 'Email:', 'Dirección:', 'Ciudad:', 'Teléfono:', 'Tipo:'];
-  const userEmail = data.userLoginData.email;
-  const userCity = data.userLoginData.city;
-  const userAddress = data.userLoginData.address;
-  const userPhone = data.userLoginData.phone;
-  const userType = data.userLoginData.type;
-
-
-  console.log(data.favourites)
-
-  const detailsArray = [];
-
-  useEffect(() => {
-   Object.values(data.userLoginData).map((detail, key) => {
-    if (key > 0 && key < 7) {
-      detailsArray.push(detail);
-    }
-   })
-  }, []);
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -43,8 +22,8 @@ const UserPage = () => {
 
         return response.json();
       })
-      .then( res => console.log(res))
-      .catch( e => console.log(e));
+      .then(res => console.log(res))
+      .catch(e => console.log(e));
   };
 
   const deleteFavouriteCar = (idCar) => {
@@ -104,36 +83,34 @@ const UserPage = () => {
           </ul>
         </div>
         <div className='user-content user-container-details'>
-          <h2 className='heading-details-user'>{userName}</h2>
+          <h2 className='heading-details-user'>{data.userLoginData.name}</h2>
           <div className='user-details'>
-            <p className='details'><strong>Tipo:</strong> {userType}</p>
-            <p className='details'><strong>Dirección:</strong> {userAddress}</p>
-            <p className='details'><strong>Ciudad:</strong> {userCity}</p>
-            <p className='details'><strong>Teléfono:</strong> {userPhone}</p>
-            <p className='details'><strong>Email:</strong> {userEmail}</p>
+            <p className='details'><strong>Tipo:</strong> {data.userLoginData.type}</p>
+            <p className='details'><strong>Dirección:</strong> {data.userLoginData.address}</p>
+            <p className='details'><strong>Ciudad:</strong> {data.userLoginData.city}</p>
+            <p className='details'><strong>Teléfono:</strong> {data.userLoginData.phone}</p>
+            <p className='details'><strong>Email:</strong> {data.userLoginData.email}</p>
           </div>
         </div>
         <div className='user-favourites user-container-details'>
           <h2 className='heading-details-user'>Favoritos</h2>
           <div className='user-details-favourites'>
             {
-              Object.values(data.favourites).map(favourite =>{
+              Object.values(data.favourites).map((favourite, key) =>{
                 return (
-                  <>
-                    <div className="card">
-                      <img className='favourite-image' src={favourite.image} alt="card Image" />
-                      <div className="container-favourite-details">
-                        <h3>
-                          <b>{favourite.brandName} {favourite.modelName}</b>
-                        </h3>
-                        <Button
-                          className='favourites-button'
-                          onClick={e => deleteFavouriteCar(favourite.idCar)}
-                          name='Eliminar'
-                        />
-                      </div>
+                  <div className="card" key={key}>
+                    <img className='favourite-image' src={favourite.image} alt="card Image" />
+                    <div className="container-favourite-details">
+                      <h3>
+                        <b>{favourite.brandName} {favourite.modelName}</b>
+                      </h3>
+                      <Button
+                        className='favourites-button'
+                        onClick={e => deleteFavouriteCar(favourite.idCar)}
+                        name='Eliminar'
+                      />
                     </div>
-                  </>
+                  </div>
                 )
               })
             }
