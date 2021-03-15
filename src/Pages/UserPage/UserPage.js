@@ -39,7 +39,14 @@ const UserPage = () => {
 
         return response.json();
       })
-      .then( res => console.log(res))
+      .then(
+        res => {
+          // setData(prevState => ({
+          //   ...prevState,
+          //   favourites: [data.favourites.filter((car) => car.idCar !== res)]
+          // }))
+          console.log(res);
+        })
       .catch( e => console.log(e));
   };
 

@@ -12,7 +12,6 @@ const CarDetails = ({ car }) => {
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
   const handlefavourite = (carId) => {
-    console.log("get here");
     const token = localStorage.getItem('UserToken');
     const config = {
       method: 'POST',
@@ -26,7 +25,10 @@ const CarDetails = ({ car }) => {
 
         return response.json();
       })
-      .then( res => console.log(res))
+      .then(
+        res => {
+          console.log(res)
+        })
       .catch( e => console.log(e));
   }
 
