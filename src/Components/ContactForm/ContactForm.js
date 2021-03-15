@@ -1,7 +1,7 @@
 import { Button, Input } from '../Generic';
 import { useState } from 'react';
 
-const ContactForm = ({ className, sectionLocation }) => {
+const ContactForm = ({ className, sectionLocation, id }) => {
 
   const initalValue = {contactName: '', contactEmail: '', contactText: ''};
   const [contact, setContact] = useState(initalValue);
@@ -19,7 +19,7 @@ const ContactForm = ({ className, sectionLocation }) => {
     formData.append('email', contact.contactEmail);
     formData.append('text', contact.contactText);
 
-    fetch(`http://localhost:8000/contact/${sectionLocation}`, {
+    fetch(`http://localhost:8000/contact/${sectionLocation}/${id}`, {
       method: 'POST',
       body: formData,
       mode: 'cors'

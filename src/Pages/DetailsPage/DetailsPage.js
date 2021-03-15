@@ -81,6 +81,7 @@ const DetailsPage = (props) => {
                     <ContactForm
                       className='form-marging'
                       sectionLocation='details'
+                      id={id}
                     />
                   </div>
                 </div>

@@ -2,7 +2,6 @@ import { Button, DetailParagraph } from '../../Components/Generic';
 import { useState, useEffect } from 'react';
 
 const CarDetails = ({ car }) => {
-  console.log(car);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
