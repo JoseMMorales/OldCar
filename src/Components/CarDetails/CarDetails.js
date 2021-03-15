@@ -1,7 +1,9 @@
 import { Button, DetailParagraph } from '../../Components/Generic';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '../../Context';
 
 const CarDetails = ({ car }) => {
+  const { data, setData } = useContext(Context);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -27,7 +29,13 @@ const CarDetails = ({ car }) => {
       })
       .then(
         res => {
-          console.log(res)
+          let newCar = res;
+
+          setData(prevState => ({
+            ...prevState,
+            favourites: [...prevState.favourites, newCar]
+          }));
+          alert("Coche favorito añadido!!")
         })
       .catch( e => console.log(e));
   }

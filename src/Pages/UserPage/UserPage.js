@@ -41,11 +41,13 @@ const UserPage = () => {
       })
       .then(
         res => {
-          // setData(prevState => ({
-          //   ...prevState,
-          //   favourites: [data.favourites.filter((car) => car.idCar !== res)]
-          // }))
-          console.log(res);
+          const newFavouritesArray = data.favourites.filter((car) => car.idCar !== res.idCar);
+
+          setData(prevState => ({
+            ...prevState,
+            favourites: [...newFavouritesArray]
+          }))
+          // console.log(res);
         })
       .catch( e => console.log(e));
   };
