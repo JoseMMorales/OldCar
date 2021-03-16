@@ -82,7 +82,13 @@ input[type="file"] { display: none; }
 .files-uploaded {
   @include flex-structure(column, none, center, center);
 }
-
+.btn-publish {
+  &.remove-images {
+    width: 2rem;
+    padding: 0;
+    margin-left: 1rem;
+  }
+}
 .upload-icon { font-size: 1.6rem; }
 
 .publish-button-container {

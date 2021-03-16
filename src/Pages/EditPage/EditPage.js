@@ -59,7 +59,6 @@ const EditPage = () => {
     })
     .then(
       resp => {
-        console.log("ok done in Update" , resp);
         setData(prevState => ({ ...prevState, userLoginData: resp}));
         navigate.push('/Pages/UserPage/UserPage/#user');
       }

@@ -39,6 +39,15 @@ const PublishPage = () => {
     }))
   }
 
+  const deleteImage = (name) => {
+    const newFilesArray = userInput.files.filter((file) => file.name !== name);
+
+    setUserInput(prevState => ({
+      ...prevState,
+      files: [...newFilesArray]
+    }))
+  }
+
   const addContact = e => {
     e.preventDefault();
 
@@ -58,8 +67,9 @@ const PublishPage = () => {
     formData.append('longDescription', userInput.longDescription);
     formData.append('file0', userInput.files[0]);
     formData.append('file1', userInput.files[1]);
-    // formData.append('file2', userInput.files[2]);
-    // formData.append('file3', userInput.files[3]);
+    formData.append('file2', userInput.files[2]);
+    formData.append('file3', userInput.files[3]);
+    formData.append('file4', userInput.files[4]);
 
     fetch('http://localhost:8000/publish', {
       method: 'POST',
@@ -69,6 +79,7 @@ const PublishPage = () => {
     .then(response => response.json())
     .then(
       resp => {
+
         // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
         console.log(resp);
       }
@@ -293,24 +304,20 @@ const PublishPage = () => {
                 />
                 <div className='files-uploaded'>
                   {
-                    userInput.files[0] &&
-                    <div className='file'><b>Foto 1:</b> {userInput.files[0].name}</div>
-                  }
-                  {
-                    userInput.files[1] &&
-                    <div className='file'><b>Foto 2:</b> {userInput.files[1].name}</div>
-                  }
-                  {
-                    userInput.files[2] &&
-                    <div className='file'><b>Foto 3:</b> {userInput.files[2].name}</div>
-                  }
-                  {
-                    userInput.files[3] &&
-                    <div className='file'><b>Foto 4:</b> {userInput.files[3].name}</div>
-                  }
-                  {
-                    userInput.files[4] &&
-                    <div className='file'><b>Foto 5:</b> {userInput.files[4].name}</div>
+                    userInput.files.map((file, key) => {
+                      const photoNumber = key + 1;
+                      return (
+                        <div className='file' key={key}>
+                          <b>Foto {photoNumber}:</b> {file.name}
+                          <Button
+                            name='X'
+                            className='btn-publish remove-images'
+                            type='button'
+                            onClick={() => deleteImage(file.name)}
+                          />
+                        </div>
+                      )
+                    })
                   }
                 </div>
               </div>
