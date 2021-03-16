@@ -1,0 +1,8 @@
+.noResults-container {
+  @include flex-structure(none, none, none, center);
+  margin-bottom: 2rem;
+}
+
+.noResultsImage {
+  width: 90%;
+}

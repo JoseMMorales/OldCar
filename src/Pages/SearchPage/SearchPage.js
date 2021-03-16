@@ -1,8 +1,8 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
+import { Button, NoResult } from '../../Components/Generic';
 import { FaCalendarAlt, FaGasPump } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
 import Search from '../../Components/Search/Search';
-import { Button } from '../../Components/Generic';
 import { Context } from '../../Context';
 import { Link} from 'react-router-dom';
 
@@ -127,14 +127,7 @@ const SearchPage = () => {
         }
       </div>
       {
-        data.searchCars.length === 0 &&
-        <div className='noResults-container'>
-          <img
-            src='/img/noResults.png'
-            alt='No Results'
-            className='noResultsImage'
-          />
-        </div>
+        data.searchCars.length === 0 && <NoResult />
       }
     </div>
   )

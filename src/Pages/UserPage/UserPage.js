@@ -1,7 +1,7 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { Context } from '../../Context';
+import { Button, NoResult } from '../../Components/Generic';
 import { Link } from 'react-router-dom';
-import { Button } from '../../Components/Generic';
+import { Context } from '../../Context';
 import { useContext } from 'react';
 
 const login_URL = `url('/img/bg-user.jpg')`;
@@ -47,7 +47,6 @@ const UserPage = () => {
             ...prevState,
             favourites: [...newFavouritesArray]
           }))
-          // console.log(res);
         })
       .catch( e => console.log(e));
   };
@@ -115,13 +114,16 @@ const UserPage = () => {
                       </h3>
                       <Button
                         className='favourites-button'
-                        onClick={e => deleteFavouriteCar(favourite.idCar)}
+                        onClick={() => deleteFavouriteCar(favourite.idCar)}
                         name='Eliminar'
                       />
                     </div>
                   </div>
                 )
               })
+            }
+            {
+              data.favourites.length === 0 && <NoResult />
             }
         </div>
       </div>

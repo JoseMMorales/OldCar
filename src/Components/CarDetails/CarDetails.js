@@ -29,13 +29,18 @@ const CarDetails = ({ car }) => {
       })
       .then(
         res => {
-          let newCar = res;
+          console.log(res)
+          if (res.idCar === 0) {
+            alert("Coche repetido en favoritos, añade otro a tu lista");
+          } else {
+            let newCar = res;
 
-          setData(prevState => ({
-            ...prevState,
-            favourites: [...prevState.favourites, newCar]
-          }));
-          alert("Coche favorito añadido!!")
+            setData(prevState => ({
+              ...prevState,
+              favourites: [...prevState.favourites, newCar]
+            }));
+            alert("Coche añadido a favoritos");
+          }
         })
       .catch( e => console.log(e));
   }
@@ -68,7 +73,7 @@ const CarDetails = ({ car }) => {
         detail= {`${numberWithDots(`${ car.price}`)}€`}
       />
       {
-        isAuthenticated === 'true' &&
+        isAuthenticated &&
           <div className='favourite-car'>
             <Button
               className='btn-search'

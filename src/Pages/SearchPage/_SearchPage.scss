@@ -60,15 +60,6 @@
   }
 }
 
-.noResults-container {
-  @include flex-structure(none, none, none, center);
-  margin-bottom: 2rem;
-}
-
-.noResultsImage {
-  width: 90%;
-}
-
 //MEDIUM DEVICE
 @media (max-width: $medium-device) {
   .search-car-container {
