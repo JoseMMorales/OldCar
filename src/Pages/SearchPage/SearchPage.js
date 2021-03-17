@@ -21,7 +21,7 @@ const SearchPage = () => {
 
   let URLCarSearch = '';
 
-  sellerURL ? RLCarSearch += `&seller=${sellerURL}` : false;
+  sellerURL ? URLCarSearch += `&seller=${sellerURL}` : false;
   brandURL ? URLCarSearch += `&brand=${brandURL}` : false;
   modelURL ? URLCarSearch += `&model=${modelURL}` : false;
   priceURL ? URLCarSearch += `&price=${priceURL}` : false;

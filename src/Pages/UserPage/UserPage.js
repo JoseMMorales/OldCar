@@ -68,6 +68,48 @@ const UserPage = () => {
       .catch( e => console.log(e));
   }
 
+  const deletePublished = (idCar) => {
+    console.log(idCar);
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}`}
+    };
+    fetch(`http://localhost:8000/cars/deleted/${idCar}`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then(
+        res => {
+          const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
+          setData(prevState => ({ ...prevState, published: newPublishedArray}))
+        })
+      .catch( e => console.log(e));
+  }
+
+  const updatePublished = (idCar) => {
+    // const token = localStorage.getItem('UserToken');
+    // const config = {
+    //   method: 'DELETE',
+    //   headers: { 'Authorization': `Bearer ${token}`}
+    // };
+    // fetch(`http://localhost:8000/cars/deleted/${idCar}`, config)
+    //   .then(response => {
+    //     if (!response.ok)
+    //       throw new Error(response.statusText);
+    //     return response.json();
+    //   })
+    //   .then(
+    //     res => {
+    //       const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
+    //       setData(prevState => ({ ...prevState, published: newPublishedArray}))
+    //     })
+    //   .catch( e => console.log(e));
+  }
+
+
   return (
     <div id='user'>
       <HeroSecondary
@@ -162,8 +204,13 @@ const UserPage = () => {
                       </h3>
                       <Button
                         className='favourites-button'
-                        onClick={() => deleteFavouriteCar(publish.idCar)}
+                        onClick={() => deletePublished(publish.idCar)}
                         name='Eliminar'
+                      />
+                      <Button
+                        className='favourites-button'
+                        onClick={() => updatePublished(publish.idCar)}
+                        name='Editar'
                       />
                     </div>
                   </div>
