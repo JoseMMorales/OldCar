@@ -74,11 +74,13 @@ const initialValue = {
   searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:''},
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-  favourites: []
+  favourites: [],
+  published: []
 }
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
+  console.log(data.published);
 
   return (
     <Context.Provider value={{data, setData}}>

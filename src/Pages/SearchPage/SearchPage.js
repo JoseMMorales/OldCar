@@ -30,7 +30,7 @@ const SearchPage = () => {
 
   const URLCarSearchAmended = URLCarSearch.slice(1);
 
-  const USER_URL = `http://localhost:8000/search?${URLCarSearchAmended}`;
+  const USER_URL = `http://localhost:8000/cars/search?${URLCarSearchAmended}`;
 
   useEffect(() => {
     fetch(USER_URL)

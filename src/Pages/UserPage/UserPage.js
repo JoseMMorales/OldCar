@@ -41,7 +41,6 @@ const UserPage = () => {
       .then(
         res => {
           const newFavouritesArray = data.favourites.filter((car) => car.idCar !== res.idCar);
-
           setData(prevState => ({
             ...prevState,
             favourites: [...newFavouritesArray]
@@ -56,7 +55,7 @@ const UserPage = () => {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${token}`}
     };
-    fetch(`http://localhost:8000/carPublished`, config)
+    fetch(`http://localhost:8000/cars/published`, config)
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
@@ -64,7 +63,7 @@ const UserPage = () => {
       })
       .then(
         res => {
-          console.log(res);
+          setData(prevState => ({ ...prevState, published: res}))
         })
       .catch( e => console.log(e));
   }
@@ -83,9 +82,7 @@ const UserPage = () => {
             </li>
             <li
               className='user-list-element dark-color'
-              onClick={
-                getPublished()
-              }>
+              onClick={getPublished}>
               Publicados
             </li>
             <li
@@ -154,11 +151,28 @@ const UserPage = () => {
         <div className='user-published user-container-details'>
           <h2 className='heading-details-user'>Publicados</h2>
           <div className='user-details'>
-            {/* <p className='details'><strong>Tipo:</strong> {data.userLoginData.type}</p>
-            <p className='details'><strong>Dirección:</strong> {data.userLoginData.address}</p>
-            <p className='details'><strong>Ciudad:</strong> {data.userLoginData.city}</p>
-            <p className='details'><strong>Teléfono:</strong> {data.userLoginData.phone}</p>
-            <p className='details'><strong>Email:</strong> {data.userLoginData.email}</p> */}
+          {
+              Object.values(data.published).map((publish, key) =>{
+                return (
+                  <div className='card' key={key}>
+                    <img className='favourite-image' src={publish.image} alt='card Image' />
+                    <div className='container-favourite-details'>
+                      <h3>
+                        <b>{publish.brandName} {publish.modelName}</b>
+                      </h3>
+                      <Button
+                        className='favourites-button'
+                        onClick={() => deleteFavouriteCar(publish.idCar)}
+                        name='Eliminar'
+                      />
+                    </div>
+                  </div>
+                )
+              })
+            }
+            {
+              data.published.length === 0 && <NoResult />
+            }
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ const DetailsPage = (props) => {
   const { data, setData } = useContext(Context);
   const { id } = props.match.params;
 
-  const USER_URL = `http://localhost:8000/details/${id}`;
+  const USER_URL = `http://localhost:8000/cars/details/${id}`;
 
   useEffect(() => {
     fetch(USER_URL)
