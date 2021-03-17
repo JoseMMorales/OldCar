@@ -21,29 +21,12 @@ const SearchPage = () => {
 
   let URLCarSearch = '';
 
-  if (brandURL) {
-    URLCarSearch += `&brand=${brandURL}`;
-  }
-
-  if (modelURL) {
-    URLCarSearch += `&model=${modelURL}`;
-  }
-
-  if (sellerURL) {
-    URLCarSearch += `&seller=${sellerURL}`;
-  }
-
-  if (yearURL) {
-    URLCarSearch += `&year=${yearURL}`;
-  }
-
-  if (kmURL) {
-    URLCarSearch += `&km=${kmURL}`;
-  }
-
-  if (priceURL) {
-    URLCarSearch += `&price=${priceURL}`;
-  }
+  sellerURL ? RLCarSearch += `&seller=${sellerURL}` : false;
+  brandURL ? URLCarSearch += `&brand=${brandURL}` : false;
+  modelURL ? URLCarSearch += `&model=${modelURL}` : false;
+  priceURL ? URLCarSearch += `&price=${priceURL}` : false;
+  yearURL ? URLCarSearch += `&year=${yearURL}` : false;
+  kmURL ? URLCarSearch += `&km=${kmURL}` : false;
 
   const URLCarSearchAmended = URLCarSearch.slice(1);
 

@@ -11,13 +11,25 @@
 }
 
 .search-values {
-  margin: 0 .6rem;
-  padding: .1rem .4rem;
+  margin: 0 .9rem 0 .6rem;
+  padding: .1rem;
   border: 1px solid $grey-color;
   font-weight: 400;
+  color: $grey-color;
+  text-align:right;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-color;
+  }
 }
 
-$btn-filter : '.bn-filter';
+.checkMark {
+  position: relative;
+  right: -7px;
+  top: -10px;
+}
+
 
 .search-wrapper {
   display: grid;

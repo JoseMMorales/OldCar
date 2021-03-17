@@ -19,7 +19,6 @@ const UserPage = () => {
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
-
         return response.json();
       })
       .then(res => console.log(res))
@@ -51,21 +50,46 @@ const UserPage = () => {
       .catch( e => console.log(e));
   };
 
+  const getPublished = () => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      method: 'GET',
+      headers: { 'Authorization': `Bearer ${token}`}
+    };
+    fetch(`http://localhost:8000/carPublished`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then(
+        res => {
+          console.log(res);
+        })
+      .catch( e => console.log(e));
+  }
+
   return (
     <div id='user'>
       <HeroSecondary
         src={login_URL}
         text='Sitio usuario OldCar'
       />
-      <div className="user-container">
-        <div className="user-sidebar">
+      <div className='user-container'>
+        <div className='user-sidebar'>
           <ul className='user-list'>
-            <li className="user-list-element">
-              <Link to={'/Pages/EditPage/EditPage'}>Perfil</Link>
+            <li className='user-list-element'>
+              <Link className='link-user-hover dark-color' to={'/Pages/EditPage/EditPage'}>Perfil</Link>
             </li>
-            <li className="user-list-element">Favoritos</li>
             <li
-              className="user-list-element"
+              className='user-list-element dark-color'
+              onClick={
+                getPublished()
+              }>
+              Publicados
+            </li>
+            <li
+              className='user-list-element'
               onClick={() => {
                 deleteUser();
                 setData(prevState => ({
@@ -75,10 +99,10 @@ const UserPage = () => {
                  window.localStorage.removeItem('isAuthenticated');
                 alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
               }}>
-              <Link to={'/'}>Eliminar cuenta</Link>
+              <Link className='link-user-hover dark-color' to={'/'}>Eliminar cuenta</Link>
             </li>
             <li
-              className="user-list-element"
+              className='user-list-element'
               onClick={() => {
                 window.localStorage.removeItem('isAuthenticated');
                 setData(prevState => ({
@@ -86,7 +110,7 @@ const UserPage = () => {
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
                  }))
               }}>
-              <Link to={'/'}>Salir</Link>
+              <Link className='link-user-hover dark-color' to={'/'}>Salir</Link>
             </li>
           </ul>
         </div>
@@ -106,9 +130,9 @@ const UserPage = () => {
             {
               Object.values(data.favourites).map((favourite, key) =>{
                 return (
-                  <div className="card" key={key}>
-                    <img className='favourite-image' src={favourite.image} alt="card Image" />
-                    <div className="container-favourite-details">
+                  <div className='card' key={key}>
+                    <img className='favourite-image' src={favourite.image} alt='card Image' />
+                    <div className='container-favourite-details'>
                       <h3>
                         <b>{favourite.brandName} {favourite.modelName}</b>
                       </h3>
@@ -125,9 +149,19 @@ const UserPage = () => {
             {
               data.favourites.length === 0 && <NoResult />
             }
+          </div>
+        </div>
+        <div className='user-published user-container-details'>
+          <h2 className='heading-details-user'>Publicados</h2>
+          <div className='user-details'>
+            {/* <p className='details'><strong>Tipo:</strong> {data.userLoginData.type}</p>
+            <p className='details'><strong>Dirección:</strong> {data.userLoginData.address}</p>
+            <p className='details'><strong>Ciudad:</strong> {data.userLoginData.city}</p>
+            <p className='details'><strong>Teléfono:</strong> {data.userLoginData.phone}</p>
+            <p className='details'><strong>Email:</strong> {data.userLoginData.email}</p> */}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }

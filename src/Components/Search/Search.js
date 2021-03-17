@@ -12,26 +12,21 @@ const Search = ( { pathName, showResults, className } ) => {
 
   const initalValues = {brand:'', model:'', seller:'', km:'', year:'', price:''};
 
-  let [selectState, setSelectState] = useState(initalValues);
+  let [selectState, setSelectState] = useState(data.searchValues);
 
   //Handling change of values for context
   const handleChange = (value) => {
     if (value.length === 0) {
       setSelectState(initalValues)
     } else {
-      setSelectState(prevState => ({
-        ...prevState,
-        [value[0].name]: value[0].value
-      }));
+      setSelectState(prevState => ({...prevState, [value[0].name]: value[0].value }));
     }
   }
 
   //Handle Input change in Inputs
   const handleInput = e => {
 		const { name, value } = e.target;
-		setSelectState(prevState => ({
-      ...prevState, [name]: value
-    }));
+		setSelectState(prevState => ({ ...prevState, [name]: value }));
 	}
 
   //Update Context when SelectState Change
@@ -41,14 +36,37 @@ const Search = ( { pathName, showResults, className } ) => {
 
   //Reset Search with context when go to HOME
   useEffect(() => {
-    pathName === '/Pages/Home/Home' &&
-      setSelectState(initalValues);
-  }, [])
+    pathName === '/Pages/Home/Home' && setSelectState(initalValues);
+  }, []);
 
   //States to clean the values up when click remove button
   const [brandsValue, setBrandsValue] = useState([]);
   const [modelsValue, setModelsValue] = useState([]);
   const [sellersValue, setSellersValue] = useState([]);
+
+  console.log(brandsValue);
+
+  //Delete individual result
+  const deleteResult = (value) => {
+    const newResultArray = Object.fromEntries(
+    Object.entries(data.searchValues).filter(([key, result]) => result !== value[1]));
+
+    setData(prevState => ({...prevState, searchValues: newResultArray }));
+
+    switch (value[0]) {
+      case 'brand':
+        setBrandsValue([]);
+        break;
+      case 'model':
+        setModelsValue([]);
+        break;
+      case 'model':
+        setSellersValue([]);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -57,9 +75,18 @@ const Search = ( { pathName, showResults, className } ) => {
           {
             showResults && (
               <>
-                { Object.values(data.searchValues).map((value, key) => {
+                { Object.entries(data.searchValues).map((value, key) => {
                     return (
-                      value && <p className='search-values' key={key}>{value}</p>
+                      value[1] &&
+                        <div key={key}>
+                          <p className='search-values'
+                             onClick={() => deleteResult(value)}>
+                              {value[1]}
+                            <span className='checkMark dark-color bg-light'>
+                              X
+                            </span>
+                          </p>
+                        </div>
                     )
                   })
                 }
@@ -136,21 +163,19 @@ const Search = ( { pathName, showResults, className } ) => {
           />
           <div className='select-buttons'>
             {
-               !showResults &&
+              !showResults &&
                 <Button
                   onClick={handleSearch}
                   className='bn-filter btn total-width'
                   name='Buscar'
-                  value={selectState.name}
+                  // value={selectState.name}
                 />
-
             }
             <Button
               className='btn-reset total-width'
               name='Borrar'
               onClick={(e) => {
                 e.preventDefault()
-                setBrandsValue([])
                 setBrandsValue([])
                 setModelsValue([])
                 setSellersValue([])
