@@ -93,11 +93,14 @@ const LoginPage= () => {
     })
     .then(
       resp => {
-        console.log("ok done" , resp);
-        setRegister(Registercredentials);
-        setData(prevState => ({ ...prevState, userLoginData: resp}))
-        localStorage.setItem('isAuthenticated', true);
-        navigate.push('/Pages/UserPage/UserPage/#user');
+        if (resp.code === 400) {
+          alert(resp.message);
+        } else {
+          setRegister(Registercredentials);
+          setData(prevState => ({ ...prevState, userLoginData: resp}))
+          localStorage.setItem('isAuthenticated', true);
+          navigate.push('/Pages/UserPage/UserPage/#user');
+        }
       }
     ).catch(error => console.log(error));
   }
