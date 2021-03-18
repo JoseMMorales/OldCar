@@ -48,7 +48,8 @@ const Dropdown = () => {
               setData(prevState => ({
                 ...prevState,
                 userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
-               }))
+                published: [{idCar: '', brand: '', model: '', image: ''}]
+              }))
             }}>
             <Link to={'/'}>Salir</Link>
           </li>

@@ -48,7 +48,6 @@ const LoginPage= () => {
       })
       .then(
         response => {
-          // console.log('Answer ok: ', response)
           localStorage.setItem('UserToken', response.token);
           localStorage.setItem('isAuthenticated', true);
 

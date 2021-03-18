@@ -13,6 +13,8 @@ const DetailsPage = (props) => {
   const { data, setData } = useContext(Context);
   const { id } = props.match.params;
 
+  console.log(props);
+
   const USER_URL = `http://localhost:8000/cars/details/${id}`;
 
   useEffect(() => {

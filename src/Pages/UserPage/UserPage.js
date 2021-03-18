@@ -68,7 +68,7 @@ const UserPage = () => {
           setData(prevState => ({ ...prevState, published: res}))
         })
       .catch( e => console.log(e));
-  }
+  };
 
   const deletePublished = (idCar) => {
     const token = localStorage.getItem('UserToken');
@@ -88,7 +88,7 @@ const UserPage = () => {
           setData(prevState => ({ ...prevState, published: newPublishedArray}))
         })
       .catch( e => console.log(e));
-  }
+  };
 
   return (
     <div id='user'>
@@ -100,7 +100,11 @@ const UserPage = () => {
         <div className='user-sidebar'>
           <ul className='user-list'>
             <li className='user-list-element'>
-              <Link className='link-user-hover dark-color' to={'/Pages/EditPage/EditPage'}>Perfil</Link>
+              <Link
+                className='link-user-hover dark-color'
+                to={'/Pages/EditPage/EditPage'}>
+                Perfil
+              </Link>
             </li>
             <li
               className='user-list-element dark-color'
@@ -110,15 +114,20 @@ const UserPage = () => {
             <li
               className='user-list-element'
               onClick={() => {
-                deleteUser();
-                setData(prevState => ({
-                  ...prevState,
-                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                 }))
-                 window.localStorage.removeItem('isAuthenticated');
-                alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
+              deleteUser();
+              setData(prevState => ({
+                ...prevState,
+                userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
+                published: [{idCar: '', brand: '', model: '', image: ''}]
+              }))
+              window.localStorage.removeItem('isAuthenticated');
+              alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
               }}>
-              <Link className='link-user-hover dark-color' to={'/'}>Eliminar cuenta</Link>
+              <Link
+                className='link-user-hover dark-color'
+                to={'/'}>
+                Eliminar cuenta
+              </Link>
             </li>
             <li
               className='user-list-element'
@@ -127,7 +136,8 @@ const UserPage = () => {
                 setData(prevState => ({
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                 }))
+                  published: [{idCar: '', brand: '', model: '', image: ''}]
+                }))
               }}>
               <Link className='link-user-hover dark-color' to={'/'}>Salir</Link>
             </li>
@@ -147,7 +157,7 @@ const UserPage = () => {
           <h2 className='heading-details-user'>Favoritos</h2>
           <div className='user-details-favourites'>
             {
-              Object.values(data.favourites).map((favourite, key) =>{
+                data.favourites.length > 1 && Object.values(data.favourites).map((favourite, key) =>{
                 return (
                   <div className='card' key={key}>
                     <img className='favourite-image' src={favourite.image} alt='card Image' />
@@ -166,7 +176,7 @@ const UserPage = () => {
               })
             }
             {
-              data.favourites.length === 0 && <NoResult />
+              data.favourites.length === 1 && <NoResult />
             }
           </div>
         </div>
@@ -174,13 +184,14 @@ const UserPage = () => {
           <h2 className='heading-details-user'>Publicados</h2>
           <div className='user-details'>
           {
+              data.published.length > 1 &&
               Object.values(data.published).map((publish, key) =>{
                 return (
                   <div className='card' key={key}>
-                    <img className='favourite-image' src={publish.image} alt='card Image' />
+                    <img className='favourite-image' src={publish.imageMain} alt='card Image' />
                     <div className='container-favourite-details'>
                       <h3>
-                        <b>{publish.brandName} {publish.modelName}</b>
+                        <b>{publish.brand} {publish.model}</b>
                       </h3>
                       <Button
                         className='favourites-button'
@@ -190,7 +201,11 @@ const UserPage = () => {
                       <Button
                         className='favourites-button'
                         onClick={() => {
-                          navigate.push('/Pages/PublishPage/PublishPage', { params: true });
+                          navigate.push('/Pages/PublishPage/PublishPage', {
+                            params: true,
+                            car: publish
+                          });
+                          // console.log(publish);
                         }}
                         name='Editar'
                       />
@@ -200,7 +215,7 @@ const UserPage = () => {
               })
             }
             {
-              data.published.length === 0 && <NoResult />
+              data.published.length === 1 && <NoResult />
             }
           </div>
         </div>

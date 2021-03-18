@@ -111,7 +111,7 @@ const Navbar = () => {
                 <li className='li-navbar'>
                   <NavHashLink
                     className='nav-link dark-color'
-                    to='/Pages/LoginPage/LoginPage#login'>
+                    to={'/Pages/LoginPage/LoginPage#login', { params: true }}>
                     Login
                   </NavHashLink>
                 </li>

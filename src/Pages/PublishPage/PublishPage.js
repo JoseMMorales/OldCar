@@ -3,10 +3,16 @@ import { Button, Input } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useState , useContext } from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
+import { Context } from '../../Context';
 
 const publish_URL = `url('/img/bg-publish.jpg')`;
 
 const PublishPage = (props) => {
+  const { data, setData } = useContext(Context);
+
+  console.log(props);
+
+  const params = props.location.state?.params;
 
   const [userInput, setUserInput] = useState(
     {
@@ -26,6 +32,26 @@ const PublishPage = (props) => {
     files: []
   });
 
+  const [updateInput, setUpdateInput] = useState(
+    {
+    brand: props.location.state?.car.brand,
+    model: props.location.state?.car.model,
+    km: props.location.state?.car.km,
+    price: props.location.state?.car.price,
+    year: props.location.state?.car.year,
+    shortDescription: props.location.state?.car.shortDescription,
+    longDescription: props.location.state?.car.longDescription,
+    files: [
+      props.location.state?.car.imageMain,
+      props.location.state?.car.imageSecond,
+      props.location.state?.car.imageThird,
+      props.location.state?.car.imageFourth,
+      props.location.state?.car.imageFifth,
+    ]
+  });
+
+  // console.log(updateInput);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInput({...userInput, [name]: value});
@@ -39,13 +65,21 @@ const PublishPage = (props) => {
     }))
   }
 
-  const deleteImage = (name) => {
+  const deleteImage = (name, params) => {
+    if (params) {
+      const newUpdatedFilesArray = updateInput.files.filter((file) => file !== name);
+      console.log({newUpdatedFilesArray});
+      // setUpdateInput(prevState => ({
+      //   ...prevState,
+      //   files: [...newUpdatedFilesArray]
+      // }))
+    } else {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
-
-    setUserInput(prevState => ({
-      ...prevState,
-      files: [...newFilesArray]
-    }))
+      setUserInput(prevState => ({
+        ...prevState,
+        files: [...newFilesArray]
+      }))
+    }
   }
 
   const publishCar = e => {
@@ -85,28 +119,43 @@ const PublishPage = (props) => {
     ).catch(error => console.log(error))
   }
 
-  const updatePublished = (e) => {
+  const updatePublishedCar = (e) => {
     e.preventDefault();
-    // const token = localStorage.getItem('UserToken');
-    // const config = {
-    //   method: 'POST',
-    //   headers: { 'Authorization': `Bearer ${token}`}
-    // };
-    // fetch(`http://localhost:8000/cars/publish`, config)
-    //   .then(response => {
-    //     if (!response.ok)
-    //       throw new Error(response.statusText);
-    //     return response.json();
-    //   })
-    //   .then(
-    //     res => {
-    //       console.log(res);
-    //       // const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
-    //       // setData(prevState => ({ ...prevState, published: newPublishedArray}))
-    //     })
-    //   .catch( e => console.log(e));
-  }
 
+    const formData = new FormData();
+    formData.append('brand', updateInput.brand);
+    formData.append('model', updateInput.model);
+    formData.append('km', updateInput.km);
+    formData.append('price', updateInput.price);
+    formData.append('year', updateInput.year);
+    formData.append('shortDescription', updateInput.shortDescription);
+    formData.append('longDescription', updateInput.longDescription);
+    formData.append('file0', updateInput.files[0]);
+    formData.append('file1', updateInput.files[1]);
+    formData.append('file2', updateInput.files[2]);
+    formData.append('file3', updateInput.files[3]);
+    formData.append('file4', updateInput.files[4]);
+
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`},
+      body: formData,
+    };
+    fetch(`http://localhost:8000/cars`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then(
+        res => {
+          console.log(res);
+          // const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
+          // setData(prevState => ({ ...prevState, published: newPublishedArray}))
+        })
+      .catch( e => console.log(e));
+  }
 
   return (
     <div id='publish'>
@@ -117,43 +166,45 @@ const PublishPage = (props) => {
       <div className='container'>
         <div className='register-container'>
           {
-            !props.location.state?.params &&
-              <div className='heading-publish'>
-                <h1 className='main-heading grey-color'>
-                  Publica tu anunio en Old
-                  <span className='main-color'>Car</span>
-                </h1>
-                <p>
-                  UNA PUBLICACIÓN GRATIS. MÁXIMA DIFUSION: Al publicar en
-                  Old
-                  <span className='main-color'>Car</span>, su coche aparecerá también en una extensa red de
-                  portales asociados a nosotros...
-                </p>
-                <p>
-                  <b>*Campos obligarorios</b>
-                </p>
-              </div>
+            !params &&
+            <div className='heading-publish'>
+              <h1 className='main-heading grey-color'>
+                Publica tu anunio en Old
+                <span className='main-color'>Car</span>
+              </h1>
+              <p>
+                UNA PUBLICACIÓN GRATIS. MÁXIMA DIFUSION: Al publicar en
+                Old
+                <span className='main-color'>Car</span>, su coche aparecerá también en una extensa red de
+                portales asociados a nosotros...
+              </p>
+              <p>
+                <b>*Campos obligarorios</b>
+              </p>
+            </div>
           }
           {
-            props.location.state?.params &&
-              <div className='heading-publish'>
-                <h1 className='main-heading grey-color'>
-                  Edita tu anunio en Old
-                  <span className='main-color'>Car</span>
-                </h1>
-                <p>
-                  En Old
-                  <span className='main-color'>Car</span> podrás editar tus anuncios con todos los detalles
-                  que quieras cambiar y luego verlos en página de usuario.
-                </p>
-                <p>
-                  <b>*Campos obligarorios</b>
-                </p>
-              </div>
+            params &&
+            <div className='heading-publish'>
+              <h1 className='main-heading grey-color'>
+                Edita tu anunio en Old
+                <span className='main-color'>Car</span>
+              </h1>
+              <p>
+                En Old
+                <span className='main-color'>Car</span> podrás editar tus anuncios con todos los detalles
+                que quieras cambiar y luego verlos en página de usuario.
+              </p>
+              <p>
+                <b>*Campos obligarorios</b>
+              </p>
+            </div>
           }
-          <form className='form-publish' onSubmit={publishCar}>
+          <form
+            className='form-publish'
+            onSubmit={!params ? publishCar : updatePublishedCar}>
             {
-              !props.location.state?.params &&
+              !params &&
                 <div className='personal-details-publish'>
                   <div className='heading-section-form bg-grey-Slight'>
                     <h3 className='main-text-heading-form main-color'>1. Tus Datos</h3>
@@ -248,7 +299,10 @@ const PublishPage = (props) => {
                   labelName='Marca*'
                   onChange={handleChange}
                   inputName='brand'
-                  value={userInput.brand}
+                  value={ !params ?
+                    userInput.username :
+                    updateInput.brand
+                  }
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -260,7 +314,10 @@ const PublishPage = (props) => {
                   labelName='Modelo*'
                   onChange={handleChange}
                   inputName='model'
-                  value={userInput.model}
+                  value={ !params ?
+                    userInput.model :
+                    updateInput.model
+                  }
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='text'
@@ -272,7 +329,10 @@ const PublishPage = (props) => {
                   labelName='Km'
                   onChange={handleChange}
                   inputName='km'
-                  value={userInput.km}
+                  value={ !params ?
+                    userInput.km :
+                    updateInput.km
+                  }
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='number'
@@ -284,7 +344,10 @@ const PublishPage = (props) => {
                   labelName='Precio*'
                   onChange={handleChange}
                   inputName='price'
-                  value={userInput.price}
+                  value={ !params ?
+                    userInput.price :
+                    updateInput.price
+                  }
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='number'
@@ -296,7 +359,10 @@ const PublishPage = (props) => {
                   labelName='Año*'
                   onChange={handleChange}
                   inputName='year'
-                  value={userInput.year}
+                  value={ !params ?
+                    userInput.year :
+                    updateInput.year
+                  }
                   InputClassName={false}
                   labelClassName='grey-color'
                   type='number'
@@ -308,7 +374,10 @@ const PublishPage = (props) => {
                   className='textarea-publish'
                   rows='3'
                   onChange={handleChange}
-                  value={userInput.shortDescription}
+                  value={ !params ?
+                    userInput.shortDescription :
+                    updateInput.shortDescription
+                  }
                   placeholder='Descripción corta (Max 50)*'
                   name='shortDescription'
                   required
@@ -317,7 +386,10 @@ const PublishPage = (props) => {
                   className='textarea-publish'
                   rows='8'
                   onChange={handleChange}
-                  value={userInput.longDescription}
+                  value={ !params ?
+                    userInput.longDescription :
+                    updateInput.longDescription
+                  }
                   placeholder='Descripción larga (Max 150)*'
                   name='longDescription'
                   required
@@ -325,7 +397,7 @@ const PublishPage = (props) => {
               </div>
             </div>
             <div className='car-pictures-publish'>
-            <div className='heading-section-form bg-grey-Slight'>
+              <div className='heading-section-form bg-grey-Slight'>
                 <h3 className='main-text-heading-form main-color'>Añade tus fotos</h3>
                 <RiArrowDownSFill className='main-color'/>
               </div>
@@ -349,6 +421,7 @@ const PublishPage = (props) => {
                 />
                 <div className='files-uploaded'>
                   {
+                    !params &&
                     userInput.files.map((file, key) => {
                       const photoNumber = key + 1;
                       return (
@@ -358,7 +431,24 @@ const PublishPage = (props) => {
                             name='X'
                             className='btn-publish remove-images'
                             type='button'
-                            onClick={() => deleteImage(file.name)}
+                            onClick={() => deleteImage(file.name, params)}
+                          />
+                        </div>
+                      )
+                    })
+                  }
+                  {
+                    params &&
+                    updateInput.files.map((file, key) => {
+                      const photoNumber = key + 1;
+                      return (
+                        <div className='file' key={key}>
+                          <b>Foto {photoNumber}:</b> {file}
+                          <Button
+                            name='X'
+                            className='btn-publish remove-images'
+                            type='button'
+                            onClick={() => deleteImage(file, params)}
                           />
                         </div>
                       )
@@ -368,22 +458,11 @@ const PublishPage = (props) => {
               </div>
             </div>
             <div className='publish-button-container'>
-              {
-                !props.location.state?.params &&
-                  <Button
-                    name='Confirmar'
-                    className='btn-publish'
-                    type='submit'
-                  />
-              }
-              {
-                props.location.state?.params &&
-                <Button
-                  name='Editar'
-                  className='btn-publish'
-                  type='submit'
-                />
-              }
+              <Button
+                name={props.location.state?.params ? 'Editar' : 'Confirmar'}
+                className='btn-publish'
+                type='submit'
+              />
               <label className='label-publish grey-color'>
                 <input className='input' type='checkbox' name='remember' />
                   <span className='total-width'>
