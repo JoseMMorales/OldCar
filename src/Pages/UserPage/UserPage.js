@@ -1,6 +1,6 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, NoResult } from '../../Components/Generic';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
 import { useContext } from 'react';
 
@@ -8,6 +8,8 @@ const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
   const { data, setData } = useContext(Context);
+
+  let navigate = useHistory();
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -69,7 +71,6 @@ const UserPage = () => {
   }
 
   const deletePublished = (idCar) => {
-    console.log(idCar);
     const token = localStorage.getItem('UserToken');
     const config = {
       method: 'DELETE',
@@ -88,27 +89,6 @@ const UserPage = () => {
         })
       .catch( e => console.log(e));
   }
-
-  const updatePublished = (idCar) => {
-    // const token = localStorage.getItem('UserToken');
-    // const config = {
-    //   method: 'DELETE',
-    //   headers: { 'Authorization': `Bearer ${token}`}
-    // };
-    // fetch(`http://localhost:8000/cars/deleted/${idCar}`, config)
-    //   .then(response => {
-    //     if (!response.ok)
-    //       throw new Error(response.statusText);
-    //     return response.json();
-    //   })
-    //   .then(
-    //     res => {
-    //       const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
-    //       setData(prevState => ({ ...prevState, published: newPublishedArray}))
-    //     })
-    //   .catch( e => console.log(e));
-  }
-
 
   return (
     <div id='user'>
@@ -209,7 +189,9 @@ const UserPage = () => {
                       />
                       <Button
                         className='favourites-button'
-                        onClick={() => updatePublished(publish.idCar)}
+                        onClick={() => {
+                          navigate.push('/Pages/PublishPage/PublishPage', { params: true });
+                        }}
                         name='Editar'
                       />
                     </div>

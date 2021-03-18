@@ -44,7 +44,7 @@ const Search = ( { pathName, showResults, className } ) => {
   const [modelsValue, setModelsValue] = useState([]);
   const [sellersValue, setSellersValue] = useState([]);
 
-  console.log(brandsValue);
+  // console.log(brandsValue);
 
   //Delete individual result
   const deleteResult = (value) => {

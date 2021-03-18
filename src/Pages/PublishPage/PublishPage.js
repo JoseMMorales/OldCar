@@ -1,12 +1,12 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
-import { useState , useContext} from 'react';
+import { useState , useContext } from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
 
 const publish_URL = `url('/img/bg-publish.jpg')`;
 
-const PublishPage = () => {
+const PublishPage = (props) => {
 
   const [userInput, setUserInput] = useState(
     {
@@ -48,7 +48,7 @@ const PublishPage = () => {
     }))
   }
 
-  const addContact = e => {
+  const publishCar = e => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -79,12 +79,34 @@ const PublishPage = () => {
     .then(response => response.json())
     .then(
       resp => {
-
         // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
         console.log(resp);
       }
     ).catch(error => console.log(error))
   }
+
+  const updatePublished = (e) => {
+    e.preventDefault();
+    // const token = localStorage.getItem('UserToken');
+    // const config = {
+    //   method: 'POST',
+    //   headers: { 'Authorization': `Bearer ${token}`}
+    // };
+    // fetch(`http://localhost:8000/cars/publish`, config)
+    //   .then(response => {
+    //     if (!response.ok)
+    //       throw new Error(response.statusText);
+    //     return response.json();
+    //   })
+    //   .then(
+    //     res => {
+    //       console.log(res);
+    //       // const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
+    //       // setData(prevState => ({ ...prevState, published: newPublishedArray}))
+    //     })
+    //   .catch( e => console.log(e));
+  }
+
 
   return (
     <div id='publish'>
@@ -94,102 +116,125 @@ const PublishPage = () => {
       />
       <div className='container'>
         <div className='register-container'>
-          <div className='heading-publish'>
-            <h1 className='main-heading grey-color'>
-              Publica tu anunio en Old
-              <span className='main-color'>Car</span>
-            </h1>
-            <p>
-              UNA PUBLICACIÓN GRATIS. MÁXIMA DIFUSION: Al publicar en
-              Old
-              <span className='main-color'>Car</span>, su coche aparecerá también en una extensa red de
-              portales asociados a nosotros...
-            </p>
-            <p>
-              <b>*Campos obligarorios</b>
-            </p>
-          </div>
-          <form className='form-publish' onSubmit={addContact}>
-            <div className='personal-details-publish'>
-              <div className='heading-section-form bg-grey-Slight'>
-                <h3 className='main-text-heading-form main-color'>1. Tus Datos</h3>
-                <RiArrowDownSFill className='main-color'/>
+          {
+            !props.location.state?.params &&
+              <div className='heading-publish'>
+                <h1 className='main-heading grey-color'>
+                  Publica tu anunio en Old
+                  <span className='main-color'>Car</span>
+                </h1>
+                <p>
+                  UNA PUBLICACIÓN GRATIS. MÁXIMA DIFUSION: Al publicar en
+                  Old
+                  <span className='main-color'>Car</span>, su coche aparecerá también en una extensa red de
+                  portales asociados a nosotros...
+                </p>
+                <p>
+                  <b>*Campos obligarorios</b>
+                </p>
               </div>
-              <div className='inputs-section-form'>
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishName'
-                  Inputid='publishName'
-                  labelName='Nombre*'
-                  onChange={handleChange}
-                  inputName='username'
-                  value={userInput.username}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishEmail'
-                  Inputid='publishEmail'
-                  labelName='Email*'
-                  onChange={handleChange}
-                  inputName='email'
-                  value={userInput.email}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='email'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishPhone'
-                  Inputid='publishPhone'
-                  labelName='Teléfono'
-                  onChange={handleChange}
-                  inputName='phone'
-                  value={userInput.phone}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='tlf'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishAddress'
-                  Inputid='publishAddress'
-                  labelName='Dirección'
-                  onChange={handleChange}
-                  inputName='address'
-                  value={userInput.address}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishCity'
-                  Inputid='publishCity'
-                  labelName='Ciudad*'
-                  onChange={handleChange}
-                  inputName='city'
-                  value={userInput.city}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishSeller'
-                  Inputid='publishSeller'
-                  labelName='Vendedor*'
-                  onChange={handleChange}
-                  inputName='type'
-                  value={userInput.type}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
+          }
+          {
+            props.location.state?.params &&
+              <div className='heading-publish'>
+                <h1 className='main-heading grey-color'>
+                  Edita tu anunio en Old
+                  <span className='main-color'>Car</span>
+                </h1>
+                <p>
+                  En Old
+                  <span className='main-color'>Car</span> podrás editar tus anuncios con todos los detalles
+                  que quieras cambiar y luego verlos en página de usuario.
+                </p>
+                <p>
+                  <b>*Campos obligarorios</b>
+                </p>
               </div>
-            </div>
+          }
+          <form className='form-publish' onSubmit={publishCar}>
+            {
+              !props.location.state?.params &&
+                <div className='personal-details-publish'>
+                  <div className='heading-section-form bg-grey-Slight'>
+                    <h3 className='main-text-heading-form main-color'>1. Tus Datos</h3>
+                    <RiArrowDownSFill className='main-color'/>
+                  </div>
+                  <div className='inputs-section-form'>
+                    <Input
+                      containerClassName='publish-form-container'
+                      htmlFor='publishName'
+                      Inputid='publishName'
+                      labelName='Nombre*'
+                      onChange={handleChange}
+                      inputName='username'
+                      value={userInput.username}
+                      InputClassName={false}
+                      labelClassName='grey-color'
+                      type='text'
+                    />
+                    <Input
+                      containerClassName='publish-form-container'
+                      htmlFor='publishEmail'
+                      Inputid='publishEmail'
+                      labelName='Email*'
+                      onChange={handleChange}
+                      inputName='email'
+                      value={userInput.email}
+                      InputClassName={false}
+                      labelClassName='grey-color'
+                      type='email'
+                    />
+                    <Input
+                      containerClassName='publish-form-container'
+                      htmlFor='publishPhone'
+                      Inputid='publishPhone'
+                      labelName='Teléfono'
+                      onChange={handleChange}
+                      inputName='phone'
+                      value={userInput.phone}
+                      InputClassName={false}
+                      labelClassName='grey-color'
+                      type='tlf'
+                    />
+                    <Input
+                      containerClassName='publish-form-container'
+                      htmlFor='publishAddress'
+                      Inputid='publishAddress'
+                      labelName='Dirección'
+                      onChange={handleChange}
+                      inputName='address'
+                      value={userInput.address}
+                      InputClassName={false}
+                      labelClassName='grey-color'
+                      type='text'
+                    />
+                    <Input
+                      containerClassName='publish-form-container'
+                      htmlFor='publishCity'
+                      Inputid='publishCity'
+                      labelName='Ciudad*'
+                      onChange={handleChange}
+                      inputName='city'
+                      value={userInput.city}
+                      InputClassName={false}
+                      labelClassName='grey-color'
+                      type='text'
+                    />
+                    <Input
+                      containerClassName='publish-form-container'
+                      htmlFor='publishSeller'
+                      Inputid='publishSeller'
+                      labelName='Vendedor*'
+                      onChange={handleChange}
+                      inputName='type'
+                      value={userInput.type}
+                      InputClassName={false}
+                      labelClassName='grey-color'
+                      type='text'
+                    />
+                  </div>
+                </div>
+            }
             <div className='car-info-publish'>
               <div className='heading-section-form bg-grey-Slight'>
                 <h3 className='main-text-heading-form main-color'>Información del vehículo</h3>
@@ -323,11 +368,22 @@ const PublishPage = () => {
               </div>
             </div>
             <div className='publish-button-container'>
-              <Button
-                name='Confirmar'
-                className='btn-publish'
-                type='submit'
-              />
+              {
+                !props.location.state?.params &&
+                  <Button
+                    name='Confirmar'
+                    className='btn-publish'
+                    type='submit'
+                  />
+              }
+              {
+                props.location.state?.params &&
+                <Button
+                  name='Editar'
+                  className='btn-publish'
+                  type='submit'
+                />
+              }
               <label className='label-publish grey-color'>
                 <input className='input' type='checkbox' name='remember' />
                   <span className='total-width'>

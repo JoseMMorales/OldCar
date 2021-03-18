@@ -10,7 +10,6 @@ const edit_URL = `url('/img/bg-edit.jpg')`;
 const EditPage = () => {
   const { data, setData } = useContext(Context);
 
-  //Change page when access as an user
   let navigate = useHistory();
 
   const [editForm, setEditForm] = useState(
