@@ -33,7 +33,11 @@ const Dropdown = () => {
               src='/img/profileImg.png'
               alt='image_profile'
             />
-            <p className='name-profile'>Jose</p>
+            <p className='name-profile'>
+              {
+               data.userLoginData.name.split(' ')[0]
+              }
+              </p>
             <RiArrowDownSLine className={`arrow-profile ${active && 'arrow-visible'}`} />
             <RiArrowUpSLine className={`arrow-profile ${!active && 'arrow-visible'}`} />
         </button>

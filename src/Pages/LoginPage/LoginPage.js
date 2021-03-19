@@ -55,8 +55,6 @@ const LoginPage= () => {
           console.log(decoded);
 
           setLogin(Logincredentials);
-          navigate.push('/Pages/UserPage/UserPage/#user');
-
           getUserData();
       }).catch( error => console.log('Error: ', error));
   }
@@ -97,8 +95,7 @@ const LoginPage= () => {
         } else {
           setRegister(Registercredentials);
           setData(prevState => ({ ...prevState, userLoginData: resp}))
-          localStorage.setItem('isAuthenticated', true);
-          navigate.push('/Pages/UserPage/UserPage/#user');
+          alert("Gracias por registrate, por favor haz login para acceder a tu cuenta");
         }
       }
     ).catch(error => console.log(error));
@@ -140,6 +137,7 @@ const LoginPage= () => {
       })
       .then( res => {
         setData(prevState => ({ ...prevState, favourites: res}));
+        navigate.push('/Pages/UserPage/UserPage/#user');
       })
       .catch( e => console.log(e))
   }

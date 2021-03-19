@@ -37,7 +37,6 @@ const UserPage = () => {
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
-
         return response.json();
       })
       .then(
@@ -85,7 +84,7 @@ const UserPage = () => {
       .then(
         res => {
           const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
-          setData(prevState => ({ ...prevState, published: newPublishedArray}))
+          setData(prevState => ({ ...prevState, published: newPublishedArray}));
         })
       .catch( e => console.log(e));
   };
@@ -114,14 +113,14 @@ const UserPage = () => {
             <li
               className='user-list-element'
               onClick={() => {
-              deleteUser();
-              setData(prevState => ({
-                ...prevState,
-                userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                published: [{idCar: '', brand: '', model: '', image: ''}]
-              }))
-              window.localStorage.removeItem('isAuthenticated');
-              alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
+                deleteUser();
+                setData(prevState => ({
+                  ...prevState,
+                  userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
+                  published: [{idCar: '', brand: '', model: '', image: ''}]
+                }))
+                window.localStorage.removeItem('isAuthenticated');
+                alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
               }}>
               <Link
                 className='link-user-hover dark-color'
@@ -157,7 +156,7 @@ const UserPage = () => {
           <h2 className='heading-details-user'>Favoritos</h2>
           <div className='user-details-favourites'>
             {
-                data.favourites.length > 1 && Object.values(data.favourites).map((favourite, key) =>{
+                data.favourites.length > 0 && Object.values(data.favourites).map((favourite, key) =>{
                 return (
                   <div className='card' key={key}>
                     <img className='favourite-image' src={favourite.image} alt='card Image' />
@@ -176,7 +175,7 @@ const UserPage = () => {
               })
             }
             {
-              data.favourites.length === 1 && <NoResult />
+              data.favourites.length === 0 && <NoResult />
             }
           </div>
         </div>
@@ -205,7 +204,6 @@ const UserPage = () => {
                             params: true,
                             car: publish
                           });
-                          // console.log(publish);
                         }}
                         name='Editar'
                       />
