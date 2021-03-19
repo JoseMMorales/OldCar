@@ -3,16 +3,19 @@ import { Button, Input } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useState , useContext } from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
 
 const publish_URL = `url('/img/bg-publish.jpg')`;
 
 const PublishPage = (props) => {
+  let navigate = useHistory();
   const { data, setData } = useContext(Context);
   const [stateButton, setStateButton] = useState(0);
 
   const params = props.location.state?.params;
   const publish = props.location.state?.publish;
+  const carId = props.location.state?.carId;
 
   const [userInput, setUserInput] = useState(
     {
@@ -34,44 +37,50 @@ const PublishPage = (props) => {
 
   const [updateInput, setUpdateInput] = useState(
     {
-    brand: data.updatePublished.brand,
-    model: data.updatePublished.model,
-    km: data.updatePublished.km,
-    price: data.updatePublished.price,
-    year: data.updatePublished.year,
-    shortDescription: data.updatePublished.shortDescription,
-    longDescription: data.updatePublished.longDescription,
-    files: [
-      data.updatePublished.imageMain,
-      data.updatePublished.imageSecond,
-      data.updatePublished.imageThird,
-      data.updatePublished.imageFourth,
-      data.updatePublished.imageFifth,
-    ]
+      brand: data.updatePublished.brand,
+      model: data.updatePublished.model,
+      km: data.updatePublished.km,
+      price: data.updatePublished.price,
+      year: data.updatePublished.year,
+      shortDescription: data.updatePublished.shortDescription,
+      longDescription: data.updatePublished.longDescription,
+      files: [
+        data.updatePublished.imageMain,
+        data.updatePublished.imageSecond,
+        data.updatePublished.imageThird,
+        data.updatePublished.imageFourth,
+        data.updatePublished.imageFifth,
+      ]
   });
 
+  console.log({updateInput});
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserInput({...userInput, [name]: value});
+    if (params && !publish) {
+      const { name, value } = e.target;
+      setUpdateInput({...updateInput, [name]: value});
+    } else if (publish || !params) {
+      const { name, value } = e.target;
+      setUserInput({...userInput, [name]: value});
+    }
   }
 
   const handleFiles = (e) => {
-    const fileObj = e.target.files[0];
-    setUserInput(prevState => ({
-      ...prevState,
-      files: [...prevState.files, fileObj]
-    }))
+    if (params && !publish) {
+      console.log("Editar");
+    } else if (publish || !params) {
+      const fileObj = e.target.files[0];
+      setUserInput(prevState => ({
+        ...prevState,
+        files: [...prevState.files, fileObj]
+      }))
+    }
   }
 
-  const deleteImage = (name, params) => {
-    if (params) {
-      // const newUpdatedFilesArray = updateInput.files.filter((file) => file !== name);
-      // console.log({newUpdatedFilesArray});
-      // setUpdateInput(prevState => ({
-      //   ...prevState,
-      //   files: [...newUpdatedFilesArray]
-      // }))
-    } else {
+  const deleteImage = (name) => {
+    if (params && !publish) {
+      console.log("Editar");
+    } else if (publish || !params) {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
       setUserInput(prevState => ({
         ...prevState,
@@ -80,136 +89,133 @@ const PublishPage = (props) => {
     }
   }
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+
     switch (stateButton) {
       case 1:
-        updatePublishedCar;
+        updatePublishedCar(carId);
         break;
       case 2:
-        updatePublishedImages;
+        updatePublishedImages();
         break;
       case 3:
-        publishCarNotUser;
+        publishCarNotUser();
         break;
       case 4:
-        publishCarUser;
+        publishCarUser();
         break;
       default:
         break;
     }
   }
 
-  const publishCarNotUser = (e) => {
-    e.preventDefault();
+  const publishCarNotUser = () => {
+    const formData = new FormData();
+    formData.append('username', userInput.username);
+    formData.append('email', userInput.email);
+    formData.append('phone', userInput.phone);
+    formData.append('address', userInput.address);
+    formData.append('city', userInput.city);
+    formData.append('type', userInput.type);
+    formData.append('brand', userInput.brand);
+    formData.append('model', userInput.model);
+    formData.append('km', userInput.km);
+    formData.append('price', userInput.price);
+    formData.append('year', userInput.year);
+    formData.append('shortDescription', userInput.shortDescription);
+    formData.append('longDescription', userInput.longDescription);
+    formData.append('file0', userInput.files[0]);
+    formData.append('file1', userInput.files[1]);
+    formData.append('file2', userInput.files[2]);
+    formData.append('file3', userInput.files[3]);
+    formData.append('file4', userInput.files[4]);
 
-    // console.log('publishCarNotUser');
-    // const formData = new FormData();
-    // formData.append('username', userInput.username);
-    // formData.append('email', userInput.email);
-    // formData.append('phone', userInput.phone);
-    // formData.append('address', userInput.address);
-    // formData.append('city', userInput.city);
-    // formData.append('type', userInput.type);
-    // formData.append('brand', userInput.brand);
-    // formData.append('model', userInput.model);
-    // formData.append('km', userInput.km);
-    // formData.append('price', userInput.price);
-    // formData.append('year', userInput.year);
-    // formData.append('shortDescription', userInput.shortDescription);
-    // formData.append('longDescription', userInput.longDescription);
-    // formData.append('file0', userInput.files[0]);
-    // formData.append('file1', userInput.files[1]);
-    // formData.append('file2', userInput.files[2]);
-    // formData.append('file3', userInput.files[3]);
-    // formData.append('file4', userInput.files[4]);
-
-    // fetch('http://localhost:8000/publish', {
-    //   method: 'POST',
-    //   body: formData,
-    //   mode: 'cors'
-    // })
-    // .then(response => response.json())
-    // .then(
-    //   resp => {
-    //     // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
-    //     console.log(resp);
-    //   }
-    // ).catch(error => console.log(error))
+    fetch('http://localhost:8000/publish/notUser', {
+      method: 'POST',
+      body: formData,
+      mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(
+      resp => {
+        // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
+        // console.log(resp);
+        alert("Coche guardado correctamente!");
+      }
+    ).catch(error => console.log(error))
   }
 
-  const updatePublishedCar = (e) => {
-    e.preventDefault();
-    console.log('updatePublishedCar');
-    // const formData = new FormData();
-    // formData.append('brand', updateInput.brand);
-    // formData.append('model', updateInput.model);
-    // formData.append('km', updateInput.km);
-    // formData.append('price', updateInput.price);
-    // formData.append('year', updateInput.year);
-    // formData.append('shortDescription', updateInput.shortDescription);
-    // formData.append('longDescription', updateInput.longDescription);
-    // formData.append('file0', updateInput.files[0]);
-    // formData.append('file1', updateInput.files[1]);
-    // formData.append('file2', updateInput.files[2]);
-    // formData.append('file3', updateInput.files[3]);
-    // formData.append('file4', updateInput.files[4]);
+  const updatePublishedCar = (carId) => {
+    console.log(carId);
+    const formData = new FormData();
+    formData.append('brand', updateInput.brand);
+    formData.append('model', updateInput.model);
+    formData.append('km', updateInput.km);
+    formData.append('price', updateInput.price);
+    formData.append('year', updateInput.year);
+    formData.append('shortDescription', updateInput.shortDescription);
+    formData.append('longDescription', updateInput.longDescription);
 
-    // const token = localStorage.getItem('UserToken');
-    // const config = {
-    //   method: 'POST',
-    //   headers: { 'Authorization': `Bearer ${token}`},
-    //   body: formData,
-    // };
-    // fetch(`http://localhost:8000/cars`, config)
-    //   .then(response => {
-    //     if (!response.ok)
-    //       throw new Error(response.statusText);
-    //     return response.json();
-    //   })
-    //   .then(
-    //     res => {
-    //       console.log(res);
-    //       // const newPublishedArray = data.published.filter((car) => car.idCar !== res.id);
-    //       // setData(prevState => ({ ...prevState, published: newPublishedArray}))
-    //     })
-    //   .catch( e => console.log(e));
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`},
+      body: formData,
+    };
+
+    fetch(`http://localhost:8000/published/update/${carId}`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then(
+        res => {
+          console.log(res);
+          // setData(prevState => ({ ...prevState, published: [...prevState.published, res]}));
+          // navigate.push('/Pages/UserPage/UserPage');
+          // alert('Información del vehículo ha sido cambiada');
+        })
+      .catch( e => console.log(e));
   }
 
-  const updatePublishedImages = (e) => {
-    e.preventDefault();
+  const updatePublishedImages = () => {
+
     console.log('updatePublishedCar');
   }
 
-  const publishCarUser = (e) => {
-    e.preventDefault();
+  const publishCarUser = () => {
+    const token = localStorage.getItem('UserToken');
 
-    console.log('publishCarUser');
-    // const formData = new FormData();
-    // formData.append('brand', userInput.brand);
-    // formData.append('model', userInput.model);
-    // formData.append('km', userInput.km);
-    // formData.append('price', userInput.price);
-    // formData.append('year', userInput.year);
-    // formData.append('shortDescription', userInput.shortDescription);
-    // formData.append('longDescription', userInput.longDescription);
-    // formData.append('file0', userInput.files[0]);
-    // formData.append('file1', userInput.files[1]);
-    // formData.append('file2', userInput.files[2]);
-    // formData.append('file3', userInput.files[3]);
-    // formData.append('file4', userInput.files[4]);
+    const formData = new FormData();
+    formData.append('brand', userInput.brand);
+    formData.append('model', userInput.model);
+    formData.append('km', userInput.km);
+    formData.append('price', userInput.price);
+    formData.append('year', userInput.year);
+    formData.append('shortDescription', userInput.shortDescription);
+    formData.append('longDescription', userInput.longDescription);
+    formData.append('file0', userInput.files[0]);
+    formData.append('file1', userInput.files[1]);
+    formData.append('file2', userInput.files[2]);
+    formData.append('file3', userInput.files[3]);
+    formData.append('file4', userInput.files[4]);
 
-    // fetch('http://localhost:8000/publish', {
-    //   method: 'POST',
-    //   body: formData,
-    //   mode: 'cors'
-    // })
-    // .then(response => response.json())
-    // .then(
-    //   resp => {
-    //     // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
-    //     console.log(resp);
-    //   }
-    // ).catch(error => console.log(error))
+    fetch('http://localhost:8000/publish/user', {
+      method: 'POST',
+      body: formData,
+      mode: 'cors',
+      headers: { 'Authorization': `Bearer ${token}`}
+    })
+    .then(response => response.json())
+    .then(
+      resp => {
+        setData(prevState => ({ ...prevState, published: [...prevState.published, resp]}));
+        navigate.push('/Pages/UserPage/UserPage');
+        alert('Vehículo creado en tu perfil');
+      }
+    ).catch(error => console.log(error));
   }
 
   return (
@@ -354,9 +360,10 @@ const PublishPage = (props) => {
                   labelName='Marca*'
                   onChange={handleChange}
                   inputName='brand'
-                  value={ !params ?
-                    userInput.username :
-                    updateInput.brand
+                  value={
+                    (!params && userInput.brand) ||
+                    (params && publish && userInput.brand) ||
+                    (params && !publish && updateInput.brand) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -369,9 +376,10 @@ const PublishPage = (props) => {
                   labelName='Modelo*'
                   onChange={handleChange}
                   inputName='model'
-                  value={ !params ?
-                    userInput.model :
-                    updateInput.model
+                  value={
+                    (!params && userInput.model) ||
+                    (params && publish && userInput.model) ||
+                    (params && !publish && updateInput.model) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -384,9 +392,10 @@ const PublishPage = (props) => {
                   labelName='Km'
                   onChange={handleChange}
                   inputName='km'
-                  value={ !params ?
-                    userInput.km :
-                    updateInput.km
+                  value={
+                    (!params && userInput.km) ||
+                    (params && publish && userInput.km) ||
+                    (params && !publish && updateInput.km) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -399,9 +408,10 @@ const PublishPage = (props) => {
                   labelName='Precio*'
                   onChange={handleChange}
                   inputName='price'
-                  value={ !params ?
-                    userInput.price :
-                    updateInput.price
+                  value={
+                    (!params && userInput.price) ||
+                    (params && publish && userInput.price) ||
+                    (params && !publish && updateInput.price) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -414,9 +424,10 @@ const PublishPage = (props) => {
                   labelName='Año*'
                   onChange={handleChange}
                   inputName='year'
-                  value={ !params ?
-                    userInput.year :
-                    updateInput.year
+                  value={
+                    (!params && userInput.year) ||
+                    (params && publish && userInput.year) ||
+                    (params && !publish && updateInput.year) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -429,9 +440,10 @@ const PublishPage = (props) => {
                   className='textarea-publish'
                   rows='3'
                   onChange={handleChange}
-                  value={ !params ?
-                    userInput.shortDescription :
-                    updateInput.shortDescription
+                  value={
+                    (!params && userInput.shortDescription) ||
+                    (params && publish && userInput.shortDescription) ||
+                    (params && !publish && updateInput.shortDescription) || ''
                   }
                   placeholder='Descripción corta (Max 50)*'
                   name='shortDescription'
@@ -440,9 +452,10 @@ const PublishPage = (props) => {
                   className='textarea-publish'
                   rows='8'
                   onChange={handleChange}
-                  value={ !params ?
-                    userInput.longDescription :
-                    updateInput.longDescription
+                  value={
+                    (!params && userInput.longDescription) ||
+                    (params && publish && userInput.longDescription) ||
+                    (params && !publish && updateInput.longDescription) || ''
                   }
                   placeholder='Descripción larga (Max 150)*'
                   name='longDescription'
@@ -485,38 +498,37 @@ const PublishPage = (props) => {
                 />
                 <div className='files-uploaded'>
                   {
-                    // (params && !publish) &&
-                    // userInput.files.map((file, key) => {
-                    //   const photoNumber = key + 1;
-                    //   return (
-                        // <div className='file' key={key}>
-                        //   <b>Foto {photoNumber}:</b> {file.name}
-                          // <Button
-                          //   name='X'
-                          //   className='btn-publish remove-images'
-                          //   type='button'
-                          //   onClick={() => (setStateButton(2))}
-                          // />
-                        // </div>
-                    //   )
-                    // })
+                    (publish || !params) &&
+                    userInput.files.map((file, key) => {
+                      const photoNumber = key + 1;
+                      return (
+                        <div className='file' key={key}>
+                          <b>Foto {photoNumber}:</b> {file.name}
+                          <Button
+                            name='X'
+                            className='btn-publish remove-images'
+                            type='button'
+                            onClick={() => (deleteImage(file.name))}
+                          />
+                        </div>
+                      )
+                    })
                   }
                   {
-                    // params &&
-                    // updateInput.files.map((file, key) => {
-                    //   const photoNumber = key + 1;
-                    //   return (
-                        // <div className='file' key={key}>
-                        //   <b>Foto {photoNumber}:</b> {file}
-                          // <Button
-                          //   name='X'
-                          //   className='btn-publish remove-images'
-                          //   type='button'
-                          //   onClick={() => (setStateButton(2))}
-                          // />
-                        // </div>
-                    //   )
-                    // })
+                    (params && !publish) &&
+                    updateInput.files.map((file, key) => {
+                      return (
+                        <div className='file' key={key}>
+                          <img src={file} alt="image" style={{'width' : '150px'}}/>
+                          <Button
+                            name='X'
+                            className='btn-publish remove-images'
+                            type='button'
+                            onClick={() => (deleteImage(file.name))}
+                          />
+                        </div>
+                      )
+                    })
                   }
                 </div>
               </div>

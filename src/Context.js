@@ -75,7 +75,7 @@ const initialValue = {
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
   favourites: [],
-  published: [{ idCar: '', brand: '', model: '', image: ''}],
+  published: [{ id: '', brand: '', model: '', imageMain: ''}],
   updatePublished: {
     brand:'',
     model: '',
@@ -94,8 +94,6 @@ const initialValue = {
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
-
-  console.log(data.updatePublished);
 
   return (
     <Context.Provider value={{data, setData}}>

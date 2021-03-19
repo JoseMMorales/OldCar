@@ -56,7 +56,7 @@ const UserPage = () => {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${token}`}
     };
-    fetch(`http://localhost:8000/cars/published`, config)
+    fetch(`http://localhost:8000/published/cars`, config)
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
@@ -75,7 +75,7 @@ const UserPage = () => {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}`}
     };
-    fetch(`http://localhost:8000/cars/deleted/${idCar}`, config)
+    fetch(`http://localhost:8000/published/delete/${idCar}`, config)
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
@@ -206,7 +206,10 @@ const UserPage = () => {
                           }))
                           navigate.push(
                             '/Pages/PublishPage/PublishPage',
-                            { params: true }
+                            {
+                              params: true,
+                              carId: publish.idCar
+                            }
                           );
                         }}
                         name='Editar'
