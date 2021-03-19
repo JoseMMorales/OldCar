@@ -75,18 +75,27 @@ const initialValue = {
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
   favourites: [],
-  published: [{ idCar: '', brand: '', model: '', image: ''}]
-  // updatePublished: { brand:'', model: '', km: '',
-  //   price: '',
-  //   year: '',
-  //   shortDescription: '',
-  //   longDescription: '',
-  //   files: []
-  // }
+  published: [{ idCar: '', brand: '', model: '', image: ''}],
+  updatePublished: {
+    brand:'',
+    model: '',
+    km: '',
+    price: '',
+     year: '',
+     shortDescription: '',
+     longDescription: '',
+     imageMain: '',
+     imageSecond: '',
+     imageThird: '',
+     imageFourth: '',
+     imageFifth: ''
+    }
 }
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
+
+  console.log(data.updatePublished);
 
   return (
     <Context.Provider value={{data, setData}}>

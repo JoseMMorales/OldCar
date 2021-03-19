@@ -200,10 +200,14 @@ const UserPage = () => {
                       <Button
                         className='favourites-button'
                         onClick={() => {
-                          navigate.push('/Pages/PublishPage/PublishPage', {
-                            params: true,
-                            car: publish
-                          });
+                          setData(prevState => ({
+                            ...prevState,
+                            updatePublished: publish
+                          }))
+                          navigate.push(
+                            '/Pages/PublishPage/PublishPage',
+                            { params: true }
+                          );
                         }}
                         name='Editar'
                       />

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { NavHashLink } from 'react-router-hash-link';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Context } from '../../Context';
 import { Dropdown } from '../Generic';
 
@@ -100,11 +100,17 @@ const Navbar = () => {
               </NavHashLink>
             </li>
             <li className='li-navbar'>
-              <NavHashLink
+              <Link
                 className='nav-link dark-color'
-                to='/Pages/PublishPage/PublishPage#publish'>
+                to={{
+                  pathname: '/Pages/PublishPage/PublishPage',
+                  state: {
+                    params: isAuthenticated ? true : false,
+                    publish: isAuthenticated ? true : false
+                  }
+                }}>
                 Publicar
-              </NavHashLink>
+              </Link>
             </li>
             {
               !isAuthenticated &&
