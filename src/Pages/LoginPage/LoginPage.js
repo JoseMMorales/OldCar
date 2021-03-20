@@ -1,14 +1,14 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { useHistory } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Context } from '../../Context';
 import jwt_decode from "jwt-decode";
 
 const login_URL = `url('/img/bg-login.jpg')`;
 
 const LoginPage= () => {
-  const { data, setData } = useContext(Context);
+  const { setData, getUserData } = useContext(Context);
 
   //Change page when access as an user
   let navigate = useHistory();
@@ -56,6 +56,7 @@ const LoginPage= () => {
 
           setLogin(Logincredentials);
           getUserData();
+          navigate.push('/Pages/UserPage/UserPage/#user');
       }).catch( error => console.log('Error: ', error));
   }
 
@@ -99,46 +100,6 @@ const LoginPage= () => {
         }
       }
     ).catch(error => console.log(error));
-  }
-
-  //Get user data when login or register
-  const getUserData = () => {
-    const token = localStorage.getItem('UserToken');
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    };
-    fetch(`http://localhost:8000/user/data`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-        return response.json();
-      })
-      .then( res => {
-        setData(prevState => ({ ...prevState, userLoginData: res}));
-        getUserFavourites(res.id);
-      })
-      .catch( e => console.log(e))
-  }
-
-  //Get favourites cars when login or register
-  const getUserFavourites = (id) => {
-    const token = localStorage.getItem('UserToken');
-    const config = {
-      headers: { 'Authorization': `Bearer ${token}` }
-    };
-    fetch(`http://localhost:8000/favourite/${id}`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-        return response.json();
-      })
-      .then( res => {
-        setData(prevState => ({ ...prevState, favourites: res}));
-        navigate.push('/Pages/UserPage/UserPage/#user');
-      })
-      .catch( e => console.log(e))
   }
 
   return (

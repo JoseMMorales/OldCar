@@ -2,13 +2,18 @@ import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useHistory } from 'react-router-dom';
-import { useState , useContext} from 'react';
+import { useState , useContext, useEffect } from 'react';
 import { Context } from '../../Context';
 
 const edit_URL = `url('/img/bg-edit.jpg')`;
 
 const EditPage = () => {
-  const { data, setData } = useContext(Context);
+  const { data, setData, getUserData } = useContext(Context);
+  const isAuthenticated =  localStorage.isAuthenticated;
+
+  useEffect(() => {
+    isAuthenticated && getUserData();
+  }, [])
 
   let navigate = useHistory();
 

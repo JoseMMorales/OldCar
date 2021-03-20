@@ -1,7 +1,7 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, Input } from '../../Components/Generic';
+import { useState , useContext, useEffect } from 'react';
 import { RiArrowDownSFill } from 'react-icons/ri';
-import { useState , useContext } from 'react';
 import { MdAddAPhoto } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
@@ -10,8 +10,13 @@ const publish_URL = `url('/img/bg-publish.jpg')`;
 
 const PublishPage = (props) => {
   let navigate = useHistory();
-  const { data, setData } = useContext(Context);
+  const { data, setData, getUserData } = useContext(Context);
+  const isAuthenticated =  localStorage.isAuthenticated;
   const [stateButton, setStateButton] = useState(0);
+
+  useEffect(() => {
+    isAuthenticated && getUserData();
+  }, [])
 
   const params = props.location.state?.params;
   const publish = props.location.state?.publish;

@@ -14,7 +14,6 @@ import Home from './Pages/Home/Home';
 import { useEffect } from 'react';
 import './scss/styles.scss';
 
-
 //Each time a page is open scroll to top
 const ScrollToTopOnMount = () => {
   const { pathname } = useLocation();

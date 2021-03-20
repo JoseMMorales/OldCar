@@ -95,11 +95,45 @@ const initialValue = {
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
 
-  // console.log(data.updatePublished)
-  // console.log('published', data.published)
+  const getUserData = () => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    fetch(`http://localhost:8000/user/data`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then( res => {
+        setData(prevState => ({ ...prevState, userLoginData: res}));
+        refreshUserFavourites(res.id);
+      })
+      .catch( e => console.log(e))
+  }
+
+  const refreshUserFavourites = (id) => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    };
+    fetch(`http://localhost:8000/favourite/${id}`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then( res => {
+        setData(prevState => ({ ...prevState, favourites: res}));
+      })
+      .catch( e => console.log(e))
+  }
 
   return (
-    <Context.Provider value={{data, setData}}>
+    <Context.Provider value={{data, setData, getUserData}}>
       {props.children}
     </Context.Provider>
   )

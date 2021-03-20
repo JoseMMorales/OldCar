@@ -10,8 +10,13 @@ import ContactForm from '../../Components/ContactForm/ContactForm';
 const details_URL = `url('/img/bg-detail.jpg')`;
 
 const DetailsPage = (props) => {
-  const { data, setData } = useContext(Context);
+  const { data, setData, getUserData } = useContext(Context);
+  const isAuthenticated =  localStorage.isAuthenticated;
   const { id } = props.match.params;
+
+  useEffect(() => {
+    isAuthenticated && getUserData();
+  }, [])
 
   const USER_URL = `http://localhost:8000/cars/details/${id}`;
 

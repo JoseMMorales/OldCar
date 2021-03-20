@@ -1,7 +1,7 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, NoResult } from '../../Components/Generic';
 import { FaCalendarAlt, FaGasPump } from 'react-icons/fa';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import Search from '../../Components/Search/Search';
 import { Context } from '../../Context';
 import { Link} from 'react-router-dom';
@@ -9,8 +9,13 @@ import { Link} from 'react-router-dom';
 const search_URL = `url('/img/bg-search.jpg')`;
 
 const SearchPage = () => {
-  const { data, setData } = useContext(Context);
+  const { data, setData, getUserData } = useContext(Context);
+  const isAuthenticated =  localStorage.isAuthenticated;
   const cars = data.searchCars;
+
+  useEffect(() => {
+    isAuthenticated && getUserData();
+  }, [])
 
   const brandURL = data.searchValues.brand;
   const modelURL = data.searchValues.model;

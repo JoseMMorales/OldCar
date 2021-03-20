@@ -12,7 +12,14 @@
 .user-favourites { grid-area: element3; }
 .user-published { grid-area: element4; }
 
+.user-sidebar{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 40px;
+  z-index: 2;
+}
 .user-list {
+  z-index: 2;
   margin: 2rem;
   padding: 0;
   box-shadow: .1rem .2rem .2rem .2rem $grey-color;
@@ -83,6 +90,31 @@
   margin: 1rem;
 }
 
+
+// .card-published {
+//   display: grid;
+//   grid-template-columns: 50% 50%;
+//   width: 40%;
+//   margin: 0 auto;
+//   margin-bottom: 2rem;
+//   border: 1px solid black;
+//   padding: 1rem;
+// }
+
+.image-published {
+  width: 100%;
+}
+
+// .container-published {
+//  margin: 0 auto;
+// }
+
+// .published-button-container {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+
 @media(max-width: $medium-device) {
   .card {
     width: 90%;
@@ -96,7 +128,7 @@
     "element1"
     "element2"
     "element3"
-    "element3";
+    "element4";
   }
 
   .user-list {

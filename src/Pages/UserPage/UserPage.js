@@ -2,13 +2,17 @@ import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, NoResult } from '../../Components/Generic';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
   let navigate = useHistory();
-  const { data, setData } = useContext(Context);
+  const { data, setData, getUserData } = useContext(Context);
+
+  useEffect(() => {
+    getUserData();
+  }, [])
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -156,8 +160,8 @@ const UserPage = () => {
           <h2 className='heading-details-user'>Favoritos</h2>
           <div className='user-details-favourites'>
             {
-                data.favourites.length > 0 &&
-                Object.values(data.favourites).map((favourite, key) =>{
+              data.favourites.length > 0 &&
+              Object.values(data.favourites).map((favourite, key) =>{
                 return (
                   <div className='card' key={key}>
                     <img className='favourite-image' src={favourite.image} alt='card Image' />
@@ -187,34 +191,41 @@ const UserPage = () => {
               data.published.length > 1 &&
               Object.values(data.published).map((publish, key) =>{
                 return (
-                  <div className='card' key={key}>
-                    <img className='favourite-image' src={publish.imageMain} alt='card Image' />
-                    <div className='container-favourite-details'>
-                      <h3>
-                        <b>{publish.brand} {publish.model}</b>
-                      </h3>
-                      <Button
-                        className='favourites-button'
-                        onClick={() => deletePublished(publish.idCar)}
-                        name='Eliminar'
-                      />
-                      <Button
-                        className='favourites-button'
-                        onClick={() => {
-                          setData(prevState => ({
-                            ...prevState,
-                            updatePublished: publish
-                          }))
-                          navigate.push(
-                            '/Pages/PublishPage/PublishPage',
-                            {
-                              params: true,
-                              carId: publish.idCar
-                            }
-                          );
-                        }}
-                        name='Editar'
-                      />
+                  <div className='card-published' key={key}>
+                    <img className='image-published' src={publish.imageMain} alt='card Image' />
+                    <div className='container-published'>
+                      <div className='container-published-details'>
+                        <h3>
+                          <b>{publish.brand} {publish.model}</b>
+                        </h3>
+                        <p><b>Año </b>{publish.year}</p>
+                        <p><b>Precio </b>{publish.year}</p>
+                        <p><b>Km </b>{publish.km}</p>
+                      </div>
+                      <div className='published-button-container'>
+                        <Button
+                          className='published-button'
+                          onClick={() => deletePublished(publish.idCar)}
+                          name='Eliminar'
+                        />
+                        <Button
+                          className='published-button'
+                          onClick={() => {
+                            setData(prevState => ({
+                              ...prevState,
+                              updatePublished: publish
+                            }))
+                            navigate.push(
+                              '/Pages/PublishPage/PublishPage',
+                              {
+                                params: true,
+                                carId: publish.idCar
+                              }
+                            );
+                          }}
+                          name='Editar'
+                        />
+                      </div>
                     </div>
                   </div>
                 )
