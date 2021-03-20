@@ -17,7 +17,7 @@ const initialValue = {
       {name:'brand', label: 'Jaguar', value: 'Jaguar'},
       {name:'brand', label: 'OldTimer', value: 'OldTimer'},
       {name:'brand', label: 'Pontiac', value: 'Pontiac'},
-      {name:'brand', label: 'Rolls-Royce', value: 'Rolls-Royce'},
+      {name:'brand', label: 'Rolls Royce', value: 'Rolls Royce'},
     ],
     model: [
       {name:'model',label:'2CV', value: '2CV'},
@@ -74,8 +74,8 @@ const initialValue = {
   searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:''},
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-  favourites: [],
-  published: [{ id: '', brand: '', model: '', imageMain: ''}],
+  favourites: [{brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
+  published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}],
   updatePublished: {
     brand:'',
     model: '',
@@ -89,11 +89,14 @@ const initialValue = {
      imageThird: '',
      imageFourth: '',
      imageFifth: ''
-    }
+    },
 }
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
+
+  // console.log(data.updatePublished)
+  // console.log('published', data.published)
 
   return (
     <Context.Provider value={{data, setData}}>

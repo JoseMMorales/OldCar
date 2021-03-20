@@ -24,12 +24,10 @@ const CarDetails = ({ car }) => {
       .then(response => {
         if (!response.ok)
           throw new Error(response.statusText);
-
         return response.json();
       })
       .then(
         res => {
-          console.log(res)
           if (res.idCar === 0) {
             alert("Coche repetido en favoritos, añade otro a tu lista");
           } else {

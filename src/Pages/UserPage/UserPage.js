@@ -7,9 +7,8 @@ import { useContext } from 'react';
 const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
-  const { data, setData } = useContext(Context);
-
   let navigate = useHistory();
+  const { data, setData } = useContext(Context);
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -65,6 +64,7 @@ const UserPage = () => {
       .then(
         res => {
           setData(prevState => ({ ...prevState, published: res}))
+          console.log(res);
         })
       .catch( e => console.log(e));
   };
@@ -117,7 +117,7 @@ const UserPage = () => {
                 setData(prevState => ({
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                  published: [{idCar: '', brand: '', model: '', image: ''}]
+                  published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}]
                 }))
                 window.localStorage.removeItem('isAuthenticated');
                 alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
@@ -135,7 +135,7 @@ const UserPage = () => {
                 setData(prevState => ({
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                  published: [{idCar: '', brand: '', model: '', image: ''}]
+                  published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}]
                 }))
               }}>
               <Link className='link-user-hover dark-color' to={'/'}>Salir</Link>
@@ -156,13 +156,14 @@ const UserPage = () => {
           <h2 className='heading-details-user'>Favoritos</h2>
           <div className='user-details-favourites'>
             {
-                data.favourites.length > 0 && Object.values(data.favourites).map((favourite, key) =>{
+                data.favourites.length > 0 &&
+                Object.values(data.favourites).map((favourite, key) =>{
                 return (
                   <div className='card' key={key}>
                     <img className='favourite-image' src={favourite.image} alt='card Image' />
                     <div className='container-favourite-details'>
                       <h3>
-                        <b>{favourite.brandName} {favourite.modelName}</b>
+                        <b>{favourite.brand} {favourite.model}</b>
                       </h3>
                       <Button
                         className='favourites-button'

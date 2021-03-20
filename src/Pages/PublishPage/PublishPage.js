@@ -53,8 +53,6 @@ const PublishPage = (props) => {
       ]
   });
 
-  // console.log({updateInput});
-
   const handleChange = (e) => {
     if (params && !publish) {
       const { name, value } = e.target;
@@ -63,7 +61,7 @@ const PublishPage = (props) => {
       const { name, value } = e.target;
       setUserInput({...userInput, [name]: value});
     }
-  }
+  };
 
   const handleFiles = (e) => {
     if (params && !publish) {
@@ -75,7 +73,7 @@ const PublishPage = (props) => {
         files: [...prevState.files, fileObj]
       }))
     }
-  }
+  };
 
   const deleteImage = (name) => {
     if (params && !publish) {
@@ -87,7 +85,7 @@ const PublishPage = (props) => {
         files: [...newFilesArray]
       }))
     }
-  }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -108,7 +106,7 @@ const PublishPage = (props) => {
       default:
         break;
     }
-  }
+  };
 
   const publishCarNotUser = () => {
     const formData = new FormData();
@@ -147,7 +145,7 @@ const PublishPage = (props) => {
         }
       }
     ).catch(error => console.log(error))
-  }
+  };
 
   const updatePublishedCar = (carId) => {
     const formData = new FormData();
@@ -174,20 +172,31 @@ const PublishPage = (props) => {
       })
       .then(
         res => {
-          console.log(res);
-          // if (res.code === 200) {
-          //   alert("Un email ha sido enviado con tus datos publicados, GRACIAS!!");
-          // } else {
-          //   alert("El coche no ha sido publicado, GRACIAS!!");
-          // }
+          if (res.code === 200) {
+            alert("Nuevo datos cambiados, GRACIAS!!");
+            delete res.code;
+
+            const newArrayPublished = [];
+            data.published.map(car => car.idCar !== res.idCar && newArrayPublished.push(car));
+            newArrayPublished.push(res);
+
+            setData(prevState => ({
+              ...prevState,
+              published: [...newArrayPublished]
+            }))
+
+            navigate.push('/Pages/UserPage/UserPage');
+          } else {
+            alert("Datos no cambiados, inténtalo de nuevo!!");
+          }
         })
       .catch( e => console.log(e));
-  }
+  };
 
   const updatePublishedImages = () => {
 
     console.log('updatePublishedCar');
-  }
+  };
 
   const publishCarUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -220,7 +229,7 @@ const PublishPage = (props) => {
         alert('Vehículo creado en tu perfil');
       }
     ).catch(error => console.log(error));
-  }
+  };
 
   return (
     <div id='publish'>
