@@ -53,7 +53,7 @@ const PublishPage = (props) => {
       ]
   });
 
-  console.log({updateInput});
+  // console.log({updateInput});
 
   const handleChange = (e) => {
     if (params && !publish) {
@@ -139,15 +139,17 @@ const PublishPage = (props) => {
     .then(response => response.json())
     .then(
       resp => {
-        // setData(prevState => ({ ...prevState, users: [...prevState.users, resp] }));
-        // console.log(resp);
-        alert("Coche guardado correctamente!");
+        if (resp.code === 200) {
+          navigate.push('/Pages/Home/Home');
+          alert("Un email ha sido enviado con tus datos publicados, GRACIAS!!");
+        } else {
+          alert("El coche no ha sido publicado, GRACIAS!!");
+        }
       }
     ).catch(error => console.log(error))
   }
 
   const updatePublishedCar = (carId) => {
-    console.log(carId);
     const formData = new FormData();
     formData.append('brand', updateInput.brand);
     formData.append('model', updateInput.model);
@@ -173,9 +175,11 @@ const PublishPage = (props) => {
       .then(
         res => {
           console.log(res);
-          // setData(prevState => ({ ...prevState, published: [...prevState.published, res]}));
-          // navigate.push('/Pages/UserPage/UserPage');
-          // alert('Información del vehículo ha sido cambiada');
+          // if (res.code === 200) {
+          //   alert("Un email ha sido enviado con tus datos publicados, GRACIAS!!");
+          // } else {
+          //   alert("El coche no ha sido publicado, GRACIAS!!");
+          // }
         })
       .catch( e => console.log(e));
   }
