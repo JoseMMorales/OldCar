@@ -95,6 +95,8 @@ const initialValue = {
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
 
+  console.log(data.userLoginData);
+
   const getUserData = () => {
     const token = localStorage.getItem('UserToken');
     const config = {

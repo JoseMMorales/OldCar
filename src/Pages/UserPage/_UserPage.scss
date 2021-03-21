@@ -15,13 +15,14 @@
 .user-sidebar{
   position: -webkit-sticky;
   position: sticky;
-  top: 40px;
-  z-index: 2;
+  top: 30px;
 }
+
 .user-list {
-  z-index: 2;
+  // z-index: 2;
   margin: 2rem;
   padding: 0;
+  background-color: white;
   box-shadow: .1rem .2rem .2rem .2rem $grey-color;
 }
 
@@ -29,6 +30,8 @@
   padding: 1rem;
   border-bottom: .1rem solid $grey-light-color;
   cursor: pointer;
+  // background-color: white;
+  // z-index: 2;
 
   &:hover, &:active {
     border-left: .5rem solid $grey-light-color;

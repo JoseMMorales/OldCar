@@ -8,14 +8,13 @@ import { Context } from '../../Context';
 const edit_URL = `url('/img/bg-edit.jpg')`;
 
 const EditPage = () => {
+  let navigate = useHistory();
   const { data, setData, getUserData } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
 
   useEffect(() => {
     isAuthenticated && getUserData();
   }, [])
-
-  let navigate = useHistory();
 
   const [editForm, setEditForm] = useState(
     {

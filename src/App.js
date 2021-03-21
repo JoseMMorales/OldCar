@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 import PublishPage from './Pages/PublishPage/PublishPage';
 import DetailsPage from './Pages/DetailsPage/DetailsPage';
 import BackToTop from './Components/BackToTop/BackToTop';
@@ -25,6 +30,16 @@ const ScrollToTopOnMount = () => {
 }
 
 const App = () => {
+
+  const PrivateRoute = ({ component: Component, ...rest }) => {
+  return  <Route {...rest} render = {(props) => (
+            localStorage.isAuthenticated  ?
+            (<Component {...props} />) :
+            (<Redirect to= '/Pages/LoginPage/LoginPage' />)
+            )}
+          />
+  };
+
   return (
     <>
       <Router>
@@ -38,10 +53,10 @@ const App = () => {
             <Route exact path='/Pages/Home/Home' component={Home} />
             <Route path='/Pages/SearchPage/SearchPage' component={SearchPage} />
             <Route path='/Pages/LoginPage/LoginPage' component={LoginPage} />
-            <Route path='/Pages/EditPage/EditPage' component={EditPage} />
+            <PrivateRoute path='/Pages/EditPage/EditPage' component={EditPage} />
             <Route path='/Pages/PublishPage/PublishPage' component={PublishPage} />
             <Route path='/Pages/DetailsPage/DetailsPage/:id' component={DetailsPage} />
-            <Route path='/Pages/UserPage/UserPage' component={UserPage} />
+            <PrivateRoute path='/Pages/UserPage/UserPage' component={UserPage} />
           </Switch>
         </ContextProvider>
         <BackToTop />

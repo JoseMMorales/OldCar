@@ -9,9 +9,10 @@ const login_URL = `url('/img/bg-user.jpg')`;
 const UserPage = () => {
   let navigate = useHistory();
   const { data, setData, getUserData } = useContext(Context);
+  const isAuthenticated =  localStorage.isAuthenticated;
 
   useEffect(() => {
-    getUserData();
+    isAuthenticated && getUserData()
   }, [])
 
   const deleteUser = () => {
