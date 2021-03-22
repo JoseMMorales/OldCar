@@ -77,18 +77,19 @@ const initialValue = {
   favourites: [{brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
   published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}],
   updatePublished: {
+    idCar: '',
     brand:'',
     model: '',
     km: '',
     price: '',
-     year: '',
-     shortDescription: '',
-     longDescription: '',
-     imageMain: '',
-     imageSecond: '',
-     imageThird: '',
-     imageFourth: '',
-     imageFifth: ''
+    year: '',
+    shortDescription: '',
+    longDescription: '',
+    imageMain: '',
+    imageSecond: '',
+    imageThird: '',
+    imageFourth: '',
+    imageFifth: ''
     },
 }
 

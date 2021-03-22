@@ -220,6 +220,7 @@ const UserPage = () => {
                         <Button
                           className='published-button'
                           onClick={() => {
+                            console.log(publish);
                             setData(prevState => ({
                               ...prevState,
                               updatePublished: publish

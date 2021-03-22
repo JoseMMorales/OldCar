@@ -39,9 +39,10 @@ const PublishPage = (props) => {
     longDescription: '',
     files: []
   });
-  console.log(userInput);
+
   const [updateInput, setUpdateInput] = useState(
     {
+      idCar: data.updatePublished.idCar,
       brand: data.updatePublished.brand,
       model: data.updatePublished.model,
       km: data.updatePublished.km,
@@ -84,15 +85,33 @@ const PublishPage = (props) => {
     }
   };
 
-  const deleteImage = (name) => {
+  const deleteImage = (name, idCar) => {
     if (params && !publish) {
-      console.log(name);
-      // const newFilesArray = updateInput.files.filter((file) => file.name !== name);
-      // console.log(newFilesArray);
-      // setUpdateInput(prevState => ({
-      //   ...prevState,
-      //   files: [...newFilesArray]
-      // }))
+      console.log(name, idCar);
+      const photoName = name.split('/').slice(-1)[0];
+      console.log('Photo', photoName);
+      // const photoName = name.slice(26);
+
+      // const token = localStorage.getItem('UserToken');
+      // const config = {
+      //   method: 'DELETE',
+      //   headers: { 'Authorization': `Bearer ${token}`}
+      // };
+
+      // fetch(`http://localhost:8000/published/deleteImage?picture=${photoName}&idCar=${idCar}`, config)
+      // .then(response => response.json())
+      // .then(
+      //   resp => {
+      //     console.log(resp);
+      //     // if (resp.code === 200) {
+      //     //   navigate.push('/Pages/Home/Home');
+      //     //   alert("Un email ha sido enviado con tus datos publicados, GRACIAS!!");
+      //     // } else {
+      //     //   alert("El coche no ha sido publicado, GRACIAS!!");
+      //     // }
+      //   }
+      // ).catch(error => console.log(error))
+
     } else if (publish || !params) {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
       setUserInput(prevState => ({
@@ -212,6 +231,10 @@ const PublishPage = (props) => {
 
     console.log('updatePublishedCar');
   };
+
+  const removePublishedImage = () => {
+
+  }
 
   const publishCarUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -541,7 +564,7 @@ const PublishPage = (props) => {
                             name='X'
                             className='btn-publish remove-images'
                             type='button'
-                            onClick={() => (deleteImage(file.name))}
+                            onClick={() => (deleteImage(file.name, file.carId))}
                           />
                         </div>
                       )
@@ -550,14 +573,15 @@ const PublishPage = (props) => {
                   {
                     (params && !publish) &&
                     updateInput.files.map((file, key) => {
+                      console.log(file.idCar);
                       return (
                         <div className='file' key={key}>
-                          <img src={file} alt="image" style={{'width' : '150px'}}/>
+                          <img src={file} alt="image" style={{'width' : '250px'}}/>
                           <Button
                             name='X'
                             className='btn-publish remove-images'
                             type='button'
-                            onClick={() => (deleteImage(file))}
+                            onClick={() => (deleteImage(file, file.idCar))}
                           />
                         </div>
                       )
