@@ -5,8 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { useState , useContext, useEffect } from 'react';
 import { Context } from '../../Context';
 
-const edit_URL = `url('/img/bg-edit.jpg')`;
-
 const EditPage = () => {
   let navigate = useHistory();
   const { data, setData, getUserData } = useContext(Context);
@@ -71,7 +69,7 @@ const EditPage = () => {
     return (
     <div id='edit'>
       <HeroSecondary
-        src={edit_URL}
+        src={data.heroSecundaryURL.edit_URL}
         text='Edita tu perfil OldCar'
       />
       <div className='container'>

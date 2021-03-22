@@ -74,23 +74,19 @@ const initialValue = {
   searchValues: { brand:'', model:'', seller:'', km:'', year:'', price:''},
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-  favourites: [{brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
+  favourites: [{ brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
   published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}],
-  updatePublished: {
-    idCar: '',
-    brand:'',
-    model: '',
-    km: '',
-    price: '',
-    year: '',
-    shortDescription: '',
-    longDescription: '',
-    imageMain: '',
-    imageSecond: '',
-    imageThird: '',
-    imageFourth: '',
-    imageFifth: ''
-    },
+  updatePublished: { idCar: '', brand:'', model: '', km: '', price: '', year: '', shortDescription: '',
+                     longDescription: '', imageMain: '', imageSecond: '', imageThird: '', imageFourth: '',
+                     imageFifth: ''},
+  heroSecundaryURL : {
+    login_URL : `url('/img/bg-login.jpg')`,
+    publish_URL : `url('/img/bg-publish.jpg')`,
+    user_URL : `url('/img/bg-user.jpg')`,
+    search_URL : `url('/img/bg-search.jpg')`,
+    edit_URL : `url('/img/bg-edit.jpg')`,
+    details_URL : `url('/img/bg-detail.jpg')`,
+  }
 }
 
 const ContextProvider = (props) => {

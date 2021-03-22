@@ -7,8 +7,6 @@ import SellerDetails from '../../Components/SellerDetails/SellerDetails';
 import Insurance from '../../Components/Insurance/Insurance';
 import ContactForm from '../../Components/ContactForm/ContactForm';
 
-const details_URL = `url('/img/bg-detail.jpg')`;
-
 const DetailsPage = (props) => {
   const { data, setData, getUserData, numberWithDots } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
@@ -23,10 +21,9 @@ const DetailsPage = (props) => {
   useEffect(() => {
     fetch(USER_URL)
       .then(response => {
-          if (!response.ok)
-              throw new Error('Something went wrong: ' + response.status);
-
-            return response.json();
+        if (!response.ok)
+            throw new Error('Something went wrong: ' + response.status);
+          return response.json();
       })
       .then(json => {
         setData(prevState => ({...prevState, detailsCar: json}))
@@ -37,7 +34,7 @@ const DetailsPage = (props) => {
   return (
     <div id='details'>
       <HeroSecondary
-        src={details_URL}
+        src={data.heroSecundaryURL.details_URL}
         text='Descubre los detalles'
       />
       {

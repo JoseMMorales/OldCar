@@ -5,10 +5,8 @@ import { useState, useContext } from 'react';
 import { Context } from '../../Context';
 import jwt_decode from "jwt-decode";
 
-const login_URL = `url('/img/bg-login.jpg')`;
-
 const LoginPage= () => {
-  const { setData, getUserData } = useContext(Context);
+  const { data, setData, getUserData } = useContext(Context);
 
   //Change page when access as an user
   let navigate = useHistory();
@@ -105,7 +103,7 @@ const LoginPage= () => {
   return (
     <div id='login'>
       <HeroSecondary
-      src={login_URL}
+      src={data.heroSecundaryURL.login_URL}
       text='Hazte ya Usuario...'
       />
       <div className='container'>

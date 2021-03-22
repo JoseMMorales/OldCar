@@ -6,8 +6,6 @@ import Search from '../../Components/Search/Search';
 import { Context } from '../../Context';
 import { Link} from 'react-router-dom';
 
-const search_URL = `url('/img/bg-search.jpg')`;
-
 const SearchPage = () => {
   const { data, setData, getUserData, numberWithDots } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
@@ -54,7 +52,7 @@ const SearchPage = () => {
   return (
     <div id='search'>
       <HeroSecondary
-        src={search_URL}
+        src={data.heroSecundaryURL.search_URL}
         text='Busca tu sueño...'
         />
       <div className='container searchPage-container'>

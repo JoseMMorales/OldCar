@@ -2,27 +2,16 @@ import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, NoResult } from '../../Components/Generic';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
-import { useContext, useEffect, useState } from 'react';
-
-const login_URL = `url('/img/bg-user.jpg')`;
+import { useContext, useEffect } from 'react';
 
 const UserPage = () => {
   let navigate = useHistory();
   const { data, setData, getUserData, numberWithDots } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
-  const [isContainer, setIsContainer] = useState(false);
 
   useEffect(() => {
     isAuthenticated && getUserData()
   }, [])
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", () => {
-  //     if (window.innerWidth > 1200) {
-  //       setIsContainer(true);
-  //     }
-  //   }, false);
-  // }, []);
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -105,7 +94,7 @@ const UserPage = () => {
   return (
     <div id='user'>
       <HeroSecondary
-        src={login_URL}
+        src={data.heroSecundaryURL.user_URL}
         text='Sitio usuario OldCar'
       />
       <div className={`user-container container`}>

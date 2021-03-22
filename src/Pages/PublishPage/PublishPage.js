@@ -6,8 +6,6 @@ import { MdAddAPhoto } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
 
-const publish_URL = `url('/img/bg-publish.jpg')`;
-
 const PublishPage = (props) => {
   let navigate = useHistory();
   const { data, setData, getUserData } = useContext(Context);
@@ -58,7 +56,7 @@ const PublishPage = (props) => {
         data.updatePublished.imageFifth,
       ]
   });
-  console.log(updateInput);
+  // console.log(updateInput);
   const handleChange = (e) => {
     if (params && !publish) {
       const { name, value } = e.target;
@@ -85,32 +83,26 @@ const PublishPage = (props) => {
     }
   };
 
-  const deleteImage = (name, idCar) => {
+  const deleteImage = (name, idCar, keyPhoto) => {
     if (params && !publish) {
-      console.log(name, idCar);
-      const photoName = name.split('/').slice(-1)[0];
-      console.log('Photo', photoName);
-      // const photoName = name.slice(26);
+      const photoName = name.slice(26);
 
-      // const token = localStorage.getItem('UserToken');
-      // const config = {
-      //   method: 'DELETE',
-      //   headers: { 'Authorization': `Bearer ${token}`}
-      // };
+      const token = localStorage.getItem('UserToken');
+      const config = {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}`}
+      };
 
-      // fetch(`http://localhost:8000/published/deleteImage?picture=${photoName}&idCar=${idCar}`, config)
-      // .then(response => response.json())
-      // .then(
-      //   resp => {
-      //     console.log(resp);
-      //     // if (resp.code === 200) {
-      //     //   navigate.push('/Pages/Home/Home');
-      //     //   alert("Un email ha sido enviado con tus datos publicados, GRACIAS!!");
-      //     // } else {
-      //     //   alert("El coche no ha sido publicado, GRACIAS!!");
-      //     // }
-      //   }
-      // ).catch(error => console.log(error))
+      fetch(`http://localhost:8000/published/deleteImage?picture=${photoName}&idCar=${idCar}`, config)
+      .then(response => response.json())
+      .then(
+        resp => {
+          if (resp.code === 200) {
+            const newArray = updateInput.files.filter((photo, key) => key != keyPhoto);
+            setUpdateInput({...updateInput, files: newArray});
+          }
+        }
+      ).catch(error => console.log(error))
 
     } else if (publish || !params) {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
@@ -272,7 +264,7 @@ const PublishPage = (props) => {
   return (
     <div id='publish'>
       <HeroSecondary
-        src={publish_URL}
+        src={data.heroSecundaryURL.publish_URL}
         text=' Publicaciones Únicas'
       />
       <div className='container'>
@@ -557,9 +549,10 @@ const PublishPage = (props) => {
                   {
                     (publish || !params) &&
                     userInput.files.map((file, key) => {
+                      const photoNumber = key + 1;
                       return (
                         <div className='file' key={key}>
-                          <img src={file.name} alt="image" style={{'width' : '150px'}}/>
+                            <b>Foto {photoNumber}:</b> {file.name}
                           <Button
                             name='X'
                             className='btn-publish remove-images'
@@ -572,16 +565,15 @@ const PublishPage = (props) => {
                   }
                   {
                     (params && !publish) &&
-                    updateInput.files.map((file, key) => {
-                      console.log(file.idCar);
+                    updateInput.files.map((car, key) => {
                       return (
                         <div className='file' key={key}>
-                          <img src={file} alt="image" style={{'width' : '250px'}}/>
+                          <img src={car} alt="image" style={{'width' : '250px'}}/>
                           <Button
                             name='X'
                             className='btn-publish remove-images'
                             type='button'
-                            onClick={() => (deleteImage(file, file.idCar))}
+                            onClick={() => deleteImage(car, updateInput['idCar'], key)}
                           />
                         </div>
                       )
