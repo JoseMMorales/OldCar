@@ -9,7 +9,7 @@ import { Link} from 'react-router-dom';
 const search_URL = `url('/img/bg-search.jpg')`;
 
 const SearchPage = () => {
-  const { data, setData, getUserData } = useContext(Context);
+  const { data, setData, getUserData, numberWithDots } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
   const cars = data.searchCars;
 
@@ -50,10 +50,6 @@ const SearchPage = () => {
       })
       .catch(error => console.log(error));
   }, [brandURL, modelURL, sellerURL, yearURL, kmURL, priceURL]);
-
-
-  //Adding dots in integers received in data
-  const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
   return (
     <div id='search'>

@@ -3,15 +3,12 @@ import { useState, useEffect, useContext } from 'react';
 import { Context } from '../../Context';
 
 const CarDetails = ({ car }) => {
-  const { data, setData } = useContext(Context);
+  const { setData, numberWithDots } = useContext(Context);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     setIsAuthenticated(window.localStorage.getItem('isAuthenticated'));
   }, [])
-
-  //Adding dots in integers received in data
-  const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
   const handlefavourite = (carId) => {
     const token = localStorage.getItem('UserToken');

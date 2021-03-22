@@ -54,24 +54,18 @@
 }
 
 .user-details {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex-structure(none, row wrap, none, none);
 
-  .details {
-    padding: 1rem;
-  }
+  .details { padding: 1rem; }
 }
 
 .user-details-favourites {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  @include flex-structure(none, row wrap, none, center);
+  margin-bottom: 2rem;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include flex-structure(column, none, none, space-between);
   width: 30%;
   border: 1px solid $grey-color;
   margin: .5rem .1rem;
@@ -81,9 +75,7 @@
 .favourite-image { width: 100%; }
 
 .container-favourite-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include flex-structure(column, none, none, space-between);
   margin: .1rem .5rem;
 }
 
@@ -98,14 +90,11 @@
 .image-published { width: 80%; }
 
 .container-published {
- display: flex;
- flex-direction: column;
- justify-content: space-between;
+  @include flex-structure(column, none, none, space-between);
 }
 
 .published-button-container {
-  display: flex;
-  flex-direction: column;
+  @include flex-structure(column, none, none, none);
 }
 
 .published-button {
@@ -137,13 +126,10 @@
     "element4";
   }
 
-  .card {
-    width: 90%;
-  }
+  .card { width: 90%; }
 
-  .user-list {
-    margin: 0;
-  }
+  .user-list { margin: 0; }
+
   .container-published {
     margin-left: 0;
   }
@@ -153,7 +139,5 @@
     padding: .3rem;
   }
 
-  .image-published {
-    width: 100%;
-  }
+  .image-published { width: 100%; }
 }

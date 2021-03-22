@@ -10,7 +10,7 @@ import ContactForm from '../../Components/ContactForm/ContactForm';
 const details_URL = `url('/img/bg-detail.jpg')`;
 
 const DetailsPage = (props) => {
-  const { data, setData, getUserData } = useContext(Context);
+  const { data, setData, getUserData, numberWithDots } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
   const { id } = props.match.params;
 
@@ -33,9 +33,6 @@ const DetailsPage = (props) => {
       })
       .catch(error => console.log(error));
   }, [id]);
-
-  //Adding dots in integers received in data
-  const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
   return (
     <div id='details'>

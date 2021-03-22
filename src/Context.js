@@ -132,8 +132,16 @@ const ContextProvider = (props) => {
       .catch( e => console.log(e))
   }
 
+  const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
   return (
-    <Context.Provider value={{data, setData, getUserData}}>
+    <Context.Provider value={
+      {
+        data,
+        setData,
+        getUserData,
+        numberWithDots
+      }}>
       {props.children}
     </Context.Provider>
   )

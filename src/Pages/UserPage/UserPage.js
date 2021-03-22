@@ -8,21 +8,21 @@ const login_URL = `url('/img/bg-user.jpg')`;
 
 const UserPage = () => {
   let navigate = useHistory();
-  const { data, setData, getUserData } = useContext(Context);
+  const { data, setData, getUserData, numberWithDots } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
   const [isContainer, setIsContainer] = useState(false);
-  console.log(isContainer);
+
   useEffect(() => {
     isAuthenticated && getUserData()
   }, [])
 
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 2000) {
-        setIsContainer(true);
-      }
-    }, false);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("resize", () => {
+  //     if (window.innerWidth > 1200) {
+  //       setIsContainer(true);
+  //     }
+  //   }, false);
+  // }, []);
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -108,7 +108,7 @@ const UserPage = () => {
         src={login_URL}
         text='Sitio usuario OldCar'
       />
-      <div className={`user-container  ${isContainer && 'container'}`}>
+      <div className={`user-container container`}>
         <div className='user-sidebar'>
           <ul className='user-list'>
             <li className='user-list-element'>
@@ -207,9 +207,9 @@ const UserPage = () => {
                         <h1>
                           <b>{publish.brand} {publish.model}</b>
                         </h1>
-                        <p className='grey-color'><b className='dark-color'>Año </b>{publish.year}</p>
-                        <p className='grey-color'><b className='dark-color'>Precio </b>{publish.year}</p>
-                        <p className='grey-color'><b className='dark-color'>Km </b>{publish.km}</p>
+                        <p className='grey-color'><b className='dark-color'>Año </b>{`${numberWithDots(`${ publish.year}`)}`}</p>
+                        <p className='grey-color'><b className='dark-color'>Precio </b>{`${numberWithDots(`${ publish.price}`)}`}</p>
+                        <p className='grey-color'><b className='dark-color'>Km </b>{`${numberWithDots(`${ publish.km}`)}`}</p>
                       </div>
                       <div className='published-button-container'>
                         <Button
