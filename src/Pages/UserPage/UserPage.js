@@ -2,7 +2,7 @@ import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { Button, NoResult } from '../../Components/Generic';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const login_URL = `url('/img/bg-user.jpg')`;
 
@@ -10,10 +10,19 @@ const UserPage = () => {
   let navigate = useHistory();
   const { data, setData, getUserData } = useContext(Context);
   const isAuthenticated =  localStorage.isAuthenticated;
-
+  const [isContainer, setIsContainer] = useState(false);
+  console.log(isContainer);
   useEffect(() => {
     isAuthenticated && getUserData()
   }, [])
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 2000) {
+        setIsContainer(true);
+      }
+    }, false);
+  }, []);
 
   const deleteUser = () => {
     const token = localStorage.getItem('UserToken');
@@ -69,7 +78,6 @@ const UserPage = () => {
       .then(
         res => {
           setData(prevState => ({ ...prevState, published: res}))
-          console.log(res);
         })
       .catch( e => console.log(e));
   };
@@ -100,7 +108,7 @@ const UserPage = () => {
         src={login_URL}
         text='Sitio usuario OldCar'
       />
-      <div className='user-container'>
+      <div className={`user-container  ${isContainer && 'container'}`}>
         <div className='user-sidebar'>
           <ul className='user-list'>
             <li className='user-list-element'>
@@ -187,7 +195,7 @@ const UserPage = () => {
         </div>
         <div className='user-published user-container-details'>
           <h2 className='heading-details-user'>Publicados</h2>
-          <div className='user-details'>
+          <div className='user-details-published'>
           {
               data.published.length > 1 &&
               Object.values(data.published).map((publish, key) =>{
@@ -196,12 +204,12 @@ const UserPage = () => {
                     <img className='image-published' src={publish.imageMain} alt='card Image' />
                     <div className='container-published'>
                       <div className='container-published-details'>
-                        <h3>
+                        <h1>
                           <b>{publish.brand} {publish.model}</b>
-                        </h3>
-                        <p><b>Año </b>{publish.year}</p>
-                        <p><b>Precio </b>{publish.year}</p>
-                        <p><b>Km </b>{publish.km}</p>
+                        </h1>
+                        <p className='grey-color'><b className='dark-color'>Año </b>{publish.year}</p>
+                        <p className='grey-color'><b className='dark-color'>Precio </b>{publish.year}</p>
+                        <p className='grey-color'><b className='dark-color'>Km </b>{publish.km}</p>
                       </div>
                       <div className='published-button-container'>
                         <Button
@@ -218,10 +226,7 @@ const UserPage = () => {
                             }))
                             navigate.push(
                               '/Pages/PublishPage/PublishPage',
-                              {
-                                params: true,
-                                carId: publish.idCar
-                              }
+                              { params: true, carId: publish.idCar }
                             );
                           }}
                           name='Editar'

@@ -39,7 +39,7 @@ const PublishPage = (props) => {
     longDescription: '',
     files: []
   });
-
+  console.log(userInput);
   const [updateInput, setUpdateInput] = useState(
     {
       brand: data.updatePublished.brand,
@@ -57,7 +57,7 @@ const PublishPage = (props) => {
         data.updatePublished.imageFifth,
       ]
   });
-
+  console.log(updateInput);
   const handleChange = (e) => {
     if (params && !publish) {
       const { name, value } = e.target;
@@ -69,10 +69,14 @@ const PublishPage = (props) => {
   };
 
   const handleFiles = (e) => {
+    const fileObj = e.target.files[0];
+
     if (params && !publish) {
-      console.log("Editar");
+      setUpdateInput(prevState => ({
+        ...prevState,
+        files: [...prevState.files, fileObj]
+      }));
     } else if (publish || !params) {
-      const fileObj = e.target.files[0];
       setUserInput(prevState => ({
         ...prevState,
         files: [...prevState.files, fileObj]
@@ -82,7 +86,13 @@ const PublishPage = (props) => {
 
   const deleteImage = (name) => {
     if (params && !publish) {
-      console.log("Editar");
+      console.log(name);
+      // const newFilesArray = updateInput.files.filter((file) => file.name !== name);
+      // console.log(newFilesArray);
+      // setUpdateInput(prevState => ({
+      //   ...prevState,
+      //   files: [...newFilesArray]
+      // }))
     } else if (publish || !params) {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
       setUserInput(prevState => ({
@@ -371,38 +381,44 @@ const PublishPage = (props) => {
                 <RiArrowDownSFill className='main-color'/>
               </div>
               <div className='inputs-section-form'>
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishBrand'
-                  Inputid='publishBrand'
-                  labelName='Marca*'
-                  onChange={handleChange}
-                  inputName='brand'
-                  value={
-                    (!params && userInput.brand) ||
-                    (params && publish && userInput.brand) ||
-                    (params && !publish && updateInput.brand) || ''
-                  }
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishModel'
-                  Inputid='publishModel'
-                  labelName='Modelo*'
-                  onChange={handleChange}
-                  inputName='model'
-                  value={
-                    (!params && userInput.model) ||
-                    (params && publish && userInput.model) ||
-                    (params && !publish && updateInput.model) || ''
-                  }
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
+                {
+                  (params && publish) &&
+                  <Input
+                    containerClassName='publish-form-container'
+                    htmlFor='publishBrand'
+                    Inputid='publishBrand'
+                    labelName='Marca*'
+                    onChange={handleChange}
+                    inputName='brand'
+                    value={
+                      (!params && userInput.brand) ||
+                      (params && publish && userInput.brand) ||
+                      (params && !publish && updateInput.brand) || ''
+                    }
+                    InputClassName={false}
+                    labelClassName='grey-color'
+                    type='text'
+                  />
+                }
+                {
+                  (params && publish) &&
+                  <Input
+                    containerClassName='publish-form-container'
+                    htmlFor='publishModel'
+                    Inputid='publishModel'
+                    labelName='Modelo*'
+                    onChange={handleChange}
+                    inputName='model'
+                    value={
+                      (!params && userInput.model) ||
+                      (params && publish && userInput.model) ||
+                      (params && !publish && updateInput.model) || ''
+                    }
+                    InputClassName={false}
+                    labelClassName='grey-color'
+                    type='text'
+                  />
+                }
                 <Input
                   containerClassName='publish-form-container'
                   htmlFor='publishKm'
@@ -518,10 +534,9 @@ const PublishPage = (props) => {
                   {
                     (publish || !params) &&
                     userInput.files.map((file, key) => {
-                      const photoNumber = key + 1;
                       return (
                         <div className='file' key={key}>
-                          <b>Foto {photoNumber}:</b> {file.name}
+                          <img src={file.name} alt="image" style={{'width' : '150px'}}/>
                           <Button
                             name='X'
                             className='btn-publish remove-images'
@@ -542,7 +557,7 @@ const PublishPage = (props) => {
                             name='X'
                             className='btn-publish remove-images'
                             type='button'
-                            onClick={() => (deleteImage(file.name))}
+                            onClick={() => (deleteImage(file))}
                           />
                         </div>
                       )
