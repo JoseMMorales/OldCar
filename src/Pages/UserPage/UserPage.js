@@ -196,9 +196,24 @@ const UserPage = () => {
                         <h1>
                           <b>{publish.brand} {publish.model}</b>
                         </h1>
-                        <p className='grey-color'><b className='dark-color'>Año </b>{`${numberWithDots(`${ publish.year}`)}`}</p>
-                        <p className='grey-color'><b className='dark-color'>Precio </b>{`${numberWithDots(`${ publish.price}`)}`}</p>
-                        <p className='grey-color'><b className='dark-color'>Km </b>{`${numberWithDots(`${ publish.km}`)}`}</p>
+                        <p className='grey-color'>
+                          <b className='dark-color'>
+                            Año
+                          </b>
+                          {`${numberWithDots(`${ publish.year}`)}`}
+                        </p>
+                        <p className='grey-color'>
+                          <b className='dark-color'>
+                            Precio
+                          </b>
+                          {`${numberWithDots(`${ publish.price}`)}`}
+                        </p>
+                        <p className='grey-color'>
+                          <b className='dark-color'>
+                            Km
+                          </b>
+                          {`${numberWithDots(`${ publish.km}`)}`}
+                        </p>
                       </div>
                       <div className='published-button-container'>
                         <Button
@@ -209,11 +224,7 @@ const UserPage = () => {
                         <Button
                           className='published-button'
                           onClick={() => {
-                            console.log(publish);
-                            setData(prevState => ({
-                              ...prevState,
-                              updatePublished: publish
-                            }))
+                            setData(prevState => ({ ...prevState, updatePublished: publish }))
                             navigate.push(
                               '/Pages/PublishPage/PublishPage',
                               { params: true, carId: publish.idCar }

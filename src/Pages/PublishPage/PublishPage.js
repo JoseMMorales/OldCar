@@ -57,6 +57,7 @@ const PublishPage = (props) => {
       ]
   });
 
+  console.log(updateInput);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (params && !publish) {
@@ -68,6 +69,8 @@ const PublishPage = (props) => {
 
   const handleFiles = (e) => {
     const fileObj = e.target.files[0];
+
+    const file = URL.createObjectURL(e.target.files[0])
 
     if (params && !publish) {
       setUpdateInput(prevState => ({
@@ -591,7 +594,11 @@ const PublishPage = (props) => {
                     updateInput.files.map((car, key) => {
                       return (
                         <div className='file' key={key}>
-                          <img src={car} alt="image" style={{'width' : '250px'}}/>
+                          <img
+                            src={car.name ? URL.createObjectURL(car) : car}
+                            alt="image"
+                            style={{'width' : '250px'}}
+                          />
                           <Button
                             name='X'
                             className='btn-publish remove-images'
