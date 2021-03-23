@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const Context = createContext();
 
@@ -130,6 +130,23 @@ const ContextProvider = (props) => {
   }
 
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  // const USER_URL = `http://localhost:8000/select?brand=${brand}`;
+
+  // useEffect(() => {
+  //   fetch(USER_URL)
+  //     .then(response => {
+  //         if (!response.ok)
+  //           throw new Error("Something went wrong: " + response.status);
+  //         return response.json();
+  //     })
+  //     .then(json => {
+  //       // setData(prevState => ({
+              // ...prevState,
+              // select: json}))
+  //     })
+  //     .catch(error => console.log(error));
+  // }, []);
 
   return (
     <Context.Provider value={

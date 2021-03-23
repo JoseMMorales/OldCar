@@ -56,13 +56,12 @@ const PublishPage = (props) => {
         data.updatePublished.imageFifth,
       ]
   });
-  // console.log(updateInput);
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     if (params && !publish) {
-      const { name, value } = e.target;
       setUpdateInput({...updateInput, [name]: value});
     } else if (publish || !params) {
-      const { name, value } = e.target;
       setUserInput({...userInput, [name]: value});
     }
   };
@@ -206,11 +205,7 @@ const PublishPage = (props) => {
             data.published.map(car => car.idCar !== res.idCar && newArrayPublished.push(car));
             newArrayPublished.push(res);
 
-            setData(prevState => ({
-              ...prevState,
-              published: [...newArrayPublished]
-            }))
-
+            setData(prevState => ({ ...prevState, published: [...newArrayPublished] }))
             navigate.push('/Pages/UserPage/UserPage');
           } else {
             alert("Datos no cambiados, inténtalo de nuevo!!");
@@ -220,13 +215,41 @@ const PublishPage = (props) => {
   };
 
   const updatePublishedImages = () => {
+    const token = localStorage.getItem('UserToken');
+    const idCar = updateInput.idCar;
 
-    console.log('updatePublishedCar');
+    const formData = new FormData();
+    formData.append('file0', updateInput.files[0]);
+    formData.append('file1', updateInput.files[1]);
+    formData.append('file2', updateInput.files[2]);
+    formData.append('file3', updateInput.files[3]);
+    formData.append('file4', updateInput.files[4]);
+
+    fetch(`http://localhost:8000/published/update/image/${idCar}`, {
+      method: 'POST',
+      body: formData,
+      mode: 'cors',
+      headers: { 'Authorization': `Bearer ${token}`}
+    })
+    .then(response => response.json())
+    .then(
+      resp => {
+        if (resp.code === 200) {
+          alert("Nuevas imágenes cambiados, GRACIAS!!");
+          delete resp.code;
+
+          const newArrayPublished = [];
+          data.published.map(car => car.idCar !== resp.idCar && newArrayPublished.push(car));
+          newArrayPublished.push(resp);
+
+          setData(prevState => ({ ...prevState, published: [...newArrayPublished] }))
+          navigate.push('/Pages/UserPage/UserPage');
+        } else {
+          alert("Imágenes no cambiados, inténtalo de nuevo!!");
+        }
+      }
+    ).catch(error => console.log(error));
   };
-
-  const removePublishedImage = () => {
-
-  }
 
   const publishCarUser = () => {
     const token = localStorage.getItem('UserToken');
