@@ -11,6 +11,7 @@ import SearchPage from './Pages/SearchPage/SearchPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import EditPage from './Pages/EditPage/EditPage';
 import UserPage from './Pages/UserPage/UserPage';
+import Admin from './Pages/AdminPage/AdminPage';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
 import { useLocation } from "react-router-dom";
@@ -57,6 +58,7 @@ const App = () => {
             <Route path='/Pages/PublishPage/PublishPage' component={PublishPage} />
             <Route path='/Pages/DetailsPage/DetailsPage/:id' component={DetailsPage} />
             <PrivateRoute path='/Pages/UserPage/UserPage' component={UserPage} />
+            <PrivateRoute path='/Pages/AdminPage/AdminPage' component={Admin} />
           </Switch>
         </ContextProvider>
         <BackToTop />

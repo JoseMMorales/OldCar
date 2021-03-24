@@ -49,12 +49,26 @@ const LoginPage= () => {
           localStorage.setItem('UserToken', response.token);
           localStorage.setItem('isAuthenticated', true);
 
-          var decoded = jwt_decode(response.token);
-          console.log(decoded);
+          let decoded = jwt_decode(response.token);
+          // console.log(decoded.roles);
+
+          let isAdmin = false;
+
+          decoded.roles.map(role => {
+            if (role === 'ROLE_ADMIN') {
+              isAdmin = true;
+              return true
+            };
+          });
+
+          if (isAdmin) {
+            navigate.push('/Pages/AdminPage/AdminPage');
+          } else {
+            getUserData();
+            navigate.push('/Pages/UserPage/UserPage/#user');
+          };
 
           setLogin(Logincredentials);
-          getUserData();
-          navigate.push('/Pages/UserPage/UserPage/#user');
       }).catch( error => console.log('Error: ', error));
   }
 
@@ -62,7 +76,8 @@ const LoginPage= () => {
   const Registercredentials = { username: '', email: '', password: '' };
   const [register, setRegister] = useState(Registercredentials);
 
-  //Upload user in DDBB //Login handleChange in inputs to make DDBB call
+  //Upload user in DDBB
+  //Login handleChange in inputs to make DDBB call
   const handleRegisterChange = (e) => {
     const { name, value } = e.target;
     setRegister(prevState => ({ ...prevState, [name]: value }));

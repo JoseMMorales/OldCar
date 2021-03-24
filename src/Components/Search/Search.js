@@ -14,11 +14,9 @@ const Search = ( { pathName, showResults, className } ) => {
 
   let [selectState, setSelectState] = useState(data.searchValues);
   let [models, setModels] = useState({name: 'model', value: '', label: ''});
-  // let [brands, setBrands] = useState({name: 'brand', value: '', label: ''});
 
   //Dinamic options in Select Brand/Model from DB
   const MODEL_URL = `http://localhost:8000/select/model?brand=${selectState.brand}`;
-  // const BRAND_URL = `http://localhost:8000/select/brand?model=${selectState.model}`;
 
   useEffect(() => {
     fetch(MODEL_URL)
@@ -30,20 +28,6 @@ const Search = ( { pathName, showResults, className } ) => {
       .then(json => setModels(json))
       .catch(error => console.log(error));
   }, [selectState.brand]);
-
-  // useEffect(() => {
-  //   fetch(BRAND_URL)
-  //     .then(response => {
-  //         if (!response.ok)
-  //           throw new Error("Something went wrong: " + response.status);
-  //         return response.json();
-  //     })
-  //     .then(json => {
-  //       console.log(json);
-  //       setBrands(json)
-  //     })
-  //     .catch(error => console.log(error));
-  // }, [selectState.model]);
 
   //Handling change of values for context
   const handleChangeBrand = (value) => {
@@ -95,8 +79,10 @@ const Search = ( { pathName, showResults, className } ) => {
   useEffect(() => {
     showResults && data.searchValues.brand &&
     setBrandsValue([{name: 'brand', value: data.searchValues.brand, label: data.searchValues.brand}]);
+
     showResults && data.searchValues.model &&
     setModelsValue([{name: 'model', value: data.searchValues.model, label: data.searchValues.model}]);
+
     showResults && data.searchValues.seller &&
     setSellersValue([{name: 'seller', value: data.searchValues.seller, label: data.searchValues.seller}]);
   }, [])
@@ -166,7 +152,6 @@ const Search = ( { pathName, showResults, className } ) => {
             onChange={(modelsValue) => {
               setModelsValue(modelsValue)
               handleChangeModel(modelsValue)
-              // setBrandsValue([brands])
             }}
             options={models}
           />
