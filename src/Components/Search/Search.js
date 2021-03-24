@@ -10,16 +10,63 @@ const Search = ( { pathName, showResults, className } ) => {
   let searchHistory = useHistory();
   const handleSearch = () => searchHistory.push('/Pages/SearchPage/SearchPage');
 
-  const initalValues = {brand:'', model:'', seller:'', km:'', year:'', price:''};
+  const initalValues = { brand:'', model:'', seller:'', km:'', year:'', price:'' };
 
   let [selectState, setSelectState] = useState(data.searchValues);
+  let [models, setModels] = useState({name: 'model', value: '', label: ''});
+  // let [brands, setBrands] = useState({name: 'brand', value: '', label: ''});
+
+  //Dinamic options in Select Brand/Model from DB
+  const MODEL_URL = `http://localhost:8000/select/model?brand=${selectState.brand}`;
+  // const BRAND_URL = `http://localhost:8000/select/brand?model=${selectState.model}`;
+
+  useEffect(() => {
+    fetch(MODEL_URL)
+      .then(response => {
+          if (!response.ok)
+            throw new Error("Something went wrong: " + response.status);
+          return response.json();
+      })
+      .then(json => setModels(json))
+      .catch(error => console.log(error));
+  }, [selectState.brand]);
+
+  // useEffect(() => {
+  //   fetch(BRAND_URL)
+  //     .then(response => {
+  //         if (!response.ok)
+  //           throw new Error("Something went wrong: " + response.status);
+  //         return response.json();
+  //     })
+  //     .then(json => {
+  //       console.log(json);
+  //       setBrands(json)
+  //     })
+  //     .catch(error => console.log(error));
+  // }, [selectState.model]);
 
   //Handling change of values for context
-  const handleChange = (value) => {
+  const handleChangeBrand = (value) => {
     if (value.length === 0) {
-      setSelectState(initalValues)
+      setSelectState(prevState => ({ ...prevState, brand: ''}));
     } else {
-      setSelectState(prevState => ({...prevState, [value[0].name]: value[0].value }));
+      setSelectState(prevState => ({ ...prevState, [value[0].name]: value[0].value }));
+    }
+  }
+
+  const handleChangeModel = (value) => {
+    if (value.length === 0) {
+      setSelectState(prevState => ({ ...prevState, model: ''}));
+    } else {
+      setSelectState(prevState => ({ ...prevState, [value[0].name]: value[0].value }));
+    }
+  }
+
+  const handleChangeSellers = (value) => {
+    if (value.length === 0) {
+      setSelectState(prevState => ({ ...prevState, seller: ''}));
+    } else {
+      setSelectState(prevState => ({ ...prevState, [value[0].name]: value[0].value }));
     }
   }
 
@@ -34,24 +81,29 @@ const Search = ( { pathName, showResults, className } ) => {
     setData(prevState => ({ ...prevState, searchValues: selectState }));
   }, [selectState]);
 
-  //Reset Search with context when go to HOME
+  //Reset Search with context when go back to HOME
   useEffect(() => {
     pathName === '/Pages/Home/Home' && setSelectState(initalValues);
   }, []);
 
-  //States to clean the values up when click remove button
+  //States to clean the values up when clicking remove button
   const [brandsValue, setBrandsValue] = useState([]);
   const [modelsValue, setModelsValue] = useState([]);
   const [sellersValue, setSellersValue] = useState([]);
 
-  // console.log(brandsValue);
+  //Keep values rendered in selects when search is coming from Home
+  useEffect(() => {
+    showResults && data.searchValues.brand &&
+    setBrandsValue([{name: 'brand', value: data.searchValues.brand, label: data.searchValues.brand}]);
+    showResults && data.searchValues.model &&
+    setModelsValue([{name: 'model', value: data.searchValues.model, label: data.searchValues.model}]);
+    showResults && data.searchValues.seller &&
+    setSellersValue([{name: 'seller', value: data.searchValues.seller, label: data.searchValues.seller}]);
+  }, [])
 
-  //Delete individual result
+  //Delete individual result in Search
   const deleteResult = (value) => {
-    const newResultArray = Object.fromEntries(
-    Object.entries(data.searchValues).filter(([key, result]) => result !== value[1]));
-
-    setData(prevState => ({...prevState, searchValues: newResultArray }));
+    setSelectState(prevState => ({ ...prevState, [value[0]]: '' }));
 
     switch (value[0]) {
       case 'brand':
@@ -60,7 +112,7 @@ const Search = ( { pathName, showResults, className } ) => {
       case 'model':
         setModelsValue([]);
         break;
-      case 'model':
+      case 'seller':
         setSellersValue([]);
         break;
       default:
@@ -97,40 +149,41 @@ const Search = ( { pathName, showResults, className } ) => {
         <div className='search-wrapper' key='search-wrapper'>
           <Select
             name='brand'
-            className='brand-select grey-color'
+            className='brand-select dark-color'
             placeholder='Marca'
             values={brandsValue}
             onChange={(brandsValue) => {
               setBrandsValue(brandsValue)
-              handleChange(brandsValue)
+              handleChangeBrand(brandsValue)
             }}
             options={data.select.brand}
           />
           <Select
             name='model'
-            className='model-select grey-color'
+            className='model-select dark-color'
             placeholder='Modelo'
             values={modelsValue}
             onChange={(modelsValue) => {
               setModelsValue(modelsValue)
-              handleChange(modelsValue)
+              handleChangeModel(modelsValue)
+              // setBrandsValue([brands])
             }}
-            options={data.select.model}
+            options={models}
           />
           <Select
             name='seller'
-            className='seller-select grey-color'
+            className='seller-select dark-color'
             placeholder='Vendedor'
             values={sellersValue}
             onChange={(sellersValue) => {
               setSellersValue(sellersValue)
-              handleChange(sellersValue)
+              handleChangeSellers(sellersValue)
             }}
             options={data.select.seller}
           />
           <Input
             containerClassName='km-select'
-            InputClassName='input-search'
+            InputClassName='input-search dark-color'
             placeholder='Km de 1 a 179.000'
             type='number'
             inputName='km'
@@ -141,7 +194,7 @@ const Search = ( { pathName, showResults, className } ) => {
           />
           <Input
             containerClassName='year-select'
-            InputClassName='input-search'
+            InputClassName='input-search dark-color'
             placeholder='Año de 1.919 a 1.985'
             type='number'
             inputName='year'
@@ -152,7 +205,7 @@ const Search = ( { pathName, showResults, className } ) => {
           />
           <Input
             containerClassName='price-select'
-            InputClassName='input-search'
+            InputClassName='input-search dark-color'
             placeholder='Precio de 5.500 a 280.000'
             type='number'
             inputName='price'
@@ -168,18 +221,17 @@ const Search = ( { pathName, showResults, className } ) => {
                   onClick={handleSearch}
                   className='bn-filter btn total-width'
                   name='Buscar'
-                  // value={selectState.name}
                 />
             }
             <Button
               className='btn-reset total-width'
               name='Borrar'
               onClick={(e) => {
-                e.preventDefault()
-                setBrandsValue([])
-                setModelsValue([])
-                setSellersValue([])
-                setSelectState(initalValues)
+                e.preventDefault();
+                setBrandsValue([]);
+                setModelsValue([]);
+                setSellersValue([]);
+                setSelectState(initalValues);
               }}
             />
           </div>

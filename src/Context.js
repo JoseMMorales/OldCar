@@ -19,52 +19,6 @@ const initialValue = {
       {name:'brand', label: 'Pontiac', value: 'Pontiac'},
       {name:'brand', label: 'Rolls Royce', value: 'Rolls Royce'},
     ],
-    model: [
-      {name:'model',label:'2CV', value: '2CV'},
-      {name:'model',label:'500', value: '500'},
-      {name:'model',label:'6-27 Coupe', value: '6-27 Coupe'},
-      {name:'model',label:'Almicar',value: 'Almicar'},
-      {name:'model',label:'Balilla', value: 'Balilla'},
-      {name:'model',label:'Camaro', value: 'Camaro'},
-      {name:'model',label:'Catalina', value: 'Catalina'},
-      {name:'model',label:'Chevrolet', value: 'Chevrolet'},
-      {name:'model',label:'Continental', value: 'Continental'},
-      {name:'model',label:'Corvette', value: 'Corvette'},
-      {name:'model',label:'DB2', value: 'DB2'},
-      {name:'model',label:'DB6', value: 'DB6'},
-      {name:'model',label:'DS Cabrio', value: 'DS Cabrio'},
-      {name:'model',label:'Deauville', value: 'Deauville'},
-      {name:'model',label:'Double Phantom', value: 'Double Phantom'},
-      {name:'model',label:'E-Type', value: 'E-Type'},
-      {name:'model',label:'F-100', value: 'F-100'},
-      {name:'model',label:'Firebird', value: 'Firebird'},
-      {name:'model',label:'Freestone', value: 'Freestone'},
-      {name:'model',label:'Frogeye Sprite', value: 'Frogeye Sprite'},
-      {name:'model',label:'GTO', value: 'GTO'},
-      {name:'model',label:'Healey 3000 MK3', value: 'Healey 3000 MK3'},
-      {name:'model',label:'Lagonda', value: 'Lagonda'},
-      {name:'model',label:'MKII', value: 'MKII'},
-      {name:'model',label:'Mark VI', value: 'Mark VI'},
-      {name:'model',label:'Model 24', value: 'Model 24'},
-      {name:'model',label:'Overige', value: 'Overige'},
-      {name:'model',label:'Pantera', value: 'Pantera'},
-      {name:'model',label:'Phantom II', value: 'Phantom II'},
-      {name:'model',label:'Riviera', value: 'Riviera'},
-      {name:'model',label:'Roadmaster', value: 'Roadmaster'},
-      {name:'model',label:'Roadster', value: 'Roadster'},
-      {name:'model',label:'S1', value: 'S1'},
-      {name:'model',label:'Silver', value: 'Silver'},
-      {name:'model',label:'Special Old', value: 'Special Old'},
-      {name:'model',label:'Spider', value: 'Spider'},
-      {name:'model',label:'Super Sedan', value: 'Super Sedan'},
-      {name:'model',label:'T', value: 'T'},
-      {name:'model',label:'Ten Cabrio', value: 'Ten Cabrio'},
-      {name:'model',label:'Thunderbird', value: 'Thunderbird'},
-      {name:'model',label:'Torpedo', value: 'Torpedo'},
-      {name:'model',label:'Tourer', value: 'Tourer'},
-      {name:'model',label:'Traction', value: 'Traction'},
-      {name:'model',label:'XK120', value: 'XK120'},
-    ],
     seller: [
       {name:'seller', label:'Particular', value: 'Particular'},
       {name:'seller', label:'Concesionario', value: 'Concesionario'}
@@ -76,9 +30,11 @@ const initialValue = {
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
   favourites: [{ brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
   published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}],
-  updatePublished: { idCar: '', brand:'', model: '', km: '', price: '', year: '', shortDescription: '',
-                     longDescription: '', imageMain: '', imageSecond: '', imageThird: '', imageFourth: '',
-                     imageFifth: ''},
+  updatePublished: {
+    idCar: '', brand:'', model: '', km: '', price: '',
+    year: '', shortDescription: '', longDescription: '', imageMain: '',
+    imageSecond: '', imageThird: '', imageFourth: '', imageFifth: ''
+  },
   heroSecundaryURL : {
     login_URL : `url('/img/bg-login.jpg')`,
     publish_URL : `url('/img/bg-publish.jpg')`,
@@ -130,23 +86,6 @@ const ContextProvider = (props) => {
   }
 
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-  // const USER_URL = `http://localhost:8000/select?brand=${brand}`;
-
-  // useEffect(() => {
-  //   fetch(USER_URL)
-  //     .then(response => {
-  //         if (!response.ok)
-  //           throw new Error("Something went wrong: " + response.status);
-  //         return response.json();
-  //     })
-  //     .then(json => {
-  //       // setData(prevState => ({
-              // ...prevState,
-              // select: json}))
-  //     })
-  //     .catch(error => console.log(error));
-  // }, []);
 
   return (
     <Context.Provider value={

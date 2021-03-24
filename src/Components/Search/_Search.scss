@@ -7,7 +7,7 @@
 .noVisible { display: none; }
 
 .history-search-container  {
-  @include flex-structure(row, none, none, none);
+  @include flex-structure(none, row wrap, none, none);
 }
 
 .search-values {
@@ -29,7 +29,6 @@
   right: -7px;
   top: -10px;
 }
-
 
 .search-wrapper {
   display: grid;
@@ -62,20 +61,18 @@
 .year-select { grid-area: element5 }
 .price-select {grid-area: element6 }
 
-.input {
-  &.input-search {
+.input-search {
     height: .9rem;
     width: 99%;
     margin-bottom: .6rem;
     border: 1px solid $grey-light-color;
-  }
 
   &::placeholder {
     color: $grey-darker;
     font-weight: 400;
   }
 
-  &:hover {
+  &:hover, &:focus {
     border: 1px solid $additional-color;
   }
 }
@@ -87,6 +84,13 @@
 //     // color: $dark-color;
 //   }
 // }
+
+.react-dropdown-select-input {
+  &::placeholder {
+    color: $grey-darker;
+    font-weight: 400;
+  }
+}
 
 .select-buttons {
   grid-area: element7;
@@ -128,5 +132,9 @@
     &.label-input-name {
       margin: 0;
     }
+  }
+
+  .search-values {
+    margin: .8rem .9rem 0 .6rem;
   }
 }

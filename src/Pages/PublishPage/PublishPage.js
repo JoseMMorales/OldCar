@@ -57,7 +57,7 @@ const PublishPage = (props) => {
       ]
   });
 
-  console.log(updateInput);
+  // console.log(updateInput);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (params && !publish) {
@@ -69,8 +69,6 @@ const PublishPage = (props) => {
 
   const handleFiles = (e) => {
     const fileObj = e.target.files[0];
-
-    const file = URL.createObjectURL(e.target.files[0])
 
     if (params && !publish) {
       setUpdateInput(prevState => ({
