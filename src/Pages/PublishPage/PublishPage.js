@@ -57,7 +57,7 @@ const PublishPage = (props) => {
       ]
   });
 
-  // console.log(updateInput);
+  // console.log('updateInput', updateInput.files)
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (params && !publish) {
@@ -115,6 +115,8 @@ const PublishPage = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    console.log({stateButton});
 
     switch (stateButton) {
       case 1:
@@ -581,7 +583,7 @@ const PublishPage = (props) => {
                             name='X'
                             className='btn-publish remove-images'
                             type='button'
-                            onClick={() => (deleteImage(file.name, file.carId))}
+                            onClick={() => deleteImage(file.name, file.carId)}
                           />
                         </div>
                       )
@@ -590,6 +592,7 @@ const PublishPage = (props) => {
                   {
                     (params && !publish) &&
                     updateInput.files.map((car, key) => {
+
                       return (
                         <div className='file' key={key}>
                           <img

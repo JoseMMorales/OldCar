@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const Context = createContext();
 
@@ -29,7 +30,11 @@ const initialValue = {
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
   favourites: [{ brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
-  published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}],
+  published: [{
+    // idCar: '', brand:'', model: '', km: '', price: '',
+    // year: '', shortDescription: '', longDescription: '', imageMain: '',
+    // imageSecond: '', imageThird: '', imageFourth: '', imageFifth: ''
+  }],
   updatePublished: {
     idCar: '', brand:'', model: '', km: '', price: '',
     year: '', shortDescription: '', longDescription: '', imageMain: '',
@@ -47,6 +52,14 @@ const initialValue = {
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
+console.log(data.published);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  let location = useLocation();
+
+  useEffect(() => {
+    setIsAuthenticated(localStorage.isAuthenticated);
+  }, [location]);
 
   const getUserData = () => {
     const token = localStorage.getItem('UserToken');
@@ -93,6 +106,7 @@ const ContextProvider = (props) => {
         data,
         setData,
         getUserData,
+        isAuthenticated,
         numberWithDots
       }}>
       {props.children}

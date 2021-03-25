@@ -1,22 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { NavHashLink } from 'react-router-hash-link';
-import { useHistory, NavLink, useLocation } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { Dropdown } from '../Generic';
 import { Context } from '../../Context';
 
 const Navbar = () => {
-  // const { isAuthenticated } = useContext(Context);
-  // const isAuthenticated =  localStorage.isAuthenticated;
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  let location = useLocation();
-
-  useEffect(() => {
-    setIsAuthenticated(localStorage.isAuthenticated);
-  }, [location]);
-
-  console.log(isAuthenticated);
+  const { isAuthenticated } = useContext(Context);
 
   const [toggle, setToggle] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -34,7 +23,7 @@ const Navbar = () => {
       left: 0,
       behavior: "smooth"
     });
-  }
+  };
 
   //Scroll to section in homePage
   const handleScroll = () => {

@@ -16,6 +16,7 @@
 .table-container {
   @include flex-structure(none, none, center, center);
   margin: 2rem;
+  overflow-x: auto;
 }
 
 td, th {

@@ -186,7 +186,7 @@ const UserPage = () => {
           <h2 className='heading-details-user'>Publicados</h2>
           <div className='user-details-published'>
           {
-              data.published.length > 1 &&
+              data.published.length > 0 &&
               Object.values(data.published).map((publish, key) =>{
                 return (
                   <div className='card-published' key={key}>
@@ -239,7 +239,7 @@ const UserPage = () => {
               })
             }
             {
-              data.published.length === 1 && <NoResult />
+              data.published.length === 0 && <NoResult />
             }
           </div>
         </div>
