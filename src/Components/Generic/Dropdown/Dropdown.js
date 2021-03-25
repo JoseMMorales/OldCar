@@ -42,20 +42,26 @@ const Dropdown = () => {
             <RiArrowUpSLine className={`arrow-profile ${!active && 'arrow-visible'}`} />
         </button>
         <ul className={`dropdown-list ${active && 'active'}`}>
+          {/* {
+            <li className='profile-list-element bg-light'>
+               <Link className='dark-color' to={'/Pages/AdminPage/AdminPage'}>Ir a Admin</Link>
+            </li>
+          } */}
           <li className='profile-list-element bg-light'>
-          <Link to={'/Pages/UserPage/UserPage'}>Ir a tu Perfil</Link>
+            <Link className='dark-color' to={'/Pages/UserPage/UserPage'}>Ir a tu Perfil</Link>
           </li>
           <li
             className='profile-list-element bg-light'
             onClick={() => {
               window.localStorage.removeItem('isAuthenticated');
+              console.log(localStorage.isAuthenticated);
               setData(prevState => ({
                 ...prevState,
                 userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
                 published: [{idCar: '', brand: '', model: '', image: ''}]
               }))
             }}>
-            <Link to={'/'}>Salir</Link>
+            <Link className='dark-color' to={'/'}>Salir</Link>
           </li>
         </ul>
       </div>

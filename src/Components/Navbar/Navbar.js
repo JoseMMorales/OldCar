@@ -1,13 +1,22 @@
 import { useState, useEffect, useContext } from 'react';
 import { NavHashLink } from 'react-router-hash-link';
-import { useHistory, Link } from 'react-router-dom';
-import { Context } from '../../Context';
+import { useHistory, NavLink, useLocation } from 'react-router-dom';
 import { Dropdown } from '../Generic';
+import { Context } from '../../Context';
 
 const Navbar = () => {
-  const { data, setData } = useContext(Context);
+  // const { isAuthenticated } = useContext(Context);
+  // const isAuthenticated =  localStorage.isAuthenticated;
 
-  const isAuthenticated =  localStorage.isAuthenticated;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  let location = useLocation();
+
+  useEffect(() => {
+    setIsAuthenticated(localStorage.isAuthenticated);
+  }, [location]);
+
+  console.log(isAuthenticated);
 
   const [toggle, setToggle] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -93,15 +102,17 @@ const Navbar = () => {
               </NavHashLink>
             </li>
             <li className='li-navbar'>
-              <NavHashLink
+              <NavLink
                 className='nav-link dark-color'
-                to='/Pages/SearchPage/SearchPage#search'>
+                activeClassName='active'
+                to='/Pages/SearchPage/SearchPage'>
                 Buscar
-              </NavHashLink>
+              </NavLink>
             </li>
             <li className='li-navbar'>
-              <Link
+              <NavLink
                 className='nav-link dark-color'
+                activeClassName='active'
                 to={{
                   pathname: '/Pages/PublishPage/PublishPage',
                   state: {
@@ -110,16 +121,17 @@ const Navbar = () => {
                   }
                 }}>
                 Publicar
-              </Link>
+              </NavLink>
             </li>
             {
               !isAuthenticated &&
                 <li className='li-navbar'>
-                  <NavHashLink
+                  <NavLink
                     className='nav-link dark-color'
-                    to={'/Pages/LoginPage/LoginPage#login'}>
+                    activeClassName='active'
+                    to={'/Pages/LoginPage/LoginPage'}>
                     Login
-                  </NavHashLink>
+                  </NavLink>
                 </li>
             }
             {

@@ -2,7 +2,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
+  NavLink
 } from 'react-router-dom';
 import PublishPage from './Pages/PublishPage/PublishPage';
 import DetailsPage from './Pages/DetailsPage/DetailsPage';

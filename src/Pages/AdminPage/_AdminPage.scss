@@ -2,31 +2,28 @@
   display: flex;
   padding: 1rem;
   margin: 0;
-  background-color: $grey-light-color;
+  background-color: $bg-grey-Slight;
 }
 
 .list-admin-element {
   padding: 1rem;
 }
 
-.table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
+.admin-title {
+  text-align: center;
 }
 
-.admin-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
+.table-container {
+  @include flex-structure(none, none, center, center);
+  margin: 2rem;
 }
 
 td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
+  border: 1px solid $grey-light-color;
+  text-align: center;
   padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: $bg-grey-Slight;
 }

@@ -52,16 +52,16 @@ const LoginPage= () => {
           let decoded = jwt_decode(response.token);
           // console.log(decoded.roles);
 
-          let isAdmin = false;
+          // let isAdmin = false;
 
-          decoded.roles.map(role => {
-            if (role === 'ROLE_ADMIN') {
-              isAdmin = true;
-              return true
-            };
-          });
+          // decoded.roles.map(role => {
+          //   if (role === 'ROLE_ADMIN') {
+          //     isAdmin = true;
+          //     return true
+          //   };
+          // });
 
-          if (isAdmin) {
+          if (decoded.roles[0] === 'ROLE_ADMIN') {
             navigate.push('/Pages/AdminPage/AdminPage');
           } else {
             getUserData();

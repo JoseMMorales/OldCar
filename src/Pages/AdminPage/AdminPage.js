@@ -1,11 +1,18 @@
-import { useState } from 'react';
-
+import { useState, useContext, useEffect } from 'react';
+import { Button } from '../../Components/Generic';
+import { Context } from '../../Context';
 
 const Admin = () => {
-
-  const userHeader =  [ 'id', 'active', 'name', 'email', 'address', 'phone', 'roles', 'type', 'boton'];
+  const { getUserData } = useContext(Context);
+  const userHeader =  [ 'ID', 'ACTIVE', 'NOMBRE', 'EMAIL', 'DIRECCION', 'TLF', 'ROLE', 'TIPO', 'ELIMINAR'];
   const [headers, setHeaders] = useState({});
-  console.log(headers);
+
+  const isAuthenticated =  localStorage.isAuthenticated;
+
+  useEffect(() => {
+    // console.log("here");
+    isAuthenticated && getUserData();
+  }, [])
 
   const getUsers = () => {
     const token = localStorage.getItem('UserToken');
@@ -20,9 +27,7 @@ const Admin = () => {
           throw new Error(response.statusText);
         return response.json();
       })
-      .then( res => {
-        setHeaders(res);
-      })
+      .then( res =>setHeaders(res))
       .catch( e => console.log(e))
   }
 
@@ -31,17 +36,21 @@ const Admin = () => {
       <div>
         <ul className='list-navbar'>
           <li>
-            <a className='list-admin-element' onClick={getUsers}>
+            <a
+              className='list-admin-element'
+              onClick={getUsers}>
               Usuarios
             </a>
           </li>
           <li>
-            <a className='list-admin-element'>
+            <a
+              className='list-admin-element'>
               Anuncios
             </a>
           </li>
         </ul>
       </div>
+      <h1 className='admin-title'>Borrar Usuarios en Old<span className='main-color'>Car</span></h1>
       <div className='table-container'>
         <table className='admin-table'>
           <thead>
@@ -55,11 +64,30 @@ const Admin = () => {
           </thead>
           <tbody>
             {
-              <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-            </tr>
+              Object.values(headers).map((user, key) => {
+                return (
+                  <tr key={key}>
+                    <td>{user.id}</td>
+                    <td>
+                      {
+                        `${user.active === false ? 'No Activo' : 'Activo'}`
+                      }
+                    </td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.address}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.roles}</td>
+                    <td>{user.type}</td>
+                    <td>
+                      <Button
+                        className='btn-reset total-width'
+                        name='Borrar'
+                      />
+                    </td>
+                  </tr>
+                )
+              })
             }
           </tbody>
         </table>
