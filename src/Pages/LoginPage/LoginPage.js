@@ -52,24 +52,16 @@ const LoginPage= () => {
           let decoded = jwt_decode(response.token);
           // console.log(decoded.roles);
 
-          // let isAdmin = false;
+          const isAdmin = decoded.roles.includes('ROLE_ADMIN');
 
-          // decoded.roles.map(role => {
-          //   if (role === 'ROLE_ADMIN') {
-          //     isAdmin = true;
-          //     return true
-          //   };
-          // });
-
-          if (decoded.roles[0] === 'ROLE_ADMIN') {
-            navigate.push('/Pages/AdminPage/AdminPage');
+          if (isAdmin) {
             localStorage.setItem('admin', true);
+            navigate.push('/Pages/AdminPage/AdminPage');
           } else {
+            console.log('USER');
             getUserData();
             navigate.push('/Pages/UserPage/UserPage/#user');
           };
-
-          setLogin(Logincredentials);
       }).catch( error => console.log('Error: ', error));
   }
 

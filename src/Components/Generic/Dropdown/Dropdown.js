@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Dropdown = () => {
   const ref = useRef(null);
   const [active, setActive] = useState(false);
-  const { data, setData } = useContext(Context);
+  const { data, setData, isAdmin } = useContext(Context);
 
   const handleToggle = () => { setActive(!active) };
   const handleClickOutside = (event) => {
@@ -43,6 +43,7 @@ const Dropdown = () => {
         </button>
         <ul className={`dropdown-list ${active && 'active'}`}>
           {
+            isAdmin &&
             <li className='profile-list-element bg-light'>
                <Link className='dark-color' to={'/Pages/AdminPage/AdminPage'}>Ir a Admin</Link>
             </li>

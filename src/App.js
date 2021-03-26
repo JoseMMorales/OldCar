@@ -2,8 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
-  NavLink
+  Redirect
 } from 'react-router-dom';
 import PublishPage from './Pages/PublishPage/PublishPage';
 import DetailsPage from './Pages/DetailsPage/DetailsPage';
@@ -21,7 +20,7 @@ import Home from './Pages/Home/Home';
 import { useEffect } from 'react';
 import './scss/styles.scss';
 
-//Each time a page is open scroll to top
+//When rendering any component scroll to top
 const ScrollToTopOnMount = () => {
   const { pathname } = useLocation();
 
@@ -29,7 +28,7 @@ const ScrollToTopOnMount = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
-}
+};
 
 const App = () => {
 
@@ -42,14 +41,15 @@ const App = () => {
           />
   };
 
-  const PrivateRoute = ({ component: Component, ...rest }) => {
-    return  <Route {...rest} render = {(props) => (
-              localStorage.isAuthenticated  ?
-              (<Component {...props} />) :
-              (<Redirect to= '/Pages/LoginPage/LoginPage' />)
-              )}
-            />
-    };
+  // const AdminRoute = (props) => {
+  //   return (
+  //       localStorage.getItem("admin") ?
+  //       <AdminRoute {...props} /> :
+  //       <Redirect to = {{
+  //           pathname: "/Pages/LoginPage/LoginPage"
+  //       }} />
+  //   )
+  // }
 
   return (
     <>

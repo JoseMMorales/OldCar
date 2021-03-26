@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const HeroSecondary = ({ src, text }) => {
+const HeroSecondary = ({ src, text, imgClass }) => {
 
   return (
       <div
@@ -16,7 +16,7 @@ const HeroSecondary = ({ src, text }) => {
           }}>
           {text}
         </motion.h1>
-          <motion.img className='car-hero'
+          <motion.img className={`car-hero ${imgClass}`}
             src='/img/car.png'
             alt='car-img'
             initial={{x: -1000}}

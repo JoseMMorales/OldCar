@@ -43,17 +43,20 @@ const initialValue = {
     search_URL : `url('/img/bg-search.jpg')`,
     edit_URL : `url('/img/bg-edit.jpg')`,
     details_URL : `url('/img/bg-detail.jpg')`,
+    admin_URL : `url('/img/bg-admin.jpeg')`
   }
 }
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   let location = useLocation();
 
   useEffect(() => {
     setIsAuthenticated(localStorage.isAuthenticated);
+    setIsAdmin(localStorage.admin);
   }, [location]);
 
   const getUserData = () => {
@@ -102,6 +105,7 @@ const ContextProvider = (props) => {
         setData,
         getUserData,
         isAuthenticated,
+        isAdmin,
         numberWithDots
       }}>
       {props.children}

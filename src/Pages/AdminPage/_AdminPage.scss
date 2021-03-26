@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+.img-admin-hero {
+  display: none;
+}
+
 .table-container {
   @include flex-structure(none, none, center, center);
   margin: 2rem;

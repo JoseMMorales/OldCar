@@ -1,3 +1,4 @@
+import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { useState, useContext, useEffect } from 'react';
 import { Button } from '../../Components/Generic';
 import { Context } from '../../Context';
@@ -5,7 +6,7 @@ import { Context } from '../../Context';
 const Admin = () => {
   const { getUserData } = useContext(Context);
   const userHeader =  [ 'ID', 'ACTIVE', 'NOMBRE', 'EMAIL', 'DIRECCION', 'TLF', 'ROLE', 'TIPO', 'ELIMINAR'];
-  const carHeader =  [ 'ID', 'ACTIVE', 'MARCA', 'MODELO', 'AÑO', 'PRECIO', 'KM', 'USER', 'ELIMINAR'];
+  const carHeader =  [ 'ID', 'ACTIVE', 'MARCA', 'MODELO', 'AÑO', 'PRECIO', 'KM', 'USUARIO', 'ELIMINAR'];
   const [users, setUsers] = useState({});
   const [cars, setCars] = useState({});
 
@@ -89,7 +90,12 @@ const Admin = () => {
 
   return (
     <div>
-      <div>
+      {/* <HeroSecondary
+      imgClass='img-admin-hero'
+      src={data.heroSecundaryURL.admin_URL}
+      /> */}
+      <div className='admin-heading'>
+      <h1 className='admin-title'>Zona Admin Old<span className='main-color'>Car</span></h1>
         <ul className='list-navbar'>
           <li>
             <a
@@ -107,94 +113,96 @@ const Admin = () => {
           </li>
         </ul>
       </div>
-      <div className='admin-container'>
-        <h1 className='admin-title'>Administración de usuarios Old<span className='main-color'>Car</span></h1>
-        <div className='table-container'>
-          <table className='admin-table'>
-            <thead>
-              <tr>
+      <div className='admin-content'>
+        <div className='admin-container'>
+          <h3 className='admin-title'>Usuarios Old<span className='main-color'>Car</span></h3>
+          <div className='table-container'>
+            <table className='admin-table'>
+              <thead>
+                <tr>
+                  {
+                    userHeader.map(header => {
+                      return  <th key={header}>{header}</th>
+                    })
+                  }
+                </tr>
+              </thead>
+              <tbody>
                 {
-                  userHeader.map(header => {
-                    return  <th key={header}>{header}</th>
+                  Object.values(users).map((user, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>{user.id}</td>
+                        <td>
+                          {
+                            `${user.active === false ? 'No Activo' : 'Activo'}`
+                          }
+                        </td>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{user.address}</td>
+                        <td>{user.phone}</td>
+                        <td>{user.roles}</td>
+                        <td>{user.type}</td>
+                        <td>
+                          <Button
+                            className='btn-reset total-width'
+                            name='Borrar'
+                            onClick={() =>adminRemoveUser(user.id)}
+                          />
+                        </td>
+                      </tr>
+                    )
                   })
                 }
-              </tr>
-            </thead>
-            <tbody>
-              {
-                Object.values(users).map((user, key) => {
-                  return (
-                    <tr key={key}>
-                      <td>{user.id}</td>
-                      <td>
-                        {
-                          `${user.active === false ? 'No Activo' : 'Activo'}`
-                        }
-                      </td>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.address}</td>
-                      <td>{user.phone}</td>
-                      <td>{user.roles}</td>
-                      <td>{user.type}</td>
-                      <td>
-                        <Button
-                          className='btn-reset total-width'
-                          name='Borrar'
-                          onClick={() =>adminRemoveUser(user.id)}
-                        />
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div className='admin-container'>
-        <h1 className='admin-title'>Administración de coches Old<span className='main-color'>Car</span></h1>
-        <div className='table-container'>
-          <table className='admin-table'>
-            <thead>
-              <tr>
+        <div className='admin-container'>
+          <h3 className='admin-title'>Publicaciones Old<span className='main-color'>Car</span></h3>
+          <div className='table-container'>
+            <table className='admin-table'>
+              <thead>
+                <tr>
+                  {
+                    carHeader.map(header => {
+                      return  <th key={header}>{header}</th>
+                    })
+                  }
+                </tr>
+              </thead>
+              <tbody>
                 {
-                  carHeader.map(header => {
-                    return  <th key={header}>{header}</th>
+                  Object.values(cars).map((car, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>{car.id}</td>
+                        <td>
+                          {
+                            `${car.active === false ? 'No Activo' : 'Activo'}`
+                          }
+                        </td>
+                        <td>{car.brand}</td>
+                        <td>{car.model}</td>
+                        <td>{car.year}</td>
+                        <td>{car.price}</td>
+                        <td>{car.km}</td>
+                        <td>{car.user}</td>
+                        <td>
+                          <Button
+                            className='btn-reset total-width'
+                            name='Borrar'
+                            onClick={() =>adminRemoveCar(car.id)}
+                          />
+                        </td>
+                      </tr>
+                    )
                   })
                 }
-              </tr>
-            </thead>
-            <tbody>
-              {
-                Object.values(cars).map((car, key) => {
-                  return (
-                    <tr key={key}>
-                      <td>{car.id}</td>
-                      <td>
-                        {
-                          `${car.active === false ? 'No Activo' : 'Activo'}`
-                        }
-                      </td>
-                      <td>{car.brand}</td>
-                      <td>{car.model}</td>
-                      <td>{car.year}</td>
-                      <td>{car.price}</td>
-                      <td>{car.km}</td>
-                      <td>{car.user}</td>
-                      <td>
-                        <Button
-                          className='btn-reset total-width'
-                          name='Borrar'
-                          onClick={() =>adminRemoveCar(car.id)}
-                        />
-                      </td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
