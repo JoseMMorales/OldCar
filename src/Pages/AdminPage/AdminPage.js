@@ -9,6 +9,9 @@ const Admin = () => {
   const carHeader =  [ 'ID', 'ACTIVE', 'MARCA', 'MODELO', 'AÑO', 'PRECIO', 'KM', 'USUARIO', 'ELIMINAR'];
   const [users, setUsers] = useState({});
   const [cars, setCars] = useState({});
+  const [usersDisplay, setUsersDisplay] = useState(false);
+  const [carsDisplay, setCarsDisplay] = useState(false);
+  const [adminImgDIsplay, setAdminImgDIsplay] = useState(true);
 
   let isAuthenticated = localStorage.isAuthenticated;
 
@@ -90,32 +93,64 @@ const Admin = () => {
 
   return (
     <div>
-      {/* <HeroSecondary
-      imgClass='img-admin-hero'
-      src={data.heroSecundaryURL.admin_URL}
-      /> */}
       <div className='admin-heading'>
-      <h1 className='admin-title'>Zona Admin Old<span className='main-color'>Car</span></h1>
         <ul className='list-navbar'>
           <li>
             <a
               className='list-admin-element'
-              onClick={getAdminUsers}>
+              onClick={ () => {
+                getAdminUsers();
+                setUsersDisplay(true);
+                setCarsDisplay(false);
+                setAdminImgDIsplay(false);
+              }}>
               Usuarios
             </a>
           </li>
           <li>
             <a
               className='list-admin-element'
-              onClick={getAdminCars}>
+              onClick={() => {
+                getAdminCars();
+                setUsersDisplay(false);
+                setCarsDisplay(true);
+                setAdminImgDIsplay(false);
+              }}>
               Anuncios
+            </a>
+          </li>
+          <li>
+            <a
+              className='list-admin-element'
+              onClick={() => {
+                setUsersDisplay(false);
+                setCarsDisplay(false);
+                setAdminImgDIsplay(true);
+              }}>
+              Cerrar
             </a>
           </li>
         </ul>
       </div>
+      {
+        adminImgDIsplay &&
+        <div className='image-admin-container'>
+          <h2 className='image-admin-header'>
+            Elige una opción para visualizar
+            Old<span className='main-color'>Car</span> data
+          </h2>
+          <img
+            src='/img/adminGif.gif'
+            alt="admin-gif"
+            className='image-admin'
+          />
+        </div>
+      }
       <div className='admin-content'>
-        <div className='admin-container'>
-          <h3 className='admin-title'>Usuarios Old<span className='main-color'>Car</span></h3>
+        {
+          usersDisplay &&
+          <div className='admin-container'>
+          <h2 className='admin-title'>Usuarios Old<span className='main-color'>Car</span></h2>
           <div className='table-container'>
             <table className='admin-table'>
               <thead>
@@ -159,8 +194,11 @@ const Admin = () => {
             </table>
           </div>
         </div>
-        <div className='admin-container'>
-          <h3 className='admin-title'>Publicaciones Old<span className='main-color'>Car</span></h3>
+        }
+        {
+          carsDisplay &&
+          <div className='admin-container'>
+          <h2 className='admin-title'>Publicaciones Old<span className='main-color'>Car</span></h2>
           <div className='table-container'>
             <table className='admin-table'>
               <thead>
@@ -204,6 +242,7 @@ const Admin = () => {
             </table>
           </div>
         </div>
+        }
       </div>
     </div>
   )

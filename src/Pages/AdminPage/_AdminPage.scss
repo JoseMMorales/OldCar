@@ -5,26 +5,53 @@
   background-color: $bg-grey-Slight;
 }
 
+.image-admin-container {
+  @include flex-structure(column, none, center, center);
+}
+
+.image-admin-header {
+  position: relative;
+  top: 72px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-weight: 400;
+}
+
 .list-admin-element {
   padding: 1rem;
+  margin-right: .1rem;
+
+  &:hover {
+    background-color: $bg-grey;
+  }
+}
+
+.admin-content {
+  min-height: 100vh;
 }
 
 .admin-title {
   text-align: center;
-}
+  font-weight:  inherit;
+  margin: 2rem;
 
-.img-admin-hero {
-  display: none;
+  &::after {
+    @include separator-style(10%, .1rem, 0 auto , 0);
+   }
 }
 
 .table-container {
   @include flex-structure(none, none, center, center);
   margin: 2rem;
+}
+
+.admin-table {
+  display: block;
   overflow-x: auto;
 }
 
 td, th {
-  border: 1px solid $grey-light-color;
+  border: .1rem solid $grey-light-color;
   text-align: center;
   padding: 8px;
 }
@@ -32,3 +59,28 @@ td, th {
 tr:nth-child(even) {
   background-color: $bg-grey-Slight;
 }
+
+
+@media (max-width: $medium-device) {
+  .image-admin {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: $change-device) {
+  .image-admin-header {
+    top: 12px;
+    font-size: medium;
+  }
+}
+
+@media (max-width: $small-device) {
+  .image-admin-header {
+    font-size: .1rem;
+  }
+
+  .image-admin-container {
+    margin-top: 6rem;
+  }
+}
+
