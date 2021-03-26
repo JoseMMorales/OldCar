@@ -53,11 +53,11 @@ const Dropdown = () => {
           <li
             className='profile-list-element bg-light'
             onClick={() => {
-              window.localStorage.removeItem('isAuthenticated');
+              window.localStorage.clear();
               setData(prevState => ({
                 ...prevState,
-                userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', seller:'' },
-                published: [{idCar: '', brand: '', model: '', image: ''}]
+                userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
+                published: []
               }))
             }}>
             <Link className='dark-color' to={'/'}>Salir</Link>

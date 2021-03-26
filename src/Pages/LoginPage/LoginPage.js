@@ -63,6 +63,7 @@ const LoginPage= () => {
 
           if (decoded.roles[0] === 'ROLE_ADMIN') {
             navigate.push('/Pages/AdminPage/AdminPage');
+            localStorage.setItem('admin', true);
           } else {
             getUserData();
             navigate.push('/Pages/UserPage/UserPage/#user');

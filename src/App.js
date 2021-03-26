@@ -42,6 +42,15 @@ const App = () => {
           />
   };
 
+  const PrivateRoute = ({ component: Component, ...rest }) => {
+    return  <Route {...rest} render = {(props) => (
+              localStorage.isAuthenticated  ?
+              (<Component {...props} />) :
+              (<Redirect to= '/Pages/LoginPage/LoginPage' />)
+              )}
+            />
+    };
+
   return (
     <>
       <Router>

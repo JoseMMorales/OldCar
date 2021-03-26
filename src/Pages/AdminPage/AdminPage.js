@@ -108,7 +108,7 @@ const Admin = () => {
         </ul>
       </div>
       <div className='admin-container'>
-        <h1 className='admin-title'>Administración de usuarios en Old<span className='main-color'>Car</span></h1>
+        <h1 className='admin-title'>Administración de usuarios Old<span className='main-color'>Car</span></h1>
         <div className='table-container'>
           <table className='admin-table'>
             <thead>
@@ -153,7 +153,7 @@ const Admin = () => {
         </div>
       </div>
       <div className='admin-container'>
-        <h1 className='admin-title'>Administración de coches en Old<span className='main-color'>Car</span></h1>
+        <h1 className='admin-title'>Administración de coches Old<span className='main-color'>Car</span></h1>
         <div className='table-container'>
           <table className='admin-table'>
             <thead>

@@ -30,11 +30,7 @@ const initialValue = {
   detailsCar: [{}],
   userLoginData: { id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
   favourites: [{ brand: '', carPrice: '', carYear: '', idCar: '', idUser: '', image: '', model: ''}],
-  published: [{
-    // idCar: '', brand:'', model: '', km: '', price: '',
-    // year: '', shortDescription: '', longDescription: '', imageMain: '',
-    // imageSecond: '', imageThird: '', imageFourth: '', imageFifth: ''
-  }],
+  published: [],
   updatePublished: {
     idCar: '', brand:'', model: '', km: '', price: '',
     year: '', shortDescription: '', longDescription: '', imageMain: '',
@@ -52,7 +48,6 @@ const initialValue = {
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
-console.log(data.published);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   let location = useLocation();

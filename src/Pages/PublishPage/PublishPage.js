@@ -16,8 +16,8 @@ const PublishPage = (props) => {
     isAuthenticated && getUserData();
   }, [])
 
-  const params = props.location.state?.params;
-  const publish = props.location.state?.publish;
+  const user = props.location.state?.user;
+  const CarPublished = props.location.state?.CarPublished;
   const carId = props.location.state?.carId;
 
   const [userInput, setUserInput] = useState(
@@ -60,9 +60,10 @@ const PublishPage = (props) => {
   // console.log('updateInput', updateInput.files)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (params && !publish) {
+
+    if (user && !CarPublished) {
       setUpdateInput({...updateInput, [name]: value});
-    } else if (publish || !params) {
+    } else if (CarPublished || !user) {
       setUserInput({...userInput, [name]: value});
     }
   };
@@ -70,12 +71,12 @@ const PublishPage = (props) => {
   const handleFiles = (e) => {
     const fileObj = e.target.files[0];
 
-    if (params && !publish) {
+    if (user && !CarPublished) {
       setUpdateInput(prevState => ({
         ...prevState,
         files: [...prevState.files, fileObj]
       }));
-    } else if (publish || !params) {
+    } else if (CarPublished || !user) {
       setUserInput(prevState => ({
         ...prevState,
         files: [...prevState.files, fileObj]
@@ -84,7 +85,7 @@ const PublishPage = (props) => {
   };
 
   const deleteImage = (name, idCar, keyPhoto) => {
-    if (params && !publish) {
+    if (user && !CarPublished) {
       const photoName = name.slice(26);
 
       const token = localStorage.getItem('UserToken');
@@ -102,9 +103,9 @@ const PublishPage = (props) => {
             setUpdateInput({...updateInput, files: newArray});
           }
         }
-      ).catch(error => console.log(error))
+      ).catch(error => console.log(error));
 
-    } else if (publish || !params) {
+    } else if (CarPublished || !user) {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
       setUserInput(prevState => ({
         ...prevState,
@@ -115,8 +116,6 @@ const PublishPage = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    console.log({stateButton});
 
     switch (stateButton) {
       case 1:
@@ -296,7 +295,7 @@ const PublishPage = (props) => {
       <div className='container'>
         <div className='register-container'>
           {
-            (publish || !params)  &&
+            (CarPublished || !user)  &&
             <div className='heading-publish'>
               <h1 className='main-heading grey-color'>
                 Publica tu anunio en Old
@@ -314,7 +313,7 @@ const PublishPage = (props) => {
             </div>
           }
           {
-            (params && !publish) &&
+            (user && !CarPublished) &&
             <div className='heading-publish'>
               <h1 className='main-heading grey-color'>
                 Edita tu anunio en Old
@@ -334,7 +333,7 @@ const PublishPage = (props) => {
             className='form-publish'
             onSubmit={onSubmit}>
             {
-              !params &&
+              !user &&
               <div className='personal-details-publish'>
                 <div className='heading-section-form bg-grey-Slight'>
                   <h3 className='main-text-heading-form main-color'>1. Tus Datos</h3>
@@ -423,7 +422,7 @@ const PublishPage = (props) => {
               </div>
               <div className='inputs-section-form'>
                 {
-                  (params && publish) &&
+                  (!user || (user && CarPublished)) &&
                   <Input
                     containerClassName='publish-form-container'
                     htmlFor='publishBrand'
@@ -432,9 +431,9 @@ const PublishPage = (props) => {
                     onChange={handleChange}
                     inputName='brand'
                     value={
-                      (!params && userInput.brand) ||
-                      (params && publish && userInput.brand) ||
-                      (params && !publish && updateInput.brand) || ''
+                      (!user && userInput.brand) ||
+                      (user && CarPublished && userInput.brand) ||
+                      (user && !CarPublished && updateInput.brand) || ''
                     }
                     InputClassName={false}
                     labelClassName='grey-color'
@@ -442,7 +441,7 @@ const PublishPage = (props) => {
                   />
                 }
                 {
-                  (params && publish) &&
+                  (!user || (user && CarPublished)) &&
                   <Input
                     containerClassName='publish-form-container'
                     htmlFor='publishModel'
@@ -451,9 +450,9 @@ const PublishPage = (props) => {
                     onChange={handleChange}
                     inputName='model'
                     value={
-                      (!params && userInput.model) ||
-                      (params && publish && userInput.model) ||
-                      (params && !publish && updateInput.model) || ''
+                      (!user && userInput.model) ||
+                      (user && CarPublished && userInput.model) ||
+                      (user && !CarPublished && updateInput.model) || ''
                     }
                     InputClassName={false}
                     labelClassName='grey-color'
@@ -468,9 +467,9 @@ const PublishPage = (props) => {
                   onChange={handleChange}
                   inputName='km'
                   value={
-                    (!params && userInput.km) ||
-                    (params && publish && userInput.km) ||
-                    (params && !publish && updateInput.km) || ''
+                    (!user && userInput.km) ||
+                    (user && CarPublished && userInput.km) ||
+                    (user && !CarPublished && updateInput.km) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -484,9 +483,9 @@ const PublishPage = (props) => {
                   onChange={handleChange}
                   inputName='price'
                   value={
-                    (!params && userInput.price) ||
-                    (params && publish && userInput.price) ||
-                    (params && !publish && updateInput.price) || ''
+                    (!user && userInput.price) ||
+                    (user && CarPublished && userInput.price) ||
+                    (user && !CarPublished && updateInput.price) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -500,9 +499,9 @@ const PublishPage = (props) => {
                   onChange={handleChange}
                   inputName='year'
                   value={
-                    (!params && userInput.year) ||
-                    (params && publish && userInput.year) ||
-                    (params && !publish && updateInput.year) || ''
+                    (!user && userInput.year) ||
+                    (user && CarPublished && userInput.year) ||
+                    (user && !CarPublished && updateInput.year) || ''
                   }
                   InputClassName={false}
                   labelClassName='grey-color'
@@ -516,9 +515,9 @@ const PublishPage = (props) => {
                   rows='3'
                   onChange={handleChange}
                   value={
-                    (!params && userInput.shortDescription) ||
-                    (params && publish && userInput.shortDescription) ||
-                    (params && !publish && updateInput.shortDescription) || ''
+                    (!user && userInput.shortDescription) ||
+                    (user && CarPublished && userInput.shortDescription) ||
+                    (user && !CarPublished && updateInput.shortDescription) || ''
                   }
                   placeholder='Descripción corta (Max 50)*'
                   name='shortDescription'
@@ -528,9 +527,9 @@ const PublishPage = (props) => {
                   rows='8'
                   onChange={handleChange}
                   value={
-                    (!params && userInput.longDescription) ||
-                    (params && publish && userInput.longDescription) ||
-                    (params && !publish && updateInput.longDescription) || ''
+                    (!user && userInput.longDescription) ||
+                    (user && CarPublished && userInput.longDescription) ||
+                    (user && !CarPublished && updateInput.longDescription) || ''
                   }
                   placeholder='Descripción larga (Max 150)*'
                   name='longDescription'
@@ -538,7 +537,7 @@ const PublishPage = (props) => {
               </div>
             </div>
             {
-              (params && !publish) &&
+              (user && !CarPublished) &&
               <div className='publish-button-container'>
                 <Button
                   onClick={() => (setStateButton(1))}
@@ -573,7 +572,7 @@ const PublishPage = (props) => {
                 />
                 <div className='files-uploaded'>
                   {
-                    (publish || !params) &&
+                    (CarPublished || !user) &&
                     userInput.files.map((file, key) => {
                       const photoNumber = key + 1;
                       return (
@@ -590,7 +589,7 @@ const PublishPage = (props) => {
                     })
                   }
                   {
-                    (params && !publish) &&
+                    (user && !CarPublished) &&
                     updateInput.files.map((car, key) => {
 
                       return (
@@ -615,13 +614,13 @@ const PublishPage = (props) => {
             </div>
             <div className='publish-button-container'>
               <Button
-                name={ (params && !publish) ? 'Editar Fotos' : 'Confirmar'}
+                name={ (user && !CarPublished) ? 'Editar Fotos' : 'Confirmar'}
                 onClick={() => {
-                  if((params && !publish)) {
+                  if((user && !CarPublished)) {
                     setStateButton(2);
-                  } else if((!params && !publish)) {
+                  } else if((!user && !CarPublished)) {
                     setStateButton(3);
-                  } else if((params && publish)) {
+                  } else if((user && CarPublished)) {
                     setStateButton(4);
                   }
                 }}

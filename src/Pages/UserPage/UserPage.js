@@ -119,9 +119,9 @@ const UserPage = () => {
                 setData(prevState => ({
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                  published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}]
+                  published: []
                 }))
-                window.localStorage.removeItem('isAuthenticated');
+                window.localStorage.clear();
                 alert(`Tu cuenta ha sido eliminada, GRACIAS!!`);
               }}>
               <Link
@@ -133,11 +133,11 @@ const UserPage = () => {
             <li
               className='user-list-element'
               onClick={() => {
-                window.localStorage.removeItem('isAuthenticated');
+                window.localStorage.clear();
                 setData(prevState => ({
                   ...prevState,
                   userLoginData:{ id: '', name: '', email: '', address: '', city: '', phone: '', type:'' },
-                  published: [{ idCar: '', brand: '', model: '', imageMain: '', price: '', km: '', year: ''}]
+                  published: []
                 }))
               }}>
               <Link className='link-user-hover dark-color' to={'/'}>Salir</Link>
@@ -200,19 +200,19 @@ const UserPage = () => {
                           <b className='dark-color'>
                             Año
                           </b>
-                          {`${numberWithDots(`${ publish.year}`)}`}
+                           {` ${numberWithDots(`${ publish.year}`)}`}
                         </p>
                         <p className='grey-color'>
                           <b className='dark-color'>
                             Precio
                           </b>
-                          {`${numberWithDots(`${ publish.price}`)}`}
+                           {` ${numberWithDots(`${ publish.price}`)}`}
                         </p>
                         <p className='grey-color'>
                           <b className='dark-color'>
                             Km
                           </b>
-                          {`${numberWithDots(`${ publish.km}`)}`}
+                           {` ${numberWithDots(`${ publish.km}`)}`}
                         </p>
                       </div>
                       <div className='published-button-container'>
@@ -227,7 +227,11 @@ const UserPage = () => {
                             setData(prevState => ({ ...prevState, updatePublished: publish }))
                             navigate.push(
                               '/Pages/PublishPage/PublishPage',
-                              { params: true, carId: publish.idCar }
+                              {
+                                user: true,
+                                carId: publish.idCar,
+                                CarPublished: false
+                              }
                             );
                           }}
                           name='Editar'
