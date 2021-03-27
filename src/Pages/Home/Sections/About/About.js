@@ -2,6 +2,7 @@ import { AiOutlineCar } from 'react-icons/ai';
 import { AiOutlineLike } from 'react-icons/ai';
 import { GiHouseKeys } from 'react-icons/gi';
 import { AiOutlineWallet } from 'react-icons/ai';
+import AboutDetail from '../../../../Components/AboutDetail/AboutDetail';
 
 const About = () => {
   return (
@@ -24,14 +25,13 @@ const About = () => {
             joyas.
           </p>
         </div>
-        <div className='brands'>
-          <AiOutlineCar className='grey-light-color' />
-          <h6 className='dark-color'>Variedad</h6>
-          <p>
-            Contamos con marcas exclusivas nacionales como
-            internacionales
-          </p>
-        </div>
+          <AboutDetail
+            className='brands'
+            aboutIcon= {<AiOutlineCar className='grey-light-color' />}
+            aboutDetailHeader='Variedad'
+            aboutDetailParagraph='Contamos con marcas exclusivas nacionales como
+            internacionales'
+          />
         <div className='support'>
           <AiOutlineLike className='grey-light-color' />
           <h6 className='dark-color'>Calidad</h6>

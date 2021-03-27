@@ -1,4 +1,4 @@
-import Search from '../Search/Search';
+import Search from '../../../../Components/Search/Search';
 
 const HeroHome = () => {
 

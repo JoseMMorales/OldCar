@@ -111,10 +111,10 @@ a {
 @import '../Components/Generic/Dropdown/Dropdown';
 @import '../Components/Generic/NoResult/NoResult';
 @import '../Components/Generic/DetailParagraph/DetailParagraph';
-@import '../Components/HeroHome/HeroHome';
+@import '../Pages/Home/Sections/HeroHome/HeroHome';
 @import '../Components/HeroSecondary/HeroSecondary';
-@import '../Components/About/About';
-@import '../Components/Contact/Contact';
+@import '../Pages/Home/Sections/About/About';
+@import '../Pages/Home/Sections/Contact/Contact';
 @import '../Components/ContactForm/ContactForm';
 @import '../Components/CarDetails/CarDetails';
 @import '../Components/SellerDetails/SellerDetails';
@@ -130,6 +130,7 @@ a {
 @import '../Components/BackToTop/BackToTop';
 @import '../Components/Footer/Footer';
 @import '../Components/LoginForm/LoginForm';
+@import '../Components/AboutDetail/AboutDetail';
 
 @media (max-width: 1200px) {
 	.container {
