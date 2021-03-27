@@ -1,5 +1,4 @@
 import Search from '../Search/Search';
-import { useEffect } from 'react';
 
 const HeroHome = () => {
 

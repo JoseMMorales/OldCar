@@ -10,7 +10,8 @@ const Input = ({
   value,
   labelName,
   labelClassName,
-  onChange
+  onChange,
+  onBlur
 }) => {
 
   return (
@@ -21,6 +22,7 @@ const Input = ({
         {labelName}
       </label>
       <input
+        onBlur={onBlur}
         onChange={onChange}
         id={Inputid}
         className={`input ${InputClassName}`}

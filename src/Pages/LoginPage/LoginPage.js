@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { Context } from '../../Context';
 import jwt_decode from "jwt-decode";
+import { isValidEmail, isValidPassword, isValidText } from '../../Utils/FormValidations';
 
 const LoginPage= () => {
   const { data, setData, getUserData } = useContext(Context);
@@ -117,15 +118,21 @@ const LoginPage= () => {
       <div className='container'>
         <div className='forms-container'>
           <div className='login-container'>
-            <form className='login-form'>
+            <form className='login-form' onSubmit={submitLoginCredentials}>
               <h2 className='heading-login'>Login</h2>
               <Input
                 onChange={handleLoginChange}
-                type='text'
+                type='email'
                 inputName='email'
                 value={login.email}
                 placeholder='Email'
                 required={true}
+                onBlur={e => {
+                  if(login.email) {
+                    !isValidEmail(e) &&
+                    setLogin(prevState => ({...prevState, email: ''}));
+                  }
+                }}
               />
               <Input
                 type='password'
@@ -134,13 +141,18 @@ const LoginPage= () => {
                 onChange={handleLoginChange}
                 placeholder='Contraseña'
                 required={true}
+                onBlur={ (e) => {
+                  if(login.password) {
+                    !isValidPassword(e) &&
+                    setLogin(prevState => ({...prevState, password: ''}));
+                  }
+                }}
               />
               <div className='bottom-form total-width'>
                   <Button
                     name='Login'
                     className='btn-login'
                     type='submit'
-                    onClick={submitLoginCredentials}
                   />
                 <label className='label-login grey-color'>
                   <input className='input' type='checkbox' name='remember' />
@@ -163,6 +175,12 @@ const LoginPage= () => {
                 type='text'
                 placeholder='Nombre'
                 required={true}
+                onBlur={ (e) => {
+                  if(register.username) {
+                   !isValidText(e) &&
+                   setRegister(prevState => ({...prevState, username: ''}));
+                  }
+                }}
               />
               <Input
                 InputClassName={false}
@@ -172,6 +190,12 @@ const LoginPage= () => {
                 type='email'
                 placeholder='Email'
                 required={true}
+                onBlur={ (e) => {
+                  if(register.email) {
+                    !isValidEmail(e) &&
+                    setRegister(prevState => ({...prevState, email: ''}));
+                  }
+                }}
               />
                <Input
                 InputClassName={false}
@@ -181,6 +205,12 @@ const LoginPage= () => {
                 type='password'
                 placeholder='Contraseña'
                 required={true}
+                onBlur={ (e) => {
+                  if(register.password) {
+                    !isValidPassword(e) &&
+                    setRegister(prevState => ({...prevState, password: ''}));
+                  }
+                }}
               />
               <div className='bottom-form'>
                 <Button

@@ -5,13 +5,13 @@ import { Context } from '../../Context';
 
 const Admin = () => {
   const { getUserData } = useContext(Context);
-  const userHeader =  [ 'ID', 'ACTIVE', 'NOMBRE', 'EMAIL', 'DIRECCION', 'TLF', 'ROLE', 'TIPO', 'ELIMINAR'];
-  const carHeader =  [ 'ID', 'ACTIVE', 'MARCA', 'MODELO', 'AÑO', 'PRECIO', 'KM', 'USUARIO', 'ELIMINAR'];
+  const userHeader =  [ 'ID', 'ESTADO', 'NOMBRE', 'EMAIL', 'DIRECCION', 'TLF', 'ROLE', 'TIPO', 'ELIMINAR'];
+  const carHeader =  [ 'ID', 'ESTADO', 'MARCA', 'MODELO', 'AÑO', 'PRECIO', 'KM', 'USUARIO', 'ELIMINAR'];
   const [users, setUsers] = useState({});
   const [cars, setCars] = useState({});
   const [usersDisplay, setUsersDisplay] = useState(false);
   const [carsDisplay, setCarsDisplay] = useState(false);
-  const [adminImgDIsplay, setAdminImgDIsplay] = useState(true);
+  const [adminImgDisplay, setAdminImgDisplay] = useState(true);
 
   let isAuthenticated = localStorage.isAuthenticated;
 
@@ -102,7 +102,7 @@ const Admin = () => {
                 getAdminUsers();
                 setUsersDisplay(true);
                 setCarsDisplay(false);
-                setAdminImgDIsplay(false);
+                setAdminImgDisplay(false);
               }}>
               Usuarios
             </a>
@@ -114,7 +114,7 @@ const Admin = () => {
                 getAdminCars();
                 setUsersDisplay(false);
                 setCarsDisplay(true);
-                setAdminImgDIsplay(false);
+                setAdminImgDisplay(false);
               }}>
               Anuncios
             </a>
@@ -125,7 +125,7 @@ const Admin = () => {
               onClick={() => {
                 setUsersDisplay(false);
                 setCarsDisplay(false);
-                setAdminImgDIsplay(true);
+                setAdminImgDisplay(true);
               }}>
               Cerrar
             </a>
@@ -133,7 +133,7 @@ const Admin = () => {
         </ul>
       </div>
       {
-        adminImgDIsplay &&
+        adminImgDisplay &&
         <div className='image-admin-container'>
           <h2 className='image-admin-header'>
             Elige una opción para visualizar
@@ -170,7 +170,7 @@ const Admin = () => {
                         <td>{user.id}</td>
                         <td>
                           {
-                            `${user.active === false ? 'No Activo' : 'Activo'}`
+                            `${!user.active ? 'No Activo' : 'Activo'}`
                           }
                         </td>
                         <td>{user.name}</td>
@@ -218,7 +218,7 @@ const Admin = () => {
                         <td>{car.id}</td>
                         <td>
                           {
-                            `${car.active === false ? 'No Activo' : 'Activo'}`
+                            `${!car.active ? 'No Activo' : 'Activo'}`
                           }
                         </td>
                         <td>{car.brand}</td>
