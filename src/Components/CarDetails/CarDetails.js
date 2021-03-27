@@ -33,7 +33,7 @@ const CarDetails = ({ car }) => {
           }
         })
       .catch( e => console.log(e));
-  }
+  };
 
   return (
     <div className='car-description'>

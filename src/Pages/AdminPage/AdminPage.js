@@ -1,4 +1,3 @@
-import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
 import { useState, useContext, useEffect } from 'react';
 import { Button } from '../../Components/Generic';
 import { Context } from '../../Context';
@@ -89,7 +88,7 @@ const Admin = () => {
       })
       .catch(e => console.log(e));
     }
-  }
+  };
 
   return (
     <div>

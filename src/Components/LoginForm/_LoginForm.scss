@@ -1,0 +1,27 @@
+.login-form {
+  @include flex-structure(column, none, none, none);
+  margin: 2.5rem;
+}
+
+.heading-login {
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  line-height: 2.2rem;
+  letter-spacing: 0;
+}
+
+.btn-login {
+  width: 100px;
+}
+
+.bottom-form {
+  @include flex-structure(row, none, center, flex-start);
+}
+
+
+@media (max-width: $medium-device) {
+  .login-form {
+    margin: 1rem 0;
+  }
+}

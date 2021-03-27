@@ -1,6 +1,6 @@
+import  ContactForm  from '../ContactForm/ContactForm';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import  ContactForm  from '../ContactForm/ContactForm';
 
 const Contact = () => {
   const [scale, setScale] = useState(false);

@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import { AiFillUpSquare } from 'react-icons/ai';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const BackToTop = () => {
   const [showScroll, setShowScroll] = useState(false);
 
-  const visibleVariants = {visible: {display: 'block'}, noVisible: {display: 'none'}};
-  const movingVariants = {initial: { y: 0 }, ending: { y: '-40vh' }};
+  const visibleVariants = { visible: {display: 'block'}, noVisible: {display: 'none'} };
+  const movingVariants = { initial: { y: 0 }, ending: { y: '-40vh' }};
 
   const scrollTop = () => window.scrollTo({top: 0, behavior: 'smooth'});
 

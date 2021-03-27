@@ -124,11 +124,12 @@ a {
 @import '../Pages/PublishPage/PublishPage';
 @import '../Pages/DetailsPage/DetailsPage';
 @import '../Pages/UserPage/UserPage';
-@import '../Pages/AdminPage/AdminPage';
 @import '../Pages/LoginPage/LoginPage';
+@import '../Pages/AdminPage/AdminPage';
 @import '../Pages/EditPage/EditPage';
 @import '../Components/BackToTop/BackToTop';
 @import '../Components/Footer/Footer';
+@import '../Components/LoginForm/LoginForm';
 
 @media (max-width: 1200px) {
 	.container {
