@@ -1,0 +1,29 @@
+.admin-title {
+  text-align: center;
+  font-weight:  inherit;
+  margin: 2rem;
+
+  &::after {
+    @include separator-style(10%, .1rem, 0 auto , 0);
+   }
+}
+
+.table-container {
+  @include flex-structure(none, none, center, center);
+  margin: 2rem;
+}
+
+.admin-table {
+  display: block;
+  overflow-x: auto;
+}
+
+td, th {
+  border: .1rem solid $grey-light-color;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: $bg-grey-Slight;
+}

@@ -1,7 +1,5 @@
 .hero {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  @include flex-structure(none, none, flex-start, center);
 
   height: 93vh;
   width: 100%;

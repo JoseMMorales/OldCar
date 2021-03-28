@@ -1,13 +1,22 @@
-import { useState, useContext, useEffect } from 'react';
-import { Button } from '../../Components/Generic';
+import UsersTable from './Sections/UsersTable';
+import CarsTable from './Sections/CarsTable';
 import { Context } from '../../Context';
 
+import {
+  useState,
+  useContext,
+  useEffect,
+  useRef } from 'react';
+
 const Admin = () => {
+
+  let usersRef = useRef();
+  console.log('users', usersRef.current);
+
+  let carsRef = useRef();
+  console.log('cars', carsRef);
+
   const { getUserData } = useContext(Context);
-  const userHeader =  [ 'ID', 'ESTADO', 'NOMBRE', 'EMAIL', 'DIRECCION', 'TLF', 'ROLE', 'TIPO', 'ELIMINAR'];
-  const carHeader =  [ 'ID', 'ESTADO', 'MARCA', 'MODELO', 'AÑO', 'PRECIO', 'KM', 'USUARIO', 'ELIMINAR'];
-  const [users, setUsers] = useState({});
-  const [cars, setCars] = useState({});
   const [usersDisplay, setUsersDisplay] = useState(false);
   const [carsDisplay, setCarsDisplay] = useState(false);
   const [adminImgDisplay, setAdminImgDisplay] = useState(true);
@@ -18,76 +27,11 @@ const Admin = () => {
     isAuthenticated && getUserData();
   }, []);
 
-  const getAdminUsers = () => {
-    const token = localStorage.getItem('UserToken');
-    const config = {
-      headers: { 'Authorization': `Bearer ${token}` }
-    };
-    fetch(`http://localhost:8000/admin/users`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-        return response.json();
-      })
-      .then( res => setUsers(res))
-      .catch( e => console.log(e));
-  };
-
-  const adminRemoveUser = (id) => {
-    if (confirm("Está seguro de que quieres borrar al usuario? si confirmas todos los datos serán borrados...")) {
-       const token = localStorage.getItem('UserToken');
-      const config = {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}`}
-    };
-    fetch(`http://localhost:8000/admin/delete/user/${id}`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-        return response.json();
-      })
-      .then(res => {
-        res.code === 200 ?
-        getAdminUsers() :
-        alert("Ha habido un fallo, por favor inténtalo otra vez");
-      })
-      .catch(e => console.log(e));
-    }
-  };
-
-  const getAdminCars = () => {
-    const token = localStorage.getItem('UserToken');
-    const config = {
-      headers: { 'Authorization': `Bearer ${token}` }
-    };
-    fetch(`http://localhost:8000/admin/cars`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-        return response.json();
-      })
-      .then( res => setCars(res))
-      .catch( e => console.log(e));
-  };
-
-  const adminRemoveCar = (id) => {
-    if (confirm("Está seguro de que quieres borrar el coche? ")) {
-      const token = localStorage.getItem('UserToken');
-      const config = {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}`}
-    };
-    fetch(`http://localhost:8000/admin/delete/car/${id}`, config)
-      .then(response => {
-        if (!response.ok)
-          throw new Error(response.statusText);
-        return response.json();
-      })
-      .then(res => {
-        res.code === 200 ? getAdminCars() : alert("Ha habido un fallo, por favor inténtalo otra vez");
-      })
-      .catch(e => console.log(e));
-    }
+  const handleOnClick = () => {
+    carsRef.current.getAdminCars();
+    setUsersDisplay(false);
+    setCarsDisplay(true);
+    setAdminImgDisplay(false);
   };
 
   return (
@@ -98,7 +42,7 @@ const Admin = () => {
             <a
               className='list-admin-element'
               onClick={ () => {
-                getAdminUsers();
+                usersRef.current.getAdminUsers();
                 setUsersDisplay(true);
                 setCarsDisplay(false);
                 setAdminImgDisplay(false);
@@ -109,12 +53,7 @@ const Admin = () => {
           <li>
             <a
               className='list-admin-element'
-              onClick={() => {
-                getAdminCars();
-                setUsersDisplay(false);
-                setCarsDisplay(true);
-                setAdminImgDisplay(false);
-              }}>
+              onClick={handleOnClick}>
               Anuncios
             </a>
           </li>
@@ -140,7 +79,7 @@ const Admin = () => {
           </h2>
           <img
             src='/img/adminGif.gif'
-            alt="admin-gif"
+            alt='admin-gif'
             className='image-admin'
           />
         </div>
@@ -148,103 +87,15 @@ const Admin = () => {
       <div className='admin-content'>
         {
           usersDisplay &&
-          <div className='admin-container'>
-          <h2 className='admin-title'>Usuarios Old<span className='main-color'>Car</span></h2>
-          <div className='table-container'>
-            <table className='admin-table'>
-              <thead>
-                <tr>
-                  {
-                    userHeader.map(header => {
-                      return  <th key={header}>{header}</th>
-                    })
-                  }
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  Object.values(users).map((user, key) => {
-                    return (
-                      <tr key={key}>
-                        <td>{user.id}</td>
-                        <td>
-                          {
-                            `${!user.active ? 'No Activo' : 'Activo'}`
-                          }
-                        </td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>{user.address}</td>
-                        <td>{user.phone}</td>
-                        <td>{user.roles}</td>
-                        <td>{user.type}</td>
-                        <td>
-                          <Button
-                            className='btn-reset total-width'
-                            name='Borrar'
-                            onClick={() =>adminRemoveUser(user.id)}
-                          />
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <UsersTable ref={usersRef} />
         }
         {
           carsDisplay &&
-          <div className='admin-container'>
-          <h2 className='admin-title'>Publicaciones Old<span className='main-color'>Car</span></h2>
-          <div className='table-container'>
-            <table className='admin-table'>
-              <thead>
-                <tr>
-                  {
-                    carHeader.map(header => {
-                      return  <th key={header}>{header}</th>
-                    })
-                  }
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  Object.values(cars).map((car, key) => {
-                    return (
-                      <tr key={key}>
-                        <td>{car.id}</td>
-                        <td>
-                          {
-                            `${!car.active ? 'No Activo' : 'Activo'}`
-                          }
-                        </td>
-                        <td>{car.brand}</td>
-                        <td>{car.model}</td>
-                        <td>{car.year}</td>
-                        <td>{car.price}</td>
-                        <td>{car.km}</td>
-                        <td>{car.user}</td>
-                        <td>
-                          <Button
-                            className='btn-reset total-width'
-                            name='Borrar'
-                            onClick={() =>adminRemoveCar(car.id)}
-                          />
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <CarsTable ref={carsRef} />
         }
       </div>
     </div>
   )
-}
+};
 
 export default Admin;

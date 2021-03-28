@@ -60,7 +60,6 @@
   }
 }
 
-//MEDIUM DEVICE
 @media (max-width: $medium-device) {
   .search-car-container {
     grid-template-columns: 18rem 1fr;
@@ -77,7 +76,6 @@
   }
 }
 
-// //SMALL DEVICE
 @media (max-width: $change-device) {
   .search-car-container {
     @include flex-structure(column, none, none, none);

@@ -1,4 +1,3 @@
-
 const AboutDetail = ({
   className,
   aboutIcon,
@@ -6,7 +5,6 @@ const AboutDetail = ({
   aboutDetailParagraph
  }) => {
 
-  console.log(aboutIcon);
   return (
     <div className={className}>
       {aboutIcon}

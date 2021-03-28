@@ -25,37 +25,34 @@ const About = () => {
             joyas.
           </p>
         </div>
-          <AboutDetail
-            className='brands'
-            aboutIcon= {<AiOutlineCar className='grey-light-color' />}
-            aboutDetailHeader='Variedad'
-            aboutDetailParagraph='Contamos con marcas exclusivas nacionales como
-            internacionales'
-          />
-        <div className='support'>
-          <AiOutlineLike className='grey-light-color' />
-          <h6 className='dark-color'>Calidad</h6>
-          <p>
-            Todos nuestros coches estan bajo un exhaustivo control de
-            calidad
-          </p>
-        </div>
-        <div className='dealership'>
-          <GiHouseKeys className='grey-light-color' />
-          <h6 className='dark-color'>Concesión</h6>
-          <p>
-            Concesionarios y propietarios autorizados a la venta por
-            OldCar
-          </p>
-        </div>
-        <div className='affordable'>
-          <AiOutlineWallet className='grey-light-color' />
-          <h6 className='dark-color'>Asequible</h6>
-          <p>
-            Precios por debajo del mercado para que sea mas
-            económico y atractivo
-          </p>
-        </div>
+        <AboutDetail
+          className='brands'
+          aboutIcon= {<AiOutlineCar className='grey-light-color' />}
+          aboutDetailHeader='Variedad'
+          aboutDetailParagraph='Contamos con marcas exclusivas nacionales como
+          internacionales'
+        />
+        <AboutDetail
+          className='support'
+          aboutIcon= {<AiOutlineLike className='grey-light-color' />}
+          aboutDetailHeader='Calidad'
+          aboutDetailParagraph='Todos nuestros coches estan bajo un exhaustivo control de
+          calidad'
+        />
+        <AboutDetail
+          className='dealership'
+          aboutIcon= {<GiHouseKeys className='grey-light-color' />}
+          aboutDetailHeader='Concesión'
+          aboutDetailParagraph='Concesionarios y propietarios autorizados a la venta por
+          OldCar'
+        />
+        <AboutDetail
+          className='affordable'
+          aboutIcon= {<AiOutlineWallet className='grey-light-color' />}
+          aboutDetailHeader='Asequible'
+          aboutDetailParagraph='Precios por debajo del mercado para que sea mas
+          económico y atractivo'
+        />
       </div>
     </div>
   );

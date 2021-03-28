@@ -38,10 +38,9 @@ const SearchPage = () => {
   useEffect(() => {
     fetch(USER_URL)
       .then(response => {
-          if (!response.ok)
-              throw new Error("Something went wrong: " + response.status);
-
-              return response.json();
+        if (!response.ok)
+          throw new Error("Something went wrong: " + response.status);
+        return response.json();
       })
       .then(json => {
         setData(prevState => ({...prevState, searchCars: json}))
@@ -88,11 +87,11 @@ const SearchPage = () => {
                   <ul className='search-tags'>
                     <li className='grey-color'>
                       <FaCalendarAlt />
-                      {`${numberWithDots(`${ car.year}`)}`}
+                      {`${numberWithDots(` ${ car.year}`)}`}
                     </li>
                     <li className='grey-color'>
                       <FaGasPump />
-                      {`${numberWithDots(`${ car.km}`)}`}
+                      {`${numberWithDots(` ${ car.km}`)}`}
                     </li>
                   </ul>
                   <Link to={`/Pages/DetailsPage/DetailsPage/${car.id}`}>
