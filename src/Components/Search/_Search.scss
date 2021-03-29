@@ -75,15 +75,11 @@
   &:hover, &:focus {
     border: 1px solid $additional-color;
   }
-}
 
-// .label {
-//   &.label-input-name {
-//     // margin: 0;
-//     // font-weight: 100;
-//     // color: $dark-color;
-//   }
-// }
+  &:focus {
+    box-shadow: 0 0 0 3px rgb(0 116 217 / 20%);
+  }
+}
 
 .react-dropdown-select-input {
   &::placeholder {

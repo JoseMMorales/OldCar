@@ -4,6 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../Generic';
 import { Context } from '../../Context';
 
+import {
+  isValidKm,
+  isValidAnno,
+  isValidPrice } from '../../Utils/FormValidations';
+
 const Search = ( { pathName, showResults, className } ) => {
   const { data, setData } = useContext(Context);
 
@@ -169,35 +174,50 @@ const Search = ( { pathName, showResults, className } ) => {
           <Input
             containerClassName='km-select'
             InputClassName='input-search dark-color'
-            placeholder='Km de 1 a 179.000'
+            placeholder='Km'
             type='number'
             inputName='km'
-            // labelName='Desde 1 a 179.000'
             value={selectState.km}
             labelClassName='label-input-name'
             onChange={handleInput}
+            onBlur={ (e) => {
+              if(selectState.km) {
+                !isValidKm(e) &&
+                setSelectState(prevState => ({...prevState, km: ''}));
+              }
+            }}
           />
           <Input
             containerClassName='year-select'
             InputClassName='input-search dark-color'
-            placeholder='Año de 1.919 a 1.985'
+            placeholder='Año'
             type='number'
             inputName='year'
-            // labelName='Desde 1.919 a 1.985'
             value={selectState.year}
             labelClassName='label-input-name'
             onChange={handleInput}
+            onBlur={ (e) => {
+              if(selectState.year) {
+                !isValidAnno(e) &&
+                setSelectState(prevState => ({...prevState, year: ''}));
+              }
+            }}
           />
           <Input
             containerClassName='price-select'
             InputClassName='input-search dark-color'
-            placeholder='Precio de 5.500 a 280.000'
+            placeholder='Precio'
             type='number'
             inputName='price'
-            // labelName='Desde 5.500 a 280.000'
             value={selectState.price}
             labelClassName='label-input-name'
             onChange={handleInput}
+            onBlur={ (e) => {
+              if(selectState.price) {
+                !isValidPrice(e) &&
+                setSelectState(prevState => ({...prevState, price: ''}));
+              }
+            }}
           />
           <div className='select-buttons'>
             {

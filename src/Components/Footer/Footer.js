@@ -4,30 +4,18 @@ import { FaTwitterSquare } from 'react-icons/fa';
 import { FaGithubSquare } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-
-
-const linkedin = 'https://www.linkedin.com/in/jose-m-369686b9/';
-const github = 'https://github.com/JoseMMorales/';
-const facebook = 'https://es-es.facebook.com/Codespaceacademy/';
-const twitter = 'https://twitter.com/codespaceacade?lang=en/';
+import { NavLink } from 'react-router-dom';
+import { Context } from '../../Context';
+import { useContext } from 'react';
 
 const Footer = () => {
+  const { data, scrollWithOffset } = useContext(Context);
   const [linkURL, setLinkURL] = useState('')
 
   useEffect(() => {
       linkURL && window.open(linkURL, '_blank');
       setLinkURL('');
   }, [linkURL]);
-
-   //Offset when scrolling from section
-   const scrollWithOffset = (el, offset) => {
-    const elementPosition = el.offsetTop - offset;
-    window.scroll({
-      top: elementPosition,
-      left: 0,
-      behavior: "smooth"
-    });
-  }
 
   return (
     <>
@@ -66,33 +54,33 @@ const Footer = () => {
                 </NavHashLink>
               </li>
               <li>
-                <NavHashLink
+                <NavLink
                   className='light-color'
                   activeClassName='none'
-                  to= '/Pages/SearchPage/SearchPage#search'>
+                  to= '/Pages/SearchPage/SearchPage'>
                   Buscar
-                </NavHashLink>
+                </NavLink>
               </li>
               <li>
-                <NavHashLink
+                <NavLink
                   className='light-color'
                   activeClassName='none'
-                  to= '/Pages/PublishPage/PublishPage#publish'>
+                  to= '/Pages/PublishPage/PublishPage'>
                   Publicar
-                </NavHashLink>
+                </NavLink>
               </li>
               <li>
-                <NavHashLink
+                <NavLink
                   className='light-color'
                   activeClassName='none'
-                  to='/Pages/LoginPage/LoginPage#login'>
+                  to='/Pages/LoginPage/LoginPage'>
                   Login
-                </NavHashLink>
+                </NavLink>
               </li>
             </ul>
             <ul className='social-list'>
               <li>
-                <a onClick={() => setLinkURL(linkedin)}
+                <a onClick={() => setLinkURL(data.footerURL.linkedin)}
                   name='linkedin'
                   className='social-icon'>
                   <FaLinkedin className='hover grey-light-color' name='linkedin'/>
@@ -100,21 +88,21 @@ const Footer = () => {
               </li>
               <li>
                 <a className='social-icon'
-                  onClick={() => setLinkURL(github)}
+                  onClick={() => setLinkURL(data.footerURL.github)}
                   name='github'>
                   <FaGithubSquare className='hover grey-light-color' />
                 </a>
               </li>
               <li>
                 <a className='social-icon'
-                  onClick={() => setLinkURL(facebook)}
+                  onClick={() => setLinkURL(data.footerURL.facebook)}
                   name='facebook'>
                   <FaFacebookSquare className = 'hover grey-light-color' />
                 </a>
               </li>
               <li>
                 <a className='social-icon'
-                  onClick={() => setLinkURL(twitter)}
+                  onClick={() => setLinkURL(data.footerURL.twitter)}
                   name = 'twitter'>
                   <FaTwitterSquare className='hover grey-light-color' />
                 </a>
@@ -135,10 +123,10 @@ const Footer = () => {
         <div className='footer-bottom light-color'>
           <p>
             @2021 OldCars.All rights reserved.Built by
-            <a onClick={() =>setLinkURL(github)}
+            <a onClick={() =>setLinkURL(data.footerURL.github)}
               className='additional-color'
               rel='nofollow'>
-              Jose MMorales
+                 {` Jose MMorales`}
             </a>
           </p>
         </div>

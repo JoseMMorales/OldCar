@@ -57,3 +57,36 @@ export const isValidTlf = (e) => {
   }
   return true;
 };
+
+export const isValidKm = (e) => {
+  const kmValue = e.target.value;
+
+  if (kmValue >= 1 && kmValue <= 179000) {
+    return true;
+  } else {
+    alert('Solo se aceptan KMs desde 1 a 179.000');
+    return false;
+  }
+};
+
+export const isValidAnno = (e) => {
+  const annoValue = e.target.value;
+
+  if (annoValue >= 1919 && annoValue <= 1985) {
+    return true;
+  } else {
+    alert('Solo se aceptan Años desde 1.919 a 1.985');
+    return false;
+  }
+};
+
+export const isValidPrice = (e) => {
+  const priceValue = e.target.value;
+
+  if (priceValue >= 5500 && priceValue <= 280000) {
+    return true;
+  } else {
+    alert('Solo se aceptan Años desde 1.919 a 1.985');
+    return false;
+  }
+};

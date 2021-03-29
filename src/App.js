@@ -70,9 +70,9 @@ const App = () => {
             <PrivateRoute path='/Pages/UserPage/UserPage' component={UserPage} />
             <PrivateRoute path='/Pages/AdminPage/AdminPage' component={AdminPage} />
           </Switch>
+          <BackToTop />
+          <Footer />
         </ContextProvider>
-        <BackToTop />
-        <Footer />
       </Router>
     </>
   );

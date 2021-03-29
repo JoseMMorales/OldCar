@@ -99,9 +99,7 @@
   }
 
   .search-additional-features {
-    @include flex-structure(column, none, flex-start, none);
-
-    .search-tags { margin-bottom: 1rem; }
+    @include flex-structure(row, none, center, none);
 
     li { padding: .6rem .5rem; }
   }

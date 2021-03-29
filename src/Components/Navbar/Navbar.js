@@ -5,7 +5,7 @@ import Dropdown  from '../Dropdown/Dropdown';
 import { Context } from '../../Context';
 
 const Navbar = () => {
-  const { isAuthenticated } = useContext(Context);
+  const { isAuthenticated, scrollWithOffset } = useContext(Context);
 
   const [toggle, setToggle] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -14,16 +14,6 @@ const Navbar = () => {
   //Dropdown toggle when clicking in the window
 	const handleClick = () => history.push('/Pages/Home/Home#home');
 	const handleToggle = () => setToggle(!toggle);
-
-  //Offset when scrolling from section
-  const scrollWithOffset = (el, offset) => {
-    const elementPosition = el.offsetTop - offset;
-    window.scroll({
-      top: elementPosition,
-      left: 0,
-      behavior: "smooth"
-    });
-  };
 
   //Scroll to section in homePage
   const handleScroll = () => {

@@ -44,8 +44,14 @@ const initialValue = {
     edit_URL : `url('/img/bg-edit.jpg')`,
     details_URL : `url('/img/bg-detail.jpg')`,
     admin_URL : `url('/img/bg-admin.jpeg')`
+  },
+  footerURL: {
+    linkedin: 'https://www.linkedin.com/in/jose-m-369686b9/',
+    github: 'https://github.com/JoseMMorales/',
+    facebook: 'https://es-es.facebook.com/Codespaceacademy/',
+    twitter: 'https://twitter.com/codespaceacade?lang=en/'
   }
-}
+};
 
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
@@ -77,7 +83,7 @@ const ContextProvider = (props) => {
         refreshUserFavourites(res.id);
       })
       .catch( e => console.log(e))
-  }
+  };
 
   const refreshUserFavourites = (id) => {
     const token = localStorage.getItem('UserToken');
@@ -98,6 +104,15 @@ const ContextProvider = (props) => {
 
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
+  const scrollWithOffset = (el, offset) => {
+    const elementPosition = el.offsetTop - offset;
+    window.scroll({
+      top: elementPosition,
+      left: 0,
+      behavior: "smooth"
+    });
+  };
+
   return (
     <Context.Provider value={
       {
@@ -106,12 +121,13 @@ const ContextProvider = (props) => {
         getUserData,
         isAuthenticated,
         isAdmin,
-        numberWithDots
+        numberWithDots,
+        scrollWithOffset
       }}>
       {props.children}
     </Context.Provider>
   )
-}
+};
 
-export { ContextProvider }
+export { ContextProvider };
 
