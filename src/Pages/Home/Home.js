@@ -1,9 +1,6 @@
-import HeroHome from '../../Components/HeroHome/HeroHome';
-import Contact from './Sections/Contact/Contact';
+import { HeroHome, About, Contact } from './Sections';
 import { useContext, useEffect } from 'react';
-import About from './Sections/About/About';
 import { Context } from '../../Context';
-
 
 const Home = () => {
   const { getUserData } = useContext(Context);

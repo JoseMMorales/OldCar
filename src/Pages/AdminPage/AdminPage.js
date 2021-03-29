@@ -1,24 +1,13 @@
-import UsersTable from './Sections/UsersTable';
-import CarsTable from './Sections/CarsTable';
+import { useState, useContext, useEffect } from 'react';
+import { AdminNav, CarsTable, UsersTable } from './Sections';
 import { Context } from '../../Context';
 
-import {
-  useState,
-  useContext,
-  useEffect,
-  useRef } from 'react';
-
-const Admin = () => {
-
-  let usersRef = useRef();
-  console.log('users', usersRef.current);
-
-  let carsRef = useRef();
-  console.log('cars', carsRef);
-
+const AdminPage = () => {
   const { getUserData } = useContext(Context);
   const [usersDisplay, setUsersDisplay] = useState(false);
   const [carsDisplay, setCarsDisplay] = useState(false);
+  const [users, setUsers] = useState({});
+  const [cars, setCars] = useState({});
   const [adminImgDisplay, setAdminImgDisplay] = useState(true);
 
   let isAuthenticated = localStorage.isAuthenticated;
@@ -27,49 +16,47 @@ const Admin = () => {
     isAuthenticated && getUserData();
   }, []);
 
-  const handleOnClick = () => {
-    carsRef.current.getAdminCars();
-    setUsersDisplay(false);
-    setCarsDisplay(true);
-    setAdminImgDisplay(false);
+  const getAdminUsers = () => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    };
+    fetch(`http://localhost:8000/admin/users`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then( res => {
+        setUsers(res)
+      })
+      .catch( e => console.log(e));
+  };
+
+  const getAdminCars = () => {
+    const token = localStorage.getItem('UserToken');
+    const config = {
+      headers: { 'Authorization': `Bearer ${token}` }
+    };
+    fetch(`http://localhost:8000/admin/cars`, config)
+      .then(response => {
+        if (!response.ok)
+          throw new Error(response.statusText);
+        return response.json();
+      })
+      .then( res => setCars(res))
+      .catch( e => console.log(e));
   };
 
   return (
     <div>
-      <div className='admin-heading'>
-        <ul className='list-navbar'>
-          <li>
-            <a
-              className='list-admin-element'
-              onClick={ () => {
-                usersRef.current.getAdminUsers();
-                setUsersDisplay(true);
-                setCarsDisplay(false);
-                setAdminImgDisplay(false);
-              }}>
-              Usuarios
-            </a>
-          </li>
-          <li>
-            <a
-              className='list-admin-element'
-              onClick={handleOnClick}>
-              Anuncios
-            </a>
-          </li>
-          <li>
-            <a
-              className='list-admin-element'
-              onClick={() => {
-                setUsersDisplay(false);
-                setCarsDisplay(false);
-                setAdminImgDisplay(true);
-              }}>
-              Cerrar
-            </a>
-          </li>
-        </ul>
-      </div>
+      <AdminNav
+        getAdminUsers={getAdminUsers}
+        getAdminCars={getAdminCars}
+        setUsersDisplay={setUsersDisplay}
+        setCarsDisplay={setCarsDisplay}
+        setAdminImgDisplay={setAdminImgDisplay}
+      />
       {
         adminImgDisplay &&
         <div className='image-admin-container'>
@@ -87,15 +74,21 @@ const Admin = () => {
       <div className='admin-content'>
         {
           usersDisplay &&
-          <UsersTable ref={usersRef} />
+          <UsersTable
+            getAdminUsers={getAdminUsers}
+            users={users}
+          />
         }
         {
           carsDisplay &&
-          <CarsTable ref={carsRef} />
+          <CarsTable
+            getAdminCars={getAdminCars}
+            cars={cars}
+          />
         }
       </div>
     </div>
   )
 };
 
-export default Admin;
+export default AdminPage;

@@ -1,0 +1,15 @@
+.list-navbar {
+  display: flex;
+  padding: 1rem;
+  margin: 0;
+  background-color: $bg-grey-Slight;
+}
+
+.list-admin-element {
+  padding: 1rem;
+  margin-right: .1rem;
+
+  &:hover {
+    background-color: $bg-grey;
+  }
+}
