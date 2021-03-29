@@ -107,7 +107,10 @@ a {
 @import '../Components/Navbar/Navbar';
 @import '../Components/Generic/Button/Button';
 @import '../Components/Generic/Input/Input';
-@import '../Components/Carousel/Carousel';
+@import '../Pages/DetailsPage/Sections/Carousel/Carousel';
+@import '../Pages/DetailsPage/Sections/Insurance/Insurance';
+@import '../Pages/DetailsPage/Sections/CarDetails/CarDetails';
+@import '../Pages/DetailsPage/Sections/SellerDetails/SellerDetails';
 @import '../Components/Generic/Dropdown/Dropdown';
 @import '../Components/Generic/NoResult/NoResult';
 @import '../Components/Generic/DetailParagraph/DetailParagraph';
@@ -116,9 +119,6 @@ a {
 @import '../Pages/Home/Sections/About/About';
 @import '../Pages/Home/Sections/Contact/Contact';
 @import '../Components/ContactForm/ContactForm';
-@import '../Components/CarDetails/CarDetails';
-@import '../Components/SellerDetails/SellerDetails';
-@import '../Components/Insurance/Insurance';
 @import '../Components/Search/Search';
 @import '../Pages/SearchPage/SearchPage';
 @import '../Pages/PublishPage/PublishPage';

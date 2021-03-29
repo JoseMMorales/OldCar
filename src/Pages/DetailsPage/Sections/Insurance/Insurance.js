@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from '../../Components/Generic';
+import { Button } from '../../../../Components/Generic';
 
 const mutua = 'https://www.mutua.es/seguros-coche/calcular/?sem=sem:sem:sitelink:mejorprecio:coche:google:google:sitelink-precio:marca:sitelink:sem:sitelink:pc:sem&gclid=EAIaIQobChMIxJy746Ld7gIVjpftCh1d-ADGEAAYASABEgKWQ_D_BwE&gclsrc=aw.ds#/codigoPostal';
 const genesis = 'https://www.genesis.es/seguros-coche?sbr=0010-0002&mkwid=bXoCLoQH_dc&pcrid=428020828996&pkw=calcular%20seguro%20genesis&pmt=e&slid=&pgrid=16042114686&ptaid=kwd-72016711951&gclid=EAIaIQobChMIkPiroKLd7gIVgp7tCh3xvQ-SEAAYASAAEgL98_D_BwE';

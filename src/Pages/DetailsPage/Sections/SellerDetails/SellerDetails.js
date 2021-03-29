@@ -1,4 +1,4 @@
-import { DetailParagraph } from '../../Components/Generic';
+import { DetailParagraph } from '../../../../Components/Generic';
 
 const SellerDetails = ({ car }) => {
 

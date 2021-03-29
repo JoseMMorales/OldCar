@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
 import { AiOutlineLeftSquare, AiOutlineRightSquare } from 'react-icons/ai';
-
+import { useState, useEffect } from 'react';
 
 const Carousel = ({
   mainImage,

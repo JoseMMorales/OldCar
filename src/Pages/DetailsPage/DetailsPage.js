@@ -1,11 +1,8 @@
+import { Insurance, Carousel, CarDetails, SellerDetails } from './Sections';
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { Context } from '../../Context';
-import { useContext, useEffect } from 'react';
-import Carousel from '../../Components/Carousel/Carousel';
-import CarDetails from '../../Components/CarDetails/CarDetails';
-import SellerDetails from '../../Components/SellerDetails/SellerDetails';
-import Insurance from '../../Components/Insurance/Insurance';
 import ContactForm from '../../Components/ContactForm/ContactForm';
+import { useContext, useEffect } from 'react';
+import { Context } from '../../Context';
 
 const DetailsPage = (props) => {
   const { data, setData, getUserData, numberWithDots } = useContext(Context);

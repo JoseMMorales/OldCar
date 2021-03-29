@@ -1,6 +1,6 @@
-import { Button, DetailParagraph } from '../../Components/Generic';
+import { Button, DetailParagraph } from '../../../../Components/Generic';
+import { Context } from '../../../../Context';
 import { useContext } from 'react';
-import { Context } from '../../Context';
 
 const CarDetails = ({ car }) => {
   const { setData, numberWithDots, isAuthenticated } = useContext(Context);
