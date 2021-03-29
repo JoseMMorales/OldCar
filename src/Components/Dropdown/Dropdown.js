@@ -1,6 +1,6 @@
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import { useState, useRef, useEffect, useContext } from 'react';
-import { Context } from '../../../Context';
+import { Context } from '../../Context';
 import { Link } from 'react-router-dom';
 
 const Dropdown = () => {

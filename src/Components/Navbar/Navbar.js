@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import { NavHashLink } from 'react-router-hash-link';
 import { useHistory, NavLink } from 'react-router-dom';
-import { Dropdown } from '../Generic';
+import { NavHashLink } from 'react-router-hash-link';
+import Dropdown  from '../Dropdown/Dropdown';
 import { Context } from '../../Context';
 
 const Navbar = () => {

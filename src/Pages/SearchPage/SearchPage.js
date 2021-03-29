@@ -53,7 +53,7 @@ const SearchPage = () => {
       <HeroSecondary
         src={data.heroSecundaryURL.search_URL}
         text='Busca tu sueño...'
-        />
+      />
       <div className='container searchPage-container'>
         <Search showResults />
         {
@@ -66,43 +66,43 @@ const SearchPage = () => {
           cars.map((car, key) => {
             return (
               <div className='search-car-container' key={key}>
-              <div className='search-car-image'>
-                <img
-                  className='img-responsive'
-                  src= {`${car.image}`}
-                  alt='Car Image'
-                />
-              </div>
-              <div className='search-car-features'>
-                <p className='dark-color'>
-                  {car.brand} {car.model}
-                </p>
-                <p>
-                  {`${numberWithDots(`${car.description}`)}`}
-                </p>
-                <p className='search-price-car main-color'>
-                {`${numberWithDots(`${car.price}`)}€`}
-                </p>
-                <div className='search-additional-features'>
-                  <ul className='search-tags'>
-                    <li className='grey-color'>
-                      <FaCalendarAlt />
-                      {`${numberWithDots(` ${ car.year}`)}`}
-                    </li>
-                    <li className='grey-color'>
-                      <FaGasPump />
-                      {`${numberWithDots(` ${ car.km}`)}`}
-                    </li>
-                  </ul>
-                  <Link to={`/Pages/DetailsPage/DetailsPage/${car.id}`}>
-                    <Button
-                      className='btn-search'
-                      name='Detalles'
-                    />
-                  </Link>
+                <div className='search-car-image'>
+                  <img
+                    className='img-responsive'
+                    src= {`${car.image}`}
+                    alt='Car Image'
+                  />
+                </div>
+                <div className='search-car-features'>
+                  <p className='dark-color'>
+                    {car.brand} {car.model}
+                  </p>
+                  <p>
+                    {`${numberWithDots(`${car.description}`)}`}
+                  </p>
+                  <p className='search-price-car main-color'>
+                  {`${numberWithDots(`${car.price}`)}€`}
+                  </p>
+                  <div className='search-additional-features'>
+                    <ul className='search-tags'>
+                      <li className='grey-color'>
+                        <FaCalendarAlt />
+                        {`${numberWithDots(` ${ car.year}`)}`}
+                      </li>
+                      <li className='grey-color'>
+                        <FaGasPump />
+                        {`${numberWithDots(` ${ car.km}`)}`}
+                      </li>
+                    </ul>
+                    <Link to={`/Pages/DetailsPage/DetailsPage/${car.id}`}>
+                      <Button
+                        className='btn-search'
+                        name='Detalles'
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
             )
           })
         }
