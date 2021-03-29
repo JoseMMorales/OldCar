@@ -7,6 +7,9 @@ const Dropdown = () => {
   const ref = useRef(null);
   const [active, setActive] = useState(false);
   const { data, setData, isAdmin } = useContext(Context);
+  const [userName, setUserName] = useState('');
+
+  const name = data.userLoginData.name.split(' ')[0];
 
   const handleToggle = () => { setActive(!active) };
   const handleClickOutside = (event) => {
@@ -18,9 +21,13 @@ const Dropdown = () => {
   useEffect(() => {
     document.addEventListener('click', handleClickOutside, true);
     return () => {
-        document.removeEventListener('click', handleClickOutside, true);
+      document.removeEventListener('click', handleClickOutside, true);
     };
   });
+
+  useEffect(() => {
+    setUserName(data.userLoginData.name.split(' ')[0]);
+  }, []);
 
   return (
     <div className='profile-container bg-grey-Slight' ref={ref}>
@@ -34,10 +41,8 @@ const Dropdown = () => {
               alt='image_profile'
             />
             <p className='name-profile'>
-              {
-               data.userLoginData.name.split(' ')[0]
-              }
-              </p>
+              {name}
+            </p>
             <RiArrowDownSLine className={`arrow-profile ${active && 'arrow-visible'}`} />
             <RiArrowUpSLine className={`arrow-profile ${!active && 'arrow-visible'}`} />
         </button>

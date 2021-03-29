@@ -1,9 +1,14 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { Button, Input } from '../../Components/Generic';
+import { Button } from '../../Components/Generic';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useHistory } from 'react-router-dom';
 import { useState , useContext, useEffect } from 'react';
 import { Context } from '../../Context';
+
+import {
+  EditPersonalForm,
+  EditContactForm,
+  EditSecurityForm } from './Sections';
 
 const EditPage = () => {
   let navigate = useHistory();
@@ -18,16 +23,20 @@ const EditPage = () => {
     {
       name: data.userLoginData.name,
       type: data.userLoginData.type,
-      email: data.userLoginData.email,
       phone: data.userLoginData.phone,
       address: data.userLoginData.address,
       city: data.userLoginData.city,
       password: ''
     });
 
+    console.log(editForm);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditForm(prevState => ({ ...prevState, [name]: value }));
+    setData(prevState => ({ ...prevState,
+      userLoginData: {...prevState.userLoginData, [name]: value }
+    }))
   }
 
   const submitEditForm = (e) => {
@@ -36,7 +45,6 @@ const EditPage = () => {
     const formData = new FormData();
     formData.append('username', editForm.name);
     formData.append('type', editForm.type);
-    formData.append('email', editForm.email);
     formData.append('phone', editForm.phone);
     formData.append('address', editForm.address);
     formData.append('city', editForm.city);
@@ -55,18 +63,17 @@ const EditPage = () => {
     .then(response => {
       if (!response.ok)
         throw new Error(response.statusText);
-
       return response.json();
     })
     .then(
       resp => {
         setData(prevState => ({ ...prevState, userLoginData: resp}));
-        navigate.push('/Pages/UserPage/UserPage/#user');
+        navigate.push('/Pages/UserPage/UserPage');
       }
     ).catch(error => console.log(error));
-  }
+  };
 
-    return (
+  return (
     <div id='edit'>
       <HeroSecondary
         src={data.heroSecundaryURL.edit_URL}
@@ -82,119 +89,33 @@ const EditPage = () => {
                 <span className="main-color">CAR</span>
               </p>
             </div>
-            <div className='personal-info'>
-              <div className='heading-form bg-grey-Slight'>
-                <h3 className='main-edit-heading-form main-color'>Información Personal</h3>
-                <RiArrowDownSFill className='main-color'/>
-              </div>
-              <div className="input-edit">
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editName'
-                  Inputid='editName'
-                  labelName='Nombre'
-                  onChange={handleChange}
-                  inputName='name'
-                  value={editForm.name ? editForm.name : data.userLoginData.name}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editSeller'
-                  Inputid='editSeller'
-                  inputName='type'
-                  value={editForm.type ? editForm.type : data.userLoginData.type}
-                  labelName='Particular o Concesionario'
-                  onChange={handleChange}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-              </div>
-            </div>
-            <div className="contact-info">
-              <div className='heading-form bg-grey-Slight'>
-                <h3 className='main-edit-heading-form main-color'>Contacto</h3>
-                <RiArrowDownSFill className='main-color'/>
-              </div>
-              <div className="input-edit">
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editAddress'
-                  Inputid='editAddress'
-                  labelName='Dirección'
-                  onChange={handleChange}
-                  InputClassName={false}
-                  inputName='address'
-                  value={editForm.address ? editForm.address : data.userLoginData.address}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editPhone'
-                  Inputid='editPhone'
-                  labelName='Teléfono'
-                  onChange={handleChange}
-                  inputName='phone'
-                  value={editForm.phone ? editForm.phone : data.userLoginData.phone}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='tlf'
-                />
-                 <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editCity'
-                  Inputid='editCity'
-                  labelName='Ciudad'
-                  onChange={handleChange}
-                  inputName='city'
-                  value={editForm.city ? editForm.city : data.userLoginData.city}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='text'
-                />
-              </div>
-            </div>
-            <div className="security">
-              <div className='heading-form bg-grey-Slight'>
-                <h3 className='main-edit-heading-form main-color'>Seguridad</h3>
-                <RiArrowDownSFill className='main-color'/>
-              </div>
-              <div className="input-edit">
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editPassword'
-                  Inputid='editPassword'
-                  labelName='Contraseña'
-                  onChange={handleChange}
-                  inputName='password'
-                  value={editForm.password}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='password'
-                />
-                <Input
-                  containerClassName='edit-form-container'
-                  htmlFor='editRepeatPassword'
-                  Inputid='editRepeatPassword'
-                  labelName='Repite Contraseña'
-                  onChange={handleChange}
-                  name='repeatPassword'
-                  // value={editForm.}
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='password'
-                />
-              </div>
-            </div>
+            <EditPersonalForm
+              IconPersonal={<RiArrowDownSFill className='main-color'/>}
+              handleChange={handleChange}
+              valuePersonalName={editForm.name}
+              setEditForm={setEditForm}
+              valuePersonalType={editForm.type}
+            />
+            <EditContactForm
+              IconContact={<RiArrowDownSFill className='main-color'/>}
+              handleChange={handleChange}
+              valueContactAddress={editForm.address}
+              setEditForm={setEditForm}
+              valueContactPhone={editForm.phone}
+              valueContactCity={editForm.city}
+            />
+            <EditSecurityForm
+              IconSecurity={<RiArrowDownSFill className='main-color'/>}
+              handleChange={handleChange}
+              valueSecurityPassword={editForm.password}
+              setEditForm={setEditForm}
+            />
             <div className="edit-buttons">
               <Button
                 name='Confirmar'
                 className='btn-edit'
-                type='submit' />
+                type='submit'
+              />
             </div>
           </form>
         </div>

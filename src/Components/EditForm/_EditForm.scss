@@ -1,0 +1,38 @@
+.edit-info {
+    border: .1rem solid $grey-light-color;
+    border-radius: .1rem;
+    margin: .5rem 0;
+
+  > h3 {
+    text-align: center;
+
+    &::after {
+      content: '';
+      height: 2rem;
+    }
+  }
+}
+
+.heading-form {
+  text-align: center;
+}
+
+.main-edit-heading-form {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.input-edit {
+  max-width: 1000px;
+  padding: 1rem;
+  margin: .2rem auto;
+}
+
+.edit-form-container { margin: .3rem 1rem; }
+
+@media (max-width: $small-device) {
+  .edit-info {
+      width: 100%;
+  }
+}
