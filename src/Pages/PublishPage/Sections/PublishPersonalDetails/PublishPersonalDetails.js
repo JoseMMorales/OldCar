@@ -1,4 +1,10 @@
 import { Input } from '../../../../Components/Generic';
+import {
+  isValidEmail,
+  isValidTlf,
+  isValidType,
+  isValidText } from '../../../../Utils/FormValidations';
+
 
 function PublishPersonalDetails({
   handleChange,
@@ -7,7 +13,8 @@ function PublishPersonalDetails({
   PublishValuePhone,
   PublishValueAddress,
   PublishValueCity,
-  PublishValueSeller
+  PublishValueSeller,
+  setUserInput
   }) {
 
   return (
@@ -20,9 +27,14 @@ function PublishPersonalDetails({
         onChange={handleChange}
         inputName='username'
         value={PublishValueName}
-        InputClassName={false}
         labelClassName='grey-color'
         type='text'
+        onBlur={ (e) => {
+          if(PublishValueName) {
+            !isValidText(e) &&
+            setUserInput(prevState => ({...prevState, username: ''}));
+          }
+        }}
       />
       <Input
         containerClassName='personal-form-container'
@@ -32,9 +44,14 @@ function PublishPersonalDetails({
         onChange={handleChange}
         inputName='email'
         value={PublishValueEmail}
-        InputClassName={false}
         labelClassName='grey-color'
         type='email'
+        onBlur={ (e) => {
+          if(PublishValueEmail) {
+            !isValidEmail(e) &&
+            setUserInput(prevState => ({...prevState, email: ''}));
+          }
+        }}
       />
       <Input
         containerClassName='personal-form-container'
@@ -44,9 +61,14 @@ function PublishPersonalDetails({
         onChange={handleChange}
         inputName='phone'
         value={PublishValuePhone}
-        InputClassName={false}
         labelClassName='grey-color'
         type='tlf'
+        onBlur={ (e) => {
+          if(PublishValuePhone) {
+            !isValidTlf(e) &&
+            setUserInput(prevState => ({ ...prevState, phone: '' }));
+          }
+        }}
       />
       <Input
         containerClassName='personal-form-container'
@@ -56,9 +78,14 @@ function PublishPersonalDetails({
         onChange={handleChange}
         inputName='address'
         value={PublishValueAddress}
-        InputClassName={false}
         labelClassName='grey-color'
         type='text'
+        onBlur={ (e) => {
+          if(PublishValueAddress) {
+            !isValidText(e) &&
+            setUserInput(prevState => ({...prevState, address: ''}));
+          }
+        }}
       />
       <Input
         containerClassName='personal-form-container'
@@ -68,9 +95,14 @@ function PublishPersonalDetails({
         onChange={handleChange}
         inputName='city'
         value={PublishValueCity}
-        InputClassName={false}
         labelClassName='grey-color'
         type='text'
+        onBlur={ (e) => {
+          if(PublishValueCity) {
+            !isValidText(e) &&
+            setUserInput(prevState => ({...prevState, city: ''}));
+          }
+        }}
       />
       <Input
         containerClassName='personal-form-container'
@@ -80,9 +112,14 @@ function PublishPersonalDetails({
         onChange={handleChange}
         inputName='type'
         value={PublishValueSeller}
-        InputClassName={false}
         labelClassName='grey-color'
         type='text'
+        onBlur={ (e) => {
+          if(PublishValueSeller) {
+            !isValidType(e) &&
+            setUserInput(prevState => ({...prevState, type: ''}));
+          }
+        }}
       />
     </>
   )

@@ -1,4 +1,5 @@
-import { Button, DetailParagraph } from '../../../../Components/Generic';
+import DetailParagraph from '../../../../Components/DetailParagraph/DetailParagraph';
+import { Button } from '../../../../Components/Generic';
 import { Context } from '../../../../Context';
 import { useContext } from 'react';
 

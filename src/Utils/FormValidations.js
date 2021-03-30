@@ -52,7 +52,7 @@ export const isValidTlf = (e) => {
   const textValid = /^[+]?[0-9-]{9,16}$/;
 
   if (!textValid.test(e.target.value)) {
-    alert('El teléfono tiene que tener entre 9 y 12 caracteres, con el prefijo del pais al que pertenece (+34654789213)');
+    alert('El teléfono tiene que tener entre 9 y 12 caracteres, con el prefijo del pais al que pertenece Ej: +34654789213');
     return false;
   }
   return true;
@@ -89,4 +89,14 @@ export const isValidPrice = (e) => {
     alert('Solo se aceptan Años desde 1.919 a 1.985');
     return false;
   }
+};
+
+export const isValidNumber = (e) => {
+  var numberValid = /^\d*\.?\d*$/.test(String(e.target.value));
+
+  if (!numberValid) {
+    alert('Los Kilómetros tienen que ser números');
+    // return false;
+  }
+  return true;
 };

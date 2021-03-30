@@ -1,12 +1,21 @@
 import { Input } from '../../../../Components/Generic';
 
+import {
+  isValidEmail,
+  isValidTlf,
+  isValidNumber,
+  isValidText } from '../../../../Utils/FormValidations';
+
 const PublishCarDetails = ({
   user,
   CarNotPublished,
   handleChange,
   userInput,
-  updateInput
+  updateInput,
+  setUserInput,
+  setUpdateInput
   }) => {
+
   return (
     <>
      {
@@ -18,13 +27,15 @@ const PublishCarDetails = ({
           labelName='Marca*'
           onChange={handleChange}
           inputName='brand'
-          value={
-            (!user && userInput.brand) ||
-            (user && CarNotPublished && userInput.brand) ||
-            (user && !CarNotPublished && updateInput.brand) || ''
-          }
+          value={userInput.brand}
           labelClassName='grey-color'
           type='text'
+          onBlur={ (e) => {
+            if(userInput.brand) {
+              !isValidText(e) &&
+              setUserInput(prevState => ({...prevState, brand: ''}));
+            }
+          }}
         />
       }
       {
@@ -36,13 +47,15 @@ const PublishCarDetails = ({
           labelName='Modelo*'
           onChange={handleChange}
           inputName='model'
-          value={
-            (!user && userInput.model) ||
-            (user && CarNotPublished && userInput.model) ||
-            (user && !CarNotPublished && updateInput.model) || ''
-          }
+          value={userInput.model}
           labelClassName='grey-color'
           type='text'
+          onBlur={ (e) => {
+            if(userInput.model) {
+              !isValidText(e) &&
+              setUserInput(prevState => ({...prevState, model: ''}));
+            }
+          }}
         />
       }
       <Input
@@ -59,6 +72,14 @@ const PublishCarDetails = ({
         }
         labelClassName='grey-color'
         type='number'
+        // onBlur={ (e) => {
+        //   if(console.log(userInput.km)) {
+        //     !isValidNumber(e) &&
+        //     setUserInput(prevState => ({...prevState, km: ''}));
+        //   } else if (updateInput.km) {
+        //     setUpdateInput(prevState => ({...prevState, km: ''}));
+        //   }
+        // }}
       />
       <Input
         containerClassName='car-form-container'

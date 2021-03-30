@@ -63,6 +63,9 @@ const PublishPage = (props) => {
       ]
   });
 
+  console.log({userInput});
+  console.log({updateInput});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -322,6 +325,7 @@ const PublishPage = (props) => {
                     PublishValueAddress={userInput.address}
                     PublishValueCity={userInput.city}
                     PublishValueSeller={userInput.type}
+                    setUserInput={setUserInput}
                   />
                 </div>
               </div>
@@ -338,6 +342,8 @@ const PublishPage = (props) => {
                   handleChange={handleChange}
                   userInput={userInput}
                   updateInput={updateInput}
+                  setUserInput={setUserInput}
+                  setUpdateInput={setUpdateInput}
                 />
               </div>
               <div className='description-container'>
