@@ -133,6 +133,10 @@ a {
 @import '../Components/AdminTable/AdminTable';
 @import '../Pages/AdminPage/Sections/AdminNav/AdminNav';
 @import '../Components/EditForm/EditForm';
+@import '../Components/Generic/TextArea/TextArea';
+@import '../Pages/PublishPage/Sections/PublishHeading/PublishHeading';
+@import '../Pages/PublishPage/Sections/PersonalDetails/PublishPersonalDetails';
+
 
 @media (max-width: 1200px) {
 	.container {

@@ -1,0 +1,15 @@
+.main-heading {
+  text-transform: uppercase;
+  font-weight: 300;
+
+  &::after {
+    @include separator-style(50%, .1rem, .6rem 0, 0);
+   }
+}
+
+@media(max-width: $small-device) {
+
+  .heading-publish {
+    p:nth-child(2) { line-height: 25px; }
+  }
+}

@@ -88,6 +88,9 @@ const EditPage = () => {
                 EDITA TUS DATOS DE TU CUENTA OLD
                 <span className="main-color">CAR</span>
               </p>
+              <p>
+                <b>*Campos obligarorios</b>
+              </p>
             </div>
             <EditPersonalForm
               IconPersonal={<RiArrowDownSFill className='main-color'/>}

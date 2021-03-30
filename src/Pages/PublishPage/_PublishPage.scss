@@ -1,15 +1,6 @@
-.register-container {
+.publish-container {
   @include flex-structure(column, none, none, none);
   margin: 1rem;
-}
-
-.main-heading {
-  text-transform: uppercase;
-  font-weight: 300;
-
-  &::after {
-    @include separator-style(50%, .1rem, .6rem 0, 0);
-   }
 }
 
 .personal-details-publish,
@@ -101,21 +92,16 @@ input[type="file"] { display: none; }
 @media(max-width: $medium-device) {
   .publish-form-container {
     width: 40%;
+    padding: 0 .5rem;
   }
-
-  .publish-form-container { padding: 0 .5rem; }
 
   .textarea-publish { width: 100%; }
 }
 
 @media(max-width: $small-device) {
-  .register-container { margin: 0; }
+  .publish-container { margin: 0; }
 
   .inputs-section-form { padding: .3rem; }
-
-  .heading-publish {
-    p:nth-child(2) { line-height: 25px; }
-  }
 
   .publish-form-container {
     width: 100%;

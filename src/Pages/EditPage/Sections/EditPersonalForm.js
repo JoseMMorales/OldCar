@@ -16,10 +16,11 @@ const EditPersonalForm = ({
         EditIcon ={IconPersonal}
         onChange={handleChange}
         htmlForFirst='editName'
-        labelNameFirst='Nombre'
+        labelNameFirst='Nombre*'
         inputNameFirst='name'
         valueFirst={valuePersonalName}
         typeFirst='text'
+        required={true}
         onBlurFirst={ (e) => {
           if(valuePersonalName) {
             !isValidText(e) &&

@@ -1,7 +1,14 @@
-import { Button, Input } from '../Generic';
 import { useState } from 'react';
 
-const ContactForm = ({ className, sectionLocation, id }) => {
+import {
+  Button,
+  Input,
+  TextArea } from '../Generic';
+
+const ContactForm = ({
+  className,
+  sectionLocation,
+  id }) => {
 
   const initalValue = {contactName: '', contactEmail: '', contactText: ''};
   const [contact, setContact] = useState(initalValue);
@@ -25,9 +32,8 @@ const ContactForm = ({ className, sectionLocation, id }) => {
       mode: 'cors'
     })
     .then( response => {
-        if (!response.ok)
+      if (!response.ok)
         throw new Error(response.statusText);
-
       return response.json();
     })
     .then(
@@ -68,14 +74,13 @@ const ContactForm = ({ className, sectionLocation, id }) => {
           required={true}
         />
         <div className='form-row'>
-          <textarea
-            className='form-control textarea'
+          <TextArea
             rows='5'
             placeholder='Mensaje...'
             onChange={handleChange}
             name='contactText'
             value={contact.contactText}
-            required
+            required={true}
           />
         </div>
         <Button
@@ -86,6 +91,6 @@ const ContactForm = ({ className, sectionLocation, id }) => {
       </form>
     </div>
   )
-}
+};
 
 export default ContactForm;

@@ -1,10 +1,12 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { Button, Input } from '../../Components/Generic';
+import { Button, Input, TextArea } from '../../Components/Generic';
 import { useState , useContext, useEffect } from 'react';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { MdAddAPhoto } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
+import PublishHeading from './Sections/PublishHeading/PublishHeading';
+import PublishPersonalDetails from './Sections/PersonalDetails/PublishPersonalDetails';
 
 const PublishPage = (props) => {
   let navigate = useHistory();
@@ -293,42 +295,11 @@ const PublishPage = (props) => {
         text=' Publicaciones Únicas'
       />
       <div className='container'>
-        <div className='register-container'>
-          {
-            (CarPublished || !user)  &&
-            <div className='heading-publish'>
-              <h1 className='main-heading grey-color'>
-                Publica tu anunio en Old
-                <span className='main-color'>Car</span>
-              </h1>
-              <p>
-                UNA PUBLICACIÓN GRATIS. MÁXIMA DIFUSION: Al publicar en
-                Old
-                <span className='main-color'>Car</span>, su coche aparecerá también en una extensa red de
-                portales asociados a nosotros...
-              </p>
-              <p>
-                <b>*Campos obligarorios</b>
-              </p>
-            </div>
-          }
-          {
-            (user && !CarPublished) &&
-            <div className='heading-publish'>
-              <h1 className='main-heading grey-color'>
-                Edita tu anunio en Old
-                <span className='main-color'>Car</span>
-              </h1>
-              <p>
-                En Old
-                <span className='main-color'>Car</span> podrás editar tus anuncios con todos los detalles
-                que quieras cambiar y luego verlos en página de usuario.
-              </p>
-              <p>
-                <b>*Campos obligarorios</b>
-              </p>
-            </div>
-          }
+        <div className='publish-container'>
+          <PublishHeading
+            CarPublished={CarPublished}
+            user={user}
+          />
           <form
             className='form-publish'
             onSubmit={onSubmit}>
@@ -340,78 +311,15 @@ const PublishPage = (props) => {
                   <RiArrowDownSFill className='main-color'/>
                 </div>
                 <div className='inputs-section-form'>
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishName'
-                    Inputid='publishName'
-                    labelName='Nombre*'
-                    onChange={handleChange}
-                    inputName='username'
-                    value={userInput.username}
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='text'
-                  />
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishEmail'
-                    Inputid='publishEmail'
-                    labelName='Email*'
-                    onChange={handleChange}
-                    inputName='email'
-                    value={userInput.email}
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='email'
-                  />
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishPhone'
-                    Inputid='publishPhone'
-                    labelName='Teléfono'
-                    onChange={handleChange}
-                    inputName='phone'
-                    value={userInput.phone}
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='tlf'
-                  />
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishAddress'
-                    Inputid='publishAddress'
-                    labelName='Dirección'
-                    onChange={handleChange}
-                    inputName='address'
-                    value={userInput.address}
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='text'
-                  />
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishCity'
-                    Inputid='publishCity'
-                    labelName='Ciudad*'
-                    onChange={handleChange}
-                    inputName='city'
-                    value={userInput.city}
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='text'
-                  />
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishSeller'
-                    Inputid='publishSeller'
-                    labelName='Vendedor*'
-                    onChange={handleChange}
-                    inputName='type'
-                    value={userInput.type}
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='text'
-                  />
+                <PublishPersonalDetails
+                  handleChange={handleChange}
+                  PublishValueName={userInput.username}
+                  PublishValueEmail={userInput.email}
+                  PublishValuePhone={userInput.phone}
+                  PublishValueAddress={userInput.address}
+                  PublishValueCity={userInput.city}
+                  PublishValueSeller={userInput.type}
+                />
                 </div>
               </div>
             }
@@ -510,7 +418,7 @@ const PublishPage = (props) => {
               </div>
               <div className='description-container'>
                 <h3 className='main-text-heading-form'>Tu vehiculo</h3>
-                <textarea
+                <TextArea
                   className='textarea-publish'
                   rows='3'
                   onChange={handleChange}
@@ -522,7 +430,7 @@ const PublishPage = (props) => {
                   placeholder='Descripción corta (Max 50)*'
                   name='shortDescription'
                 />
-                 <textarea
+                <TextArea
                   className='textarea-publish'
                   rows='8'
                   onChange={handleChange}

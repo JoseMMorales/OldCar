@@ -23,7 +23,8 @@ const EditForm = ({
   typeThird,
   onBlurThird,
   personal,
-  contact
+  contact,
+  required
  }) => {
   return (
     <div className="edit-info">
@@ -43,6 +44,7 @@ const EditForm = ({
           labelClassName='grey-color'
           type={typeFirst}
           onBlur={onBlurFirst}
+          required={required}
         />
         {
           (contact || personal) &&
@@ -57,6 +59,7 @@ const EditForm = ({
             labelClassName='grey-color'
             type={typeSecond}
             onBlur={onBlurSecond}
+            required={required}
           />
         }
         {
@@ -72,6 +75,7 @@ const EditForm = ({
             value={valueThird}
             type={typeThird}
             onBlur={onBlurThird}
+            required={required}
           />
         }
       </div>
