@@ -96,7 +96,7 @@ const Navbar = () => {
                   pathname: '/Pages/PublishPage/PublishPage',
                   state: {
                     user: isAuthenticated ? true : false,
-                    CarPublished: isAuthenticated ? true : false
+                    CarNotPublished: isAuthenticated ? true : false
                   }
                 }}>
                 Publicar

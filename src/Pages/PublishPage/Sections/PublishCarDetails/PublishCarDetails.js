@@ -2,7 +2,7 @@ import { Input } from '../../../../Components/Generic';
 
 const PublishCarDetails = ({
   user,
-  CarPublished,
+  CarNotPublished,
   handleChange,
   userInput,
   updateInput
@@ -10,7 +10,7 @@ const PublishCarDetails = ({
   return (
     <>
      {
-        (!user || (user && CarPublished)) &&
+        (!user || (user && CarNotPublished)) &&
         <Input
           containerClassName='car-form-container'
           htmlFor='publishBrand'
@@ -20,15 +20,15 @@ const PublishCarDetails = ({
           inputName='brand'
           value={
             (!user && userInput.brand) ||
-            (user && CarPublished && userInput.brand) ||
-            (user && !CarPublished && updateInput.brand) || ''
+            (user && CarNotPublished && userInput.brand) ||
+            (user && !CarNotPublished && updateInput.brand) || ''
           }
           labelClassName='grey-color'
           type='text'
         />
       }
       {
-        (!user || (user && CarPublished)) &&
+        (!user || (user && CarNotPublished)) &&
         <Input
           containerClassName='car-form-container'
           htmlFor='publishModel'
@@ -38,8 +38,8 @@ const PublishCarDetails = ({
           inputName='model'
           value={
             (!user && userInput.model) ||
-            (user && CarPublished && userInput.model) ||
-            (user && !CarPublished && updateInput.model) || ''
+            (user && CarNotPublished && userInput.model) ||
+            (user && !CarNotPublished && updateInput.model) || ''
           }
           labelClassName='grey-color'
           type='text'
@@ -54,8 +54,8 @@ const PublishCarDetails = ({
         inputName='km'
         value={
           (!user && userInput.km) ||
-          (user && CarPublished && userInput.km) ||
-          (user && !CarPublished && updateInput.km) || ''
+          (user && CarNotPublished && userInput.km) ||
+          (user && !CarNotPublished && updateInput.km) || ''
         }
         labelClassName='grey-color'
         type='number'
@@ -69,8 +69,8 @@ const PublishCarDetails = ({
         inputName='price'
         value={
           (!user && userInput.price) ||
-          (user && CarPublished && userInput.price) ||
-          (user && !CarPublished && updateInput.price) || ''
+          (user && CarNotPublished && userInput.price) ||
+          (user && !CarNotPublished && updateInput.price) || ''
         }
         labelClassName='grey-color'
         type='number'
@@ -84,8 +84,8 @@ const PublishCarDetails = ({
         inputName='year'
         value={
           (!user && userInput.year) ||
-          (user && CarPublished && userInput.year) ||
-          (user && !CarPublished && updateInput.year) || ''
+          (user && CarNotPublished && userInput.year) ||
+          (user && !CarNotPublished && updateInput.year) || ''
         }
         labelClassName='grey-color'
         type='number'

@@ -1,12 +1,12 @@
 const PublishHeading = ({
-  CarPublished,
+  CarNotPublished,
   user
  }) => {
 
   return (
     <>
        {
-        (CarPublished || !user)  &&
+        (CarNotPublished || !user)  &&
         <div className='heading-publish'>
           <h1 className='main-heading grey-color'>
             Publica tu anunio en Old
@@ -24,7 +24,7 @@ const PublishHeading = ({
         </div>
       }
       {
-        (user && !CarPublished) &&
+        (user && !CarNotPublished) &&
         <div className='heading-publish'>
           <h1 className='main-heading grey-color'>
             Edita tu anunio en Old

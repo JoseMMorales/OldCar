@@ -1,13 +1,16 @@
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
-import { Button, Input, TextArea } from '../../Components/Generic';
+import { Button, TextArea } from '../../Components/Generic';
 import { useState , useContext, useEffect } from 'react';
 import { RiArrowDownSFill } from 'react-icons/ri';
-import { MdAddAPhoto } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
 import PublishHeading from './Sections/PublishHeading/PublishHeading';
-import PublishPersonalDetails from './Sections/PublishPersonalDetails/PublishPersonalDetails';
-import PublishCarDetails from './Sections/PublishCarDetails/PublishCarDetails';
+
+import {
+  PublishPersonalDetails,
+  PublishCarDetails,
+  PublishFilesSection
+} from './Sections';
 
 const PublishPage = (props) => {
   let navigate = useHistory();
@@ -20,7 +23,7 @@ const PublishPage = (props) => {
   }, [])
 
   const user = props.location.state?.user;
-  const CarPublished = props.location.state?.CarPublished;
+  const CarNotPublished = props.location.state?.CarNotPublished;
   const carId = props.location.state?.carId;
 
   const [userInput, setUserInput] = useState(
@@ -60,13 +63,12 @@ const PublishPage = (props) => {
       ]
   });
 
-  // console.log('updateInput', updateInput.files)
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (user && !CarPublished) {
+    if (user && !CarNotPublished) {
       setUpdateInput({...updateInput, [name]: value});
-    } else if (CarPublished || !user) {
+    } else if (CarNotPublished || !user) {
       setUserInput({...userInput, [name]: value});
     }
   };
@@ -74,12 +76,12 @@ const PublishPage = (props) => {
   const handleFiles = (e) => {
     const fileObj = e.target.files[0];
 
-    if (user && !CarPublished) {
+    if (user && !CarNotPublished) {
       setUpdateInput(prevState => ({
         ...prevState,
         files: [...prevState.files, fileObj]
       }));
-    } else if (CarPublished || !user) {
+    } else if (CarNotPublished || !user) {
       setUserInput(prevState => ({
         ...prevState,
         files: [...prevState.files, fileObj]
@@ -88,7 +90,7 @@ const PublishPage = (props) => {
   };
 
   const deleteImage = (name, idCar, keyPhoto) => {
-    if (user && !CarPublished) {
+    if (user && !CarNotPublished) {
       const photoName = name.slice(26);
 
       const token = localStorage.getItem('UserToken');
@@ -108,7 +110,7 @@ const PublishPage = (props) => {
         }
       ).catch(error => console.log(error));
 
-    } else if (CarPublished || !user) {
+    } else if (CarNotPublished || !user) {
     const newFilesArray = userInput.files.filter((file) => file.name !== name);
       setUserInput(prevState => ({
         ...prevState,
@@ -298,7 +300,7 @@ const PublishPage = (props) => {
       <div className='container'>
         <div className='publish-container'>
           <PublishHeading
-            CarPublished={CarPublished}
+            CarNotPublished={CarNotPublished}
             user={user}
           />
           <form
@@ -332,7 +334,7 @@ const PublishPage = (props) => {
               <div className='inputs-section-form'>
                 <PublishCarDetails
                   user={user}
-                  CarPublished={CarPublished}
+                  CarNotPublished={CarNotPublished}
                   handleChange={handleChange}
                   userInput={userInput}
                   updateInput={updateInput}
@@ -346,8 +348,8 @@ const PublishPage = (props) => {
                   onChange={handleChange}
                   value={
                     (!user && userInput.shortDescription) ||
-                    (user && CarPublished && userInput.shortDescription) ||
-                    (user && !CarPublished && updateInput.shortDescription) || ''
+                    (user && CarNotPublished && userInput.shortDescription) ||
+                    (user && !CarNotPublished && updateInput.shortDescription) || ''
                   }
                   placeholder='Descripción corta (Max 50)*'
                   name='shortDescription'
@@ -358,8 +360,8 @@ const PublishPage = (props) => {
                   onChange={handleChange}
                   value={
                     (!user && userInput.longDescription) ||
-                    (user && CarPublished && userInput.longDescription) ||
-                    (user && !CarPublished && updateInput.longDescription) || ''
+                    (user && CarNotPublished && userInput.longDescription) ||
+                    (user && !CarNotPublished && updateInput.longDescription) || ''
                   }
                   placeholder='Descripción larga (Max 150)*'
                   name='longDescription'
@@ -367,7 +369,7 @@ const PublishPage = (props) => {
               </div>
             </div>
             {
-              (user && !CarPublished) &&
+              (user && !CarNotPublished) &&
               <div className='publish-button-container'>
                 <Button
                   onClick={() => (setStateButton(1))}
@@ -383,74 +385,25 @@ const PublishPage = (props) => {
                 <RiArrowDownSFill className='main-color'/>
               </div>
               <div className='files-section'>
-                <Input
-                  containerClassName='file-container'
-                  lableClassName= 'custom-file-upload'
-                  labelName= {
-                    <>
-                      {'Click aqui'}
-                      <MdAddAPhoto className='upload-icon' />
-                    </>
-                  }
-                  htmlFor='uploadImage'
-                  Inputid='uploadImage'
-                  InputClassName={false}
-                  onChange={handleFiles}
-                  inputName='files'
-                  labelClassName='grey-color'
-                  type='file'
+                <PublishFilesSection
+                  handleFiles={handleFiles}
+                  CarNotPublished={CarNotPublished}
+                  user={user}
+                  userInput={userInput}
+                  deleteImage={deleteImage}
+                  updateInput={updateInput}
                 />
-                <div className='files-uploaded'>
-                  {
-                    (CarPublished || !user) &&
-                    userInput.files.map((file, key) => {
-                      const photoNumber = key + 1;
-                      return (
-                        <div className='file' key={key}>
-                            <b>Foto {photoNumber}:</b> {file.name}
-                          <Button
-                            name='X'
-                            className='btn-publish remove-images'
-                            type='button'
-                            onClick={() => deleteImage(file.name, file.carId)}
-                          />
-                        </div>
-                      )
-                    })
-                  }
-                  {
-                    (user && !CarPublished) &&
-                    updateInput.files.map((car, key) => {
-
-                      return (
-                        <div className='file' key={key}>
-                          <img
-                            src={car.name ? URL.createObjectURL(car) : car}
-                            alt="image"
-                            style={{'width' : '250px'}}
-                          />
-                          <Button
-                            name='X'
-                            className='btn-publish remove-images'
-                            type='button'
-                            onClick={() => deleteImage(car, updateInput['idCar'], key)}
-                          />
-                        </div>
-                      )
-                    })
-                  }
-                </div>
               </div>
             </div>
             <div className='publish-button-container'>
               <Button
-                name={ (user && !CarPublished) ? 'Editar Fotos' : 'Confirmar'}
+                name={ (user && !CarNotPublished) ? 'Editar Fotos' : 'Confirmar'}
                 onClick={() => {
-                  if((user && !CarPublished)) {
+                  if((user && !CarNotPublished)) {
                     setStateButton(2);
-                  } else if((!user && !CarPublished)) {
+                  } else if((!user && !CarNotPublished)) {
                     setStateButton(3);
-                  } else if((user && CarPublished)) {
+                  } else if((user && CarNotPublished)) {
                     setStateButton(4);
                   }
                 }}

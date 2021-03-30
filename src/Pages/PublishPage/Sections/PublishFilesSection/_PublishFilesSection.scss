@@ -1,0 +1,40 @@
+.file-container {
+  @include flex-structure(none, none, center, none);
+
+  label {
+    width: 100px;
+    @include flex-structure(none, none, center, space-between);
+    cursor: pointer;
+    border: .1rem solid $grey-light-color;
+    padding: .2rem 3rem;
+  }
+}
+
+.upload-icon {
+  font-size: 1.6rem;
+}
+
+.files-uploaded {
+  @include flex-structure(column, none, center, center);
+}
+
+.file {
+  padding: .2rem;
+}
+
+.btn-publish {
+  width: 200px;
+
+  &.remove-images {
+    width: 2rem;
+    padding: 0;
+    margin-left: 1rem;
+  }
+}
+
+@media(max-width: $small-device) {
+  .btn-publish {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
