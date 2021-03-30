@@ -6,7 +6,8 @@ import { MdAddAPhoto } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
 import PublishHeading from './Sections/PublishHeading/PublishHeading';
-import PublishPersonalDetails from './Sections/PersonalDetails/PublishPersonalDetails';
+import PublishPersonalDetails from './Sections/PublishPersonalDetails/PublishPersonalDetails';
+import PublishCarDetails from './Sections/PublishCarDetails/PublishCarDetails';
 
 const PublishPage = (props) => {
   let navigate = useHistory();
@@ -311,15 +312,15 @@ const PublishPage = (props) => {
                   <RiArrowDownSFill className='main-color'/>
                 </div>
                 <div className='inputs-section-form'>
-                <PublishPersonalDetails
-                  handleChange={handleChange}
-                  PublishValueName={userInput.username}
-                  PublishValueEmail={userInput.email}
-                  PublishValuePhone={userInput.phone}
-                  PublishValueAddress={userInput.address}
-                  PublishValueCity={userInput.city}
-                  PublishValueSeller={userInput.type}
-                />
+                  <PublishPersonalDetails
+                    handleChange={handleChange}
+                    PublishValueName={userInput.username}
+                    PublishValueEmail={userInput.email}
+                    PublishValuePhone={userInput.phone}
+                    PublishValueAddress={userInput.address}
+                    PublishValueCity={userInput.city}
+                    PublishValueSeller={userInput.type}
+                  />
                 </div>
               </div>
             }
@@ -329,91 +330,12 @@ const PublishPage = (props) => {
                 <RiArrowDownSFill className='main-color'/>
               </div>
               <div className='inputs-section-form'>
-                {
-                  (!user || (user && CarPublished)) &&
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishBrand'
-                    Inputid='publishBrand'
-                    labelName='Marca*'
-                    onChange={handleChange}
-                    inputName='brand'
-                    value={
-                      (!user && userInput.brand) ||
-                      (user && CarPublished && userInput.brand) ||
-                      (user && !CarPublished && updateInput.brand) || ''
-                    }
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='text'
-                  />
-                }
-                {
-                  (!user || (user && CarPublished)) &&
-                  <Input
-                    containerClassName='publish-form-container'
-                    htmlFor='publishModel'
-                    Inputid='publishModel'
-                    labelName='Modelo*'
-                    onChange={handleChange}
-                    inputName='model'
-                    value={
-                      (!user && userInput.model) ||
-                      (user && CarPublished && userInput.model) ||
-                      (user && !CarPublished && updateInput.model) || ''
-                    }
-                    InputClassName={false}
-                    labelClassName='grey-color'
-                    type='text'
-                  />
-                }
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishKm'
-                  Inputid='publishKm'
-                  labelName='Km'
-                  onChange={handleChange}
-                  inputName='km'
-                  value={
-                    (!user && userInput.km) ||
-                    (user && CarPublished && userInput.km) ||
-                    (user && !CarPublished && updateInput.km) || ''
-                  }
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='number'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishPrice'
-                  Inputid='publishPrice'
-                  labelName='Precio*'
-                  onChange={handleChange}
-                  inputName='price'
-                  value={
-                    (!user && userInput.price) ||
-                    (user && CarPublished && userInput.price) ||
-                    (user && !CarPublished && updateInput.price) || ''
-                  }
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='number'
-                />
-                <Input
-                  containerClassName='publish-form-container'
-                  htmlFor='publishPrice'
-                  Inputid='publishPrice'
-                  labelName='Año*'
-                  onChange={handleChange}
-                  inputName='year'
-                  value={
-                    (!user && userInput.year) ||
-                    (user && CarPublished && userInput.year) ||
-                    (user && !CarPublished && updateInput.year) || ''
-                  }
-                  InputClassName={false}
-                  labelClassName='grey-color'
-                  type='number'
+                <PublishCarDetails
+                  user={user}
+                  CarPublished={CarPublished}
+                  handleChange={handleChange}
+                  userInput={userInput}
+                  updateInput={updateInput}
                 />
               </div>
               <div className='description-container'>

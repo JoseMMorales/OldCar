@@ -13,7 +13,7 @@ function PublishPersonalDetails({
   return (
     <>
       <Input
-        containerClassName='publish-form-container'
+        containerClassName='personal-form-container'
         htmlFor='publishName'
         Inputid='publishName'
         labelName='Nombre*'
@@ -25,7 +25,7 @@ function PublishPersonalDetails({
         type='text'
       />
       <Input
-        containerClassName='publish-form-container'
+        containerClassName='personal-form-container'
         htmlFor='publishEmail'
         Inputid='publishEmail'
         labelName='Email*'
@@ -37,7 +37,7 @@ function PublishPersonalDetails({
         type='email'
       />
       <Input
-        containerClassName='publish-form-container'
+        containerClassName='personal-form-container'
         htmlFor='publishPhone'
         Inputid='publishPhone'
         labelName='Teléfono'
@@ -49,7 +49,7 @@ function PublishPersonalDetails({
         type='tlf'
       />
       <Input
-        containerClassName='publish-form-container'
+        containerClassName='personal-form-container'
         htmlFor='publishAddress'
         Inputid='publishAddress'
         labelName='Dirección'
@@ -61,10 +61,10 @@ function PublishPersonalDetails({
         type='text'
       />
       <Input
-        containerClassName='publish-form-container'
+        containerClassName='personal-form-container'
         htmlFor='publishCity'
         Inputid='publishCity'
-        labelName='Ciudad*'
+        labelName='Ciudad'
         onChange={handleChange}
         inputName='city'
         value={PublishValueCity}
@@ -73,10 +73,10 @@ function PublishPersonalDetails({
         type='text'
       />
       <Input
-        containerClassName='publish-form-container'
+        containerClassName='personal-form-container'
         htmlFor='publishSeller'
         Inputid='publishSeller'
-        labelName='Vendedor*'
+        labelName='Particular o Concesionario'
         onChange={handleChange}
         inputName='type'
         value={PublishValueSeller}

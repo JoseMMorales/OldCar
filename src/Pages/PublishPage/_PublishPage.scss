@@ -73,21 +73,23 @@ input[type="file"] { display: none; }
 .files-uploaded {
   @include flex-structure(column, none, center, center);
 }
+
 .btn-publish {
+  width: 200px;
+
   &.remove-images {
     width: 2rem;
     padding: 0;
     margin-left: 1rem;
   }
 }
+
 .upload-icon { font-size: 1.6rem; }
 
 .publish-button-container {
   @include flex-structure(row-reverse, none, none, space-between);
   margin: 1rem 0;
 }
-
-.btn-publish { width: 200px; }
 
 @media(max-width: $medium-device) {
   .publish-form-container {
