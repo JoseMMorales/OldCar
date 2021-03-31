@@ -26,13 +26,13 @@ Security is a very important task when creating an App, so I have given a few fe
 ## Demo...
 
 ### Multi search...
-<img src="./public/gif/multiSearch.gif" width="100%" height="250"/>
+<img src="./public/gif/multiSearch.gif" width="100%"/>
 
 ### As a User...
-<img src="./public/gif/user.gif" width="100%" height="250"/>
+<img src="./public/gif/user.gif" width="100%"/>
 
 ### As Admin...
-<img src="./public/gif/admin.gif" width="100%" height="250"/>
+<img src="./public/gif/admin.gif" width="100%"/>
 
 ## Installing
 * **Note that you should have installed NodeJS ^10.16.3 to proceed with steps below**
