@@ -5,7 +5,8 @@ const TextArea = ({
   onChange,
   name,
   value,
-  required
+  required,
+  onBlur
  }) => {
 
   return (
@@ -18,6 +19,7 @@ const TextArea = ({
         name={name}
         value={value}
         required={required}
+        onBlur={onBlur}
       />
     </>
   )

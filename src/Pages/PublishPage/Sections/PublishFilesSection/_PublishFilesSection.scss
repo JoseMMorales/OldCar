@@ -16,10 +16,15 @@
 
 .files-uploaded {
   @include flex-structure(column, none, center, center);
+  margin-left: 3em;
 }
 
 .file {
   padding: .2rem;
+}
+
+.file-image-toUpload {
+  width: 250px;
 }
 
 .btn-publish {

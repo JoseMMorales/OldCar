@@ -11,7 +11,8 @@ const Input = ({
   labelName,
   labelClassName,
   onChange,
-  onBlur
+  onBlur,
+  disabled
 }) => {
 
   return (
@@ -31,6 +32,7 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         required={required}
+        disabled={disabled}
       />
     </div>
   )

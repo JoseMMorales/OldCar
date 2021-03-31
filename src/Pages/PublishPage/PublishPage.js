@@ -1,10 +1,11 @@
+import { isValidShortDescription, isValidLongDescription } from '../../Utils/FormValidations';
 import HeroSecondary from '../../Components/HeroSecondary/HeroSecondary';
+import PublishHeading from './Sections/PublishHeading/PublishHeading';
 import { Button, TextArea } from '../../Components/Generic';
 import { useState , useContext, useEffect } from 'react';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../../Context';
-import PublishHeading from './Sections/PublishHeading/PublishHeading';
 
 import {
   PublishPersonalDetails,
@@ -67,7 +68,10 @@ const PublishPage = (props) => {
   console.log({updateInput});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+
+    (/^\d.+$/.test(value)) &&
+      (value = value.replace(/[^0-9]+/g, ""));
 
     if (user && !CarNotPublished) {
       setUpdateInput({...updateInput, [name]: value});
@@ -90,6 +94,7 @@ const PublishPage = (props) => {
         files: [...prevState.files, fileObj]
       }))
     }
+    e.target.value = '';
   };
 
   const deleteImage = (name, idCar, keyPhoto) => {
@@ -352,25 +357,43 @@ const PublishPage = (props) => {
                   className='textarea-publish'
                   rows='3'
                   onChange={handleChange}
+                  placeholder='Descripción corta (Max 50)*'
+                  name='shortDescription'
                   value={
                     (!user && userInput.shortDescription) ||
                     (user && CarNotPublished && userInput.shortDescription) ||
                     (user && !CarNotPublished && updateInput.shortDescription) || ''
                   }
-                  placeholder='Descripción corta (Max 50)*'
-                  name='shortDescription'
+                  onBlur={ (e) => {
+                    if(userInput.shortDescription) {
+                      !isValidShortDescription(e) &&
+                      setUserInput(prevState => ({...prevState, shortDescription: ''}));
+                    } else if (updateInput.shortDescription) {
+                      !isValidShortDescription(e) &&
+                      setUpdateInput(prevState => ({...prevState, shortDescription: ''}));
+                    }
+                  }}
                 />
                 <TextArea
                   className='textarea-publish'
                   rows='8'
                   onChange={handleChange}
+                  placeholder='Descripción larga (Max 150)*'
+                  name='longDescription'
                   value={
                     (!user && userInput.longDescription) ||
                     (user && CarNotPublished && userInput.longDescription) ||
                     (user && !CarNotPublished && updateInput.longDescription) || ''
                   }
-                  placeholder='Descripción larga (Max 150)*'
-                  name='longDescription'
+                  onBlur={ (e) => {
+                    if(userInput.longDescription) {
+                      !isValidLongDescription(e) &&
+                      setUserInput(prevState => ({...prevState, longDescription: ''}));
+                    } else if (updateInput.longDescription) {
+                      !isValidLongDescription(e) &&
+                      setUpdateInput(prevState => ({...prevState, longDescription: ''}));
+                    }
+                  }}
                 />
               </div>
             </div>

@@ -10,7 +10,7 @@ import {
   isValidPrice } from '../../Utils/FormValidations';
 
 const Search = ( { pathName, showResults, className } ) => {
-  const { data, setData } = useContext(Context);
+  const { data, setData, numberWithDots } = useContext(Context);
 
   let searchHistory = useHistory();
   const handleSearch = () => searchHistory.push('/Pages/SearchPage/SearchPage');
@@ -57,13 +57,15 @@ const Search = ( { pathName, showResults, className } ) => {
     } else {
       setSelectState(prevState => ({ ...prevState, [value[0].name]: value[0].value }));
     }
-  }
+  };
 
-  //Handle Input change in Inputs
+  //Handling Input change in Inputs
   const handleInput = e => {
 		const { name, value } = e.target;
-		setSelectState(prevState => ({ ...prevState, [name]: value }));
-	}
+    var valueNumber = value.replace(/[^0-9]+/g, "");
+
+		setSelectState(prevState => ({ ...prevState, [name]: valueNumber }));
+	};
 
   //Update Context when SelectState Change
   useEffect(() => {
@@ -121,15 +123,15 @@ const Search = ( { pathName, showResults, className } ) => {
                 { Object.entries(data.searchValues).map((value, key) => {
                     return (
                       value[1] &&
-                        <div key={key}>
-                          <p className='search-values'
-                             onClick={() => deleteResult(value)}>
-                              {value[1]}
-                            <span className='checkMark dark-color bg-light'>
-                              X
-                            </span>
-                          </p>
-                        </div>
+                      <div key={key}>
+                        <p className='search-values'
+                            onClick={() => deleteResult(value)}>
+                            {numberWithDots(value[1])}
+                          <span className='checkMark dark-color bg-light'>
+                            X
+                          </span>
+                        </p>
+                      </div>
                     )
                   })
                 }
@@ -177,7 +179,7 @@ const Search = ( { pathName, showResults, className } ) => {
             placeholder='Km'
             type='number'
             inputName='km'
-            value={selectState.km}
+            value={numberWithDots(selectState.km)}
             labelClassName='label-input-name'
             onChange={handleInput}
             onBlur={ (e) => {
@@ -193,7 +195,7 @@ const Search = ( { pathName, showResults, className } ) => {
             placeholder='Año'
             type='number'
             inputName='year'
-            value={selectState.year}
+            value={numberWithDots(selectState.year)}
             labelClassName='label-input-name'
             onChange={handleInput}
             onBlur={ (e) => {
@@ -209,7 +211,7 @@ const Search = ( { pathName, showResults, className } ) => {
             placeholder='Precio'
             type='number'
             inputName='price'
-            value={selectState.price}
+            value={numberWithDots(selectState.price)}
             labelClassName='label-input-name'
             onChange={handleInput}
             onBlur={ (e) => {

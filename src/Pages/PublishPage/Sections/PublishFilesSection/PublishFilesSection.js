@@ -27,15 +27,23 @@ const PublishFilesSection = ({
         inputName='files'
         labelClassName='grey-color'
         type='file'
+        disabled={
+          ((CarNotPublished || !user) && userInput.files.length === 5 && true) ||
+          ((user && !CarNotPublished) && updateInput.files.length === 5 && true) ||
+          ((user && CarNotPublished) && userInput.files.length === 5 && true)
+        }
       />
       <div className='files-uploaded'>
         {
           (CarNotPublished || !user) &&
           userInput.files.map((file, key) => {
-            const photoNumber = key + 1;
             return (
               <div className='file' key={key}>
-                  <b>Foto {photoNumber}:</b> {file.name}
+                  <img
+                  src={URL.createObjectURL(file)}
+                  alt="image"
+                  className='file-image-toUpload'
+                />
                 <Button
                   name='X'
                   className='btn-publish remove-images'
@@ -49,13 +57,12 @@ const PublishFilesSection = ({
         {
           (user && !CarNotPublished) &&
           updateInput.files.map((car, key) => {
-
             return (
               <div className='file' key={key}>
                 <img
                   src={car.name ? URL.createObjectURL(car) : car}
                   alt="image"
-                  style={{'width' : '250px'}}
+                  className='file-image-toUpload'
                 />
                 <Button
                   name='X'

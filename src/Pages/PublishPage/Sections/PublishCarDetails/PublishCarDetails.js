@@ -1,10 +1,7 @@
+import { isValidNumber, isValidText } from '../../../../Utils/FormValidations';
 import { Input } from '../../../../Components/Generic';
-
-import {
-  isValidEmail,
-  isValidTlf,
-  isValidNumber,
-  isValidText } from '../../../../Utils/FormValidations';
+import { Context } from '../../../../Context';
+import { useContext } from 'react';
 
 const PublishCarDetails = ({
   user,
@@ -15,6 +12,7 @@ const PublishCarDetails = ({
   setUserInput,
   setUpdateInput
   }) => {
+  const { numberWithDots } = useContext(Context);
 
   return (
     <>
@@ -65,21 +63,22 @@ const PublishCarDetails = ({
         labelName='Km'
         onChange={handleChange}
         inputName='km'
-        value={
-          (!user && userInput.km) ||
-          (user && CarNotPublished && userInput.km) ||
-          (user && !CarNotPublished && updateInput.km) || ''
-        }
         labelClassName='grey-color'
         type='number'
-        // onBlur={ (e) => {
-        //   if(console.log(userInput.km)) {
-        //     !isValidNumber(e) &&
-        //     setUserInput(prevState => ({...prevState, km: ''}));
-        //   } else if (updateInput.km) {
-        //     setUpdateInput(prevState => ({...prevState, km: ''}));
-        //   }
-        // }}
+        value={
+          (!user && numberWithDots(userInput.km)) ||
+          (user && CarNotPublished && numberWithDots(userInput.km)) ||
+          (user && !CarNotPublished && numberWithDots(updateInput.km)) || ''
+        }
+        onBlur={ (e) => {
+          if(userInput.km) {
+            !isValidNumber(e) &&
+            setUserInput(prevState => ({...prevState, km: ''}));
+          } else if (updateInput.km) {
+            !isValidNumber(e) &&
+            setUpdateInput(prevState => ({...prevState, km: ''}));
+          }
+        }}
       />
       <Input
         containerClassName='car-form-container'
@@ -88,13 +87,22 @@ const PublishCarDetails = ({
         labelName='Precio*'
         onChange={handleChange}
         inputName='price'
-        value={
-          (!user && userInput.price) ||
-          (user && CarNotPublished && userInput.price) ||
-          (user && !CarNotPublished && updateInput.price) || ''
-        }
         labelClassName='grey-color'
         type='number'
+        value={
+          (!user && numberWithDots(userInput.price)) ||
+          (user && CarNotPublished && numberWithDots(userInput.price)) ||
+          (user && !CarNotPublished && numberWithDots(updateInput.price)) || ''
+        }
+        onBlur={ (e) => {
+          if(userInput.price) {
+            !isValidNumber(e) &&
+            setUserInput(prevState => ({...prevState, price: ''}));
+          } else if (updateInput.price) {
+            !isValidNumber(e) &&
+            setUpdateInput(prevState => ({...prevState, price: ''}));
+          }
+        }}
       />
       <Input
         containerClassName='car-form-container'
@@ -103,13 +111,22 @@ const PublishCarDetails = ({
         labelName='Año*'
         onChange={handleChange}
         inputName='year'
-        value={
-          (!user && userInput.year) ||
-          (user && CarNotPublished && userInput.year) ||
-          (user && !CarNotPublished && updateInput.year) || ''
-        }
         labelClassName='grey-color'
         type='number'
+        value={
+          (!user && numberWithDots(userInput.year)) ||
+          (user && CarNotPublished && numberWithDots(userInput.year)) ||
+          (user && !CarNotPublished && numberWithDots(updateInput.year))|| ''
+        }
+        onBlur={ (e) => {
+          if(userInput.year) {
+            !isValidNumber(e) &&
+            setUserInput(prevState => ({...prevState, year: ''}));
+          } else if (updateInput.year) {
+            !isValidNumber(e) &&
+            setUpdateInput(prevState => ({...prevState, year: ''}));
+          }
+        }}
       />
     </>
   )
