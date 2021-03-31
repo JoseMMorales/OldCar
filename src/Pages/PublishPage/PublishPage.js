@@ -64,9 +64,6 @@ const PublishPage = (props) => {
       ]
   });
 
-  console.log({userInput});
-  console.log({updateInput});
-
   const handleChange = (e) => {
     let { name, value } = e.target;
 
