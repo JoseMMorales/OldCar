@@ -24,15 +24,14 @@ Nesting, Mixins, Variables, Partials
 Security is a very important task when creating an App, so I have given a few features to make sure OldCar is not vulnerable at all. Privates routes have been set up at App.js to assure that not users have access to those areas. Forms have been protected by validations for not getting any data that is not matching with that field. [JWT Web Token](https://jwt.io/introduction) has been used to confirm any user is registered, storage locally and cleaned up when users' sessions have finished.
 
 ## Demo...
-
 ### Multi search...
-<img src="./public/gif/multiSearch.gif"/>
+<img src="./public/gif/multiSearch.gif" style="border:3px solid black;"/>
 
 ### As a User...
-<img src="./public/gif/user.gif"/>
+<img src="./public/gif/user.gif" style="border:3px solid black;"/>
 
 ### As Admin...
-<img src="./public/gif/admin.gif"/>
+<img src="./public/gif/admin.gif" style="border:3px solid black;"/>
 
 ## Installing
 * **Note that you should have installed NodeJS ^10.16.3 to proceed with steps below**
