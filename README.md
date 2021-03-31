@@ -25,26 +25,25 @@ Security is a very important task when creating an App, so I have given a few fe
 
 ## Demo...
 ### Multi search...
-<img src="./public/gif/multiSearch.gif" style="border:3px solid black;"/>
+<img src="./public/gif/multiSearch.gif" />
 
 ### As a User...
-<img src="./public/gif/user.gif" style="border:3px solid black;"/>
+<img src="./public/gif/user.gif" />
 
-<!-- ### As Admin... -->
-<h2 style="backgroundColor: grey;">As Admin...</h2>
-<img src="./public/gif/admin.gif" style="border:3px solid black;"/>
+### As Admin...
+<img src="./public/gif/admin.gif" />
 
 ## Installing
 * **Note that you should have installed NodeJS ^10.16.3 to proceed with steps below**
 * Clone the project to your local directory
 * `$git clone https://github.com/JoseMMorales/OldCar.git`
-* `$cd React-Hooks-Sass`
+* `$cd OldCar`
 * `$npm install`
 * `$npm start`
 
 ## Technologies: 
 * NodeJS ^10.16.3
-* React ^17.0.2
+* ReactJS ^17.0.2
 * Hooks
 * CSS3
 * Sass
