@@ -7,7 +7,7 @@ Front-end side of OldCar App, designed for people who loves classic cars, with l
 Furthermore, there is an ADMIN area where user assigned with that role will be able to have a general overview of registered movements, being able to remove all users/cars who are not active in OldCar DDBB.
 
 ### Eveything you can do in OldCar...   
-:+1: :tada: :computer: :confetti_ball: :clap: :grimacing:
+:+1:  :tada:  :computer:  :confetti_ball:  :clap:  :grimacing:
 * Multi search, combination of 6 different parameters(Selects/Inputs) to be more accurate in your research.
 * Register and Login, having free access to your profile if you want to do any ammendment. 
 * Favourite list, for your own reference at user area of cars you are in love.
@@ -20,7 +20,7 @@ A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awes
 
 #### Sass goodies used...
 :candy: :chocolate_bar: :lollipop: :cookie:
-Nesting, Mixins, Variables, Partials
+ Nesting, Mixins, Variables, Partials
 
 ## Security in Front-end...
 :lock: Security is a very important task when creating an App, so I have given a few features to make sure OldCar is not vulnerable at all. Privates routes have been set up at App.js to assure that not users have access to those areas. Forms have been protected by validations for not getting any data that is not matching with that field. [JWT Web Token](https://jwt.io/introduction) has been used to confirm any user is registered, storage locally and cleaned up when users' sessions have finished.
