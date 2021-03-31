@@ -6,7 +6,8 @@ Front-end side of OldCar App, designed for people who loves classic cars, with l
 
 Furthermore, there is an ADMIN area where user assigned with that role will be able to have a general overview of registered movements, being able to remove all users/cars who are not active in OldCar DDBB.
 
-### Eveything you can do in OldCar...
+### Eveything you can do in OldCar... 
+:blush:
 * Multi search, combination of 6 different parameters(Selects/Inputs) to be more accurate in your research.
 * Register and Login, having free access to your profile if you want to do any ammendment. 
 * Favourite list, for your own reference at user area of cars you are in love.
@@ -14,7 +15,7 @@ Furthermore, there is an ADMIN area where user assigned with that role will be a
 * (Not registered) Publish cars, all details are ready for publishing (content, images), confirmation email will be sent through after all successful proccess is been completed.
 * Admin Area, very specific area not available for all users as you should be assigned in your role.
 
-## OldCar Stylessheet...
+## OldCar Stylessheet... 
 A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awesome Style Sheets) for a stable and reusable system, each component has their own SCSS file in case there is any reason to use it in the future. Generally, the two pillars of this framework are [FlexBox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) and [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) for responsiveness in order to adapt the design to all devices.
 
 #### Sass goodies used...
