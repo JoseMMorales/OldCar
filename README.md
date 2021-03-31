@@ -30,7 +30,8 @@ Security is a very important task when creating an App, so I have given a few fe
 ### As a User...
 <img src="./public/gif/user.gif" style="border:3px solid black;"/>
 
-### As Admin...
+<!-- ### As Admin... -->
+<h2 style="backgroundColor: grey;">As Admin...</h2>
 <img src="./public/gif/admin.gif" style="border:3px solid black;"/>
 
 ## Installing
