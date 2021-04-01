@@ -40,17 +40,23 @@ A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awes
 ### Multi search...
 As mentioned before multi search is done in tow sections of OldCar keeping search when going through details page for each car and refreshing your search details when reaching home page.
 
-<img src="./public/gif/multiSearch.gif" />
+<div align="center">
+  <img src="./public/gif/multiSearch.gif" />
+</div>
 
 ### Logged User...
 Clear example of how to manage your own site at OldCar App, just a few clicks to create your profile as you want, with favourites and cars published with details that you want.
 
-<img src="./public/gif/user.gif" />
+<div align="center">
+  <img src="./public/gif/user.gif" />
+</div>
 
 ### As Admin...
 Admin is the most powerful role at OldCar as you can manage all profiles around, modifying the ones that are not active.
 
-<img src="./public/gif/admin.gif" />
+<div align="center">
+  <img src="./public/gif/admin.gif" />
+</div>
 
 ## App General Structure...
 
