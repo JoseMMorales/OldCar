@@ -48,7 +48,6 @@ Admin is the most powerful role at OldCar as you can manage all profiles around,
 <div align="center">
 
 |**Main Structure**  | **Pages Structure** | | **Components Structure** |
-| ------------- | ------------- | ------------- |
 | ![Screenshot 2021-04-01 at 09 24 41](https://user-images.githubusercontent.com/43299285/113258348-1f3ce400-92cc-11eb-9870-652c93e2d687.png) | ![Pages](https://user-images.githubusercontent.com/43299285/113260104-29f87880-92ce-11eb-8917-46dc50268b2d.png) | ![Components](https://user-images.githubusercontent.com/43299285/113260144-35e43a80-92ce-11eb-9d32-49adec575247.png) |
 
 </div>
