@@ -20,7 +20,6 @@ import Home from './Pages/Home/Home';
 import { useEffect } from 'react';
 import './scss/styles.scss';
 
-//When rendering any component scroll to top
 const ScrollToTopOnMount = () => {
   const { pathname } = useLocation();
 
@@ -40,16 +39,6 @@ const App = () => {
             )}
           />
   };
-
-  // const AdminRoute = (props) => {
-  //   return (
-  //       localStorage.getItem("admin") ?
-  //       <AdminRoute {...props} /> :
-  //       <Redirect to = {{
-  //           pathname: "/Pages/LoginPage/LoginPage"
-  //       }} />
-  //   )
-  // }
 
   return (
     <>
