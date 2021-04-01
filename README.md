@@ -23,9 +23,9 @@ A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awes
 ## Security in Front-end...
 #### :lock::lock: &nbsp; <b>Security is a very important task when creating an App, so I have given a few features to make sure OldCar is not vulnerable at all.</b> &nbsp; :lock::lock: <br /> 
 
-:no_entry: &nbsp; Privates routes have been set up at App.js to assure that not users have access to those areas. <br/>
-:black_nib: &nbsp; Forms have been protected by validations for not getting any data that is not matching with that field.<br/> 
-:key: &nbsp; [JWT Web Token](https://jwt.io/introduction) has been used to confirm any user is registered, storage locally and cleaned up when users' sessions have finished.
+* Privates routes have been set up at App.js to assure that not users have not access to those areas that is required being registered. <br/>
+* Forms have been protected by validations for not getting any data that is not matching with that field.<br/> 
+* [JWT Web Token](https://jwt.io/introduction) has been used to confirm any user is registered, storage locally and cleaned up when users' sessions have finished.
 
 ## Demo...
 ### Multi search...
