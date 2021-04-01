@@ -14,10 +14,19 @@ Furthermore, there is an ADMIN area where user assigned with that role will be a
 :point_right: &nbsp; (Not registered) Publish cars, all details are ready for publishing (content, images), confirmation email will be sent through after all successful proccess is been completed.<br />
 :point_right: &nbsp; Admin Area, very specific area not available for all users as you should be assigned in your role.<br />
 
+## Front End Stack...
+![Screenshot 2021-04-01 at 11 53 00](https://user-images.githubusercontent.com/43299285/113277266-d6435a80-92e0-11eb-80c6-c11e5953dd8e.png)
+
+## Hooks in this project... 
+To extract stateful logic from components, Hooks is perfect, so not hierarchy changing is need to share it among many components.
+
+### Hooks goodies used...
+:fishing_pole_and_fish: useHistory, useLocation, useState, useEffect, and useRef.
+
 ## OldCar Stylesheet... 
 A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awesome Style Sheets) for a stable and reusable system, each component has their own SCSS file in case there is any reason to use it in the future. Generally, the two pillars of this framework are [FlexBox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) and [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) for responsiveness in order to adapt the design to all devices.
 
-#### Sass goodies used...
+### Sass goodies used...
 :lollipop: Nesting, Mixins, Variables, Partials
 
 ## Security in Front-end...
@@ -80,6 +89,8 @@ Admin is the most powerful role at OldCar as you can manage all profiles around,
 * react-router-dom: ^5.2.0
 * react-router-hash-link: ^2.4.0
 * react-scripts: 4.0.1
+
+## Dev Dependencies used: 
 * sass: ^1.32.8
 
 ## Author
