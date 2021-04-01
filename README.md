@@ -2,16 +2,16 @@
 ### Final project of Full Stack Development Bootcamp at CodeSpace(Malaga).
 
 ## About this project...
-Front-end side of OldCar App, designed for people who loves classic cars, with lots of different brands and models. Built as user oriented for easily manage your favourites adverts, handling your own cars to be published, and even if you are not user registered you can put online your jewells on wheels. In this App communication is really important, so that's why email service is up and running for all users (Not/Yes) registered to keep in touch with OldCar Support team and owners who have left their credentials in the add.
+Front-end side of OldCar App, designed for people who loves classic cars, with lots of different brands and models. Built as user oriented for easily manage your favourites adverts, handling your own cars to be published, and even if you are not user registered you can put online your jewels on wheels. In this App communication is really important, so that's why email service is up and running for all users (Not/Yes) registered to keep in touch with OldCar Support team and owners who have left their credentials in the add.
 
 Furthermore, there is an ADMIN area where user assigned with that role will be able to have a general overview of registered movements, being able to remove all users/cars who are not active in OldCar DDBB.
 
-### Eveything you can do in OldCar...   
+### Everything you can do in OldCar...   
 :point_right: &nbsp; Multi search, combination of 6 different parameters(Selects/Inputs) to be more accurate in your research.<br />
-:point_right: &nbsp; Register and Login, having free access to your profile if you want to do any ammendment.<br />
+:point_right: &nbsp; Register and Login, having free access to your profile if you want to do any amendment.<br />
 :point_right: &nbsp; Favourite list, for your own reference at user area of cars you are in love.<br />
 :point_right: &nbsp; (Registered) Publish cars, totally car editable profiles to change content or images for being displayed.<br />
-:point_right: &nbsp; (Not registered) Publish cars, all details are ready for publishing (content, images), confirmation email will be sent through after all successful proccess is been completed.<br />
+:point_right: &nbsp; (Not registered) Publish cars, all details are ready for publishing (content, images), confirmation email will be sent through after all successful process is been completed.<br />
 :point_right: &nbsp; Admin Area, very specific area not available for all users as you should be assigned in your role.<br />
 
 ## Front End Stack...
@@ -27,7 +27,7 @@ To extract stateful logic from components, Hooks is perfect, so not hierarchy ch
 A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awesome Style Sheets) for a stable and reusable system, each component has their own SCSS file in case there is any reason to use it in the future. Generally, the two pillars of this framework are [FlexBox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) and [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) for responsiveness in order to adapt the design to all devices.
 
 ### Sass goodies used...
-:lollipop: &nbsp; Nesting, Mixins, Variables, Partials
+:lollipop: &nbsp; Nesting, Mixings, Variables, Partials
 
 ## Security in Front-end...
 #### :lock::lock: &nbsp; <b>Security is a very important task when creating an App, so I have given a few features to make sure OldCar is not vulnerable at all.</b> &nbsp; :lock::lock: <br /> 
@@ -38,7 +38,7 @@ A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awes
 
 ## Demo...
 ### Multi search...
-As mentioned before multi search is done in tow sections of OldCar keeping search when going throgh details page for each car and refreshing your search details when reaching home page.
+As mentioned before multi search is done in tow sections of OldCar keeping search when going through details page for each car and refreshing your search details when reaching home page.
 
 <img src="./public/gif/multiSearch.gif" />
 

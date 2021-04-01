@@ -39,7 +39,7 @@ export const isValidType = (e) => {
 };
 
 export const isValidAddress = (e) => {
-  const textValid = /^([A-Za-z0-9-_/.´, ]){1,42}$/;
+  const textValid = /^([A-Za-z0-9-_/., ]){1,42}$/;
 
   if (!textValid.test(e.target.value)) {
     alert('El texto acepta al menos 42 caracteres alfabéticos');

@@ -29,8 +29,6 @@ const EditPage = () => {
       password: ''
     });
 
-    console.log(editForm);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditForm(prevState => ({ ...prevState, [name]: value }));
