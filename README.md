@@ -1,8 +1,8 @@
 # OldCar App 
 ### Final project of Full Stack Development Bootcamp at CodeSpace(Malaga).
 
-## This project...
-Front-end side of OldCar App, designed for people who loves classic cars, with lots of different brands and models. Built as user oriented for easily manage your favourites adverts, handling your own cars to be published, and even if you are not user registered you can put online your jewells on wheels. In this App communication is really important, so that's why email service is up and running for all users (Not/Yes) registered to keep in toush with OldCar Support team and owners who have left their credentials in the add.
+## About this project...
+Front-end side of OldCar App, designed for people who loves classic cars, with lots of different brands and models. Built as user oriented for easily manage your favourites adverts, handling your own cars to be published, and even if you are not user registered you can put online your jewells on wheels. In this App communication is really important, so that's why email service is up and running for all users (Not/Yes) registered to keep in touch with OldCar Support team and owners who have left their credentials in the add.
 
 Furthermore, there is an ADMIN area where user assigned with that role will be able to have a general overview of registered movements, being able to remove all users/cars who are not active in OldCar DDBB.
 
@@ -33,7 +33,7 @@ As mentioned before multi search is done in tow sections of OldCar keeping searc
 
 <img src="./public/gif/multiSearch.gif" />
 
-### As a User...
+### Logged User...
 Clear example of how to manage your own site at OldCar App, just a few clicks to create your profile as you want, with favourites and cars published with details that you want.
 
 <img src="./public/gif/user.gif" />
@@ -43,7 +43,7 @@ Admin is the most powerful role at OldCar as you can manage all profiles around,
 
 <img src="./public/gif/admin.gif" />
 
-## App General Structure
+## App General Structure...
 
 <div align="center">
 
@@ -59,6 +59,8 @@ Admin is the most powerful role at OldCar as you can manage all profiles around,
 * `$git clone https://github.com/JoseMMorales/OldCar.git`
 * `$cd OldCar`
 * `$npm install`
+* `sass --watch src/scss/styles.scss:build/css/styles.css`
+* Open a new window terminal
 * `$npm start`
 
 ## Technologies: 

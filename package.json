@@ -14,8 +14,7 @@
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-router-hash-link": "^2.4.0",
-    "react-scripts": "4.0.1",
-    "sass": "^1.32.8"
+    "react-scripts": "4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "sass": "^1.32.8"
+  }
 }
