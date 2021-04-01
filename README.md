@@ -14,7 +14,7 @@ Furthermore, there is an ADMIN area where user assigned with that role will be a
 :point_right: &nbsp; (Not registered) Publish cars, all details are ready for publishing (content, images), confirmation email will be sent through after all successful proccess is been completed.<br />
 :point_right: &nbsp; Admin Area, very specific area not available for all users as you should be assigned in your role.<br />
 
-## OldCar Stylessheet... 
+## OldCar Stylesheet... 
 A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awesome Style Sheets) for a stable and reusable system, each component has their own SCSS file in case there is any reason to use it in the future. Generally, the two pillars of this framework are [FlexBox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) and [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) for responsiveness in order to adapt the design to all devices.
 
 #### Sass goodies used...
@@ -29,12 +29,18 @@ A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awes
 
 ## Demo...
 ### Multi search...
+As mentioned before multi search is done in tow sections of OldCar keeping search when going throgh details page for each car and refreshing your search details when reaching home page.
+
 <img src="./public/gif/multiSearch.gif" />
 
 ### As a User...
+Clear example of how to manage your own site at OldCar App, just a few clicks to create your profile as you want, with favourites and cars published with details that you want.
+
 <img src="./public/gif/user.gif" />
 
 ### As Admin...
+Admin is the most powerful role at OldCar as you can manage all profiles around, modifying the ones that are not active.
+
 <img src="./public/gif/admin.gif" />
 
 ## Installing
