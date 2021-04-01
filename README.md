@@ -21,13 +21,13 @@ Furthermore, there is an ADMIN area where user assigned with that role will be a
 To extract stateful logic from components, Hooks is perfect, so not hierarchy changing is need to share it among many components.
 
 ### Hooks goodies used...
-:fishing_pole_and_fish: useHistory, useLocation, useState, useEffect, and useRef.
+:fishing_pole_and_fish: &nbsp; useHistory, useLocation, useState, useEffect, and useRef.
 
 ## OldCar Stylesheet... 
 A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awesome Style Sheets) for a stable and reusable system, each component has their own SCSS file in case there is any reason to use it in the future. Generally, the two pillars of this framework are [FlexBox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) and [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox) for responsiveness in order to adapt the design to all devices.
 
 ### Sass goodies used...
-:lollipop: Nesting, Mixins, Variables, Partials
+:lollipop: &nbsp; Nesting, Mixins, Variables, Partials
 
 ## Security in Front-end...
 #### :lock::lock: &nbsp; <b>Security is a very important task when creating an App, so I have given a few features to make sure OldCar is not vulnerable at all.</b> &nbsp; :lock::lock: <br /> 
