@@ -9,12 +9,12 @@ In OldCar communication is really important, so that's why email service is up a
 Furthermore, there is an ADMIN area where user assigned with that role will have a general overview of all activities, being able to remove all users/cars who are not active in OldCar DDBB.
 
 ### Everything you can do in OldCar...   
-:heavy_minus_sign: &nbsp; <b>Multi search:</b> It is a combination of 6 different parameters(Selects/Inputs) to be more accurate in your research.<br />
-:heavy_minus_sign: &nbsp; <b>Register and Login: </b> Create accounts with your details and having access to them.<br />
-:heavy_minus_sign: &nbsp; <b>Favourites:</b> Make your own list of cars you are in love with, it will be displayed in you user area.<br />
-:heavy_minus_sign: &nbsp; <b>To publish cars as a registered user:</b> Publish and edit your own cars, it will be possible to update content and images.<br />
-:heavy_minus_sign: &nbsp; <b>To publish cars as a NOT registered user:</b> Publish and edit your own cars with all details needed, a confirmation email will be sent through after all successful process is been completed.<br />
-:heavy_minus_sign: &nbsp; <b>Admin Area:</b> Very specific area not available for all users as you should be assigned in your role. If so, you can delete account/cars not active.<br />
+:point_right: &nbsp; <b>Multi search:</b> It is a combination of 6 different parameters(Selects/Inputs) to be more accurate in your research.<br />
+:point_right: &nbsp; <b>Register and Login: </b> Create accounts with your details and having access to them.<br />
+:point_right: &nbsp; <b>Favourites:</b> Make your own list of cars you are in love with, it will be displayed in you user area.<br />
+:point_right: &nbsp; <b>To publish cars as a registered user:</b> Publish and edit your own cars, it will be possible to update content and images.<br />
+:point_right: &nbsp; <b>To publish cars as a NOT registered user:</b> Publish and edit your own cars with all details needed, a confirmation email will be sent through after all successful process is been completed.<br />
+:point_right: &nbsp; <b>Admin Area:</b> Very specific area not available for all users as you should be assigned in your role. If so, you can delete account/cars not active.<br />
 
 ## Front End Stack...
 <div align="center">
