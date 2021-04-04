@@ -67,6 +67,10 @@
     }
   }
 
+  .top-heading-details {
+    @include flex-structure(column, none, none, none);
+  }
+
   .contact-details {
     margin-top: 4rem;
   }
