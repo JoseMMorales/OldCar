@@ -3,6 +3,7 @@ import {
   isValidEmail,
   isValidTlf,
   isValidType,
+  isValidAddress,
   isValidText } from '../../../../Utils/FormValidations';
 
 
@@ -82,7 +83,7 @@ function PublishPersonalDetails({
         type='text'
         onBlur={ (e) => {
           if(PublishValueAddress) {
-            !isValidText(e) &&
+            !isValidAddress(e) &&
             setUserInput(prevState => ({...prevState, address: ''}));
           }
         }}
