@@ -12,7 +12,7 @@ const LoginPage= () => {
     <div id='login'>
       <HeroSecondary
       src={data.heroSecundaryURL.login_URL}
-      text='Hazte ya Usuario...'
+      text='Hazte ya usuario...'
       />
       <div className='container'>
         <div className='forms-container'>
