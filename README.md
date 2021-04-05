@@ -47,7 +47,7 @@ A framework is been built with [Sass](https://sass-lang.com/)(Syntactically Awes
 As mentioned before multi search is done in tow sections of OldCar keeping search when going through details page for each car and refreshing your search details when reaching home page.
 
 <div align="center">
-  <img src="./public/gif/multisearch.gif" />
+  <img src="./public/gif/multiSearch.gif" />
 </div>
 
 ### Logged User...
