@@ -56,6 +56,7 @@ const initialValue = {
 const ContextProvider = (props) => {
   const [data, setData] = useState(initialValue);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [screenInnerWith, setScreenInnerWith] = useState(0);
   const [isAdmin, setIsAdmin] = useState(false);
 
   let location = useLocation();
@@ -63,6 +64,8 @@ const ContextProvider = (props) => {
   useEffect(() => {
     setIsAuthenticated(localStorage.isAuthenticated);
     setIsAdmin(localStorage.admin);
+    let intViewportWidth = window.innerWidth;
+    setScreenInnerWith(intViewportWidth);
   }, [location]);
 
   const getUserData = () => {
@@ -100,7 +103,7 @@ const ContextProvider = (props) => {
         setData(prevState => ({ ...prevState, favourites: res}));
       })
       .catch( e => console.log(e))
-  }
+  };
 
   const numberWithDots = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
@@ -120,6 +123,7 @@ const ContextProvider = (props) => {
         setData,
         getUserData,
         isAuthenticated,
+        screenInnerWith,
         isAdmin,
         numberWithDots,
         scrollWithOffset
