@@ -1,6 +1,9 @@
+import { Context } from '../../Context';
 import { motion } from 'framer-motion';
+import { useContext } from 'react';
 
 const HeroSecondary = ({ src, text, imgClass }) => {
+  const { screenInnerWith } = useContext(Context);
 
   return (
       <div
@@ -8,7 +11,7 @@ const HeroSecondary = ({ src, text, imgClass }) => {
         style={{backgroundImage: src }}>
         <motion.h1
           className='caption-hero'
-          initial={{x: 1000}}
+          initial={{x: screenInnerWith}}
           animate={{x: 0}}
           transition={{
             type: 'spring',
@@ -16,13 +19,13 @@ const HeroSecondary = ({ src, text, imgClass }) => {
           }}>
           {text}
         </motion.h1>
-          <motion.img className={`car-hero ${imgClass}`}
-            src='/img/car.png'
-            alt='car-img'
-            initial={{x: -1000}}
-            animate={{x: 15}}
-            transition={{delay: 0.5, default: { duration: 4 }}}
-          />
+        <motion.img className={`car-hero ${imgClass}`}
+          src='/img/car.png'
+          alt='car-img'
+          initial={{x: -(screenInnerWith)}}
+          animate={{x: 15}}
+          transition={{default: { duration: 4 }}}
+        />
       </div>
   )
 }
