@@ -32,7 +32,7 @@ const Navbar = () => {
     <>
       <nav className='navbar bg-light dark-color'>
         <div className='brand-title' onClick={handleClick}>
-          Old<span className='main-color'>Car</span>
+          <img className='image-logo' src="/img/OldCarLogo.png" alt=""/>
         </div>
         <a
           className='toggle-button'

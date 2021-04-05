@@ -8,8 +8,14 @@
 }
 
 .brand-title {
-  font-size: 1.5rem;
-  margin: .5rem;
+  height: 3rem;
+}
+
+.image-logo {
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  max-width: 140px;
 }
 
 .navbar-list {
@@ -49,12 +55,25 @@
   .nav-link {
     padding: 1rem .8rem;
   }
+
+  .image-logo {
+    width: 120px;
+    top: .1rem;
+    left: .5rem;
+  }
 }
 
 @media (max-width: $change-device) {
-	.navbar { @include flex-structure(column, none, flex-start, none); }
+	.navbar {
+    @include flex-structure(column, none, flex-start, none);
+  }
+
   .toggle-button {
     @include flex-structure(column, none, center, space-between);
+  }
+
+  .image-logo {
+    width: 100px;
   }
 
   .navbar-links {
@@ -70,4 +89,10 @@
     flex-direction: column;
   }
   .li-navbar { text-align: center; }
+}
+
+@media (max-width: $small-device) {
+	.image-logo {
+    width: 80px;
+  }
 }

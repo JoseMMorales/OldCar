@@ -1,7 +1,5 @@
 import { isValidNumber, isValidText } from '../../../../Utils/FormValidations';
 import { Input } from '../../../../Components/Generic';
-import { Context } from '../../../../Context';
-import { useContext } from 'react';
 
 const PublishCarDetails = ({
   user,
@@ -12,7 +10,6 @@ const PublishCarDetails = ({
   setUserInput,
   setUpdateInput
   }) => {
-  const { numberWithDots } = useContext(Context);
 
   return (
     <>
@@ -66,9 +63,9 @@ const PublishCarDetails = ({
         labelClassName='grey-color'
         type='number'
         value={
-          (!user && numberWithDots(userInput.km)) ||
-          (user && CarNotPublished && numberWithDots(userInput.km)) ||
-          (user && !CarNotPublished && numberWithDots(updateInput.km)) || ''
+          (!user && userInput.km) ||
+          (user && CarNotPublished && userInput.km) ||
+          (user && !CarNotPublished && updateInput.km) || ''
         }
         onBlur={ (e) => {
           if(userInput.km) {
@@ -90,9 +87,9 @@ const PublishCarDetails = ({
         labelClassName='grey-color'
         type='number'
         value={
-          (!user && numberWithDots(userInput.price)) ||
-          (user && CarNotPublished && numberWithDots(userInput.price)) ||
-          (user && !CarNotPublished && numberWithDots(updateInput.price)) || ''
+          (!user && userInput.price) ||
+          (user && CarNotPublished && userInput.price) ||
+          (user && !CarNotPublished && updateInput.price) || ''
         }
         onBlur={ (e) => {
           if(userInput.price) {
@@ -114,9 +111,9 @@ const PublishCarDetails = ({
         labelClassName='grey-color'
         type='number'
         value={
-          (!user && numberWithDots(userInput.year)) ||
-          (user && CarNotPublished && numberWithDots(userInput.year)) ||
-          (user && !CarNotPublished && numberWithDots(updateInput.year))|| ''
+          (!user && userInput.year) ||
+          (user && CarNotPublished && userInput.year) ||
+          (user && !CarNotPublished && updateInput.year) || ''
         }
         onBlur={ (e) => {
           if(userInput.year) {

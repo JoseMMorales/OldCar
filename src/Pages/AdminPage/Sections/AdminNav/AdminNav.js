@@ -8,7 +8,7 @@ const AdminNav = ({
   return (
     <div className='admin-heading'>
       <ul className='list-navbar'>
-        <li>
+        <li className='first-child'>
           <a
             className='list-admin-element'
             onClick={ () => {

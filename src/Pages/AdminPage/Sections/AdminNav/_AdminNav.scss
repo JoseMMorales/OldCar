@@ -3,6 +3,10 @@
   padding: 1rem;
   margin: 0;
   background-color: $bg-grey-Slight;
+
+  .first-child {
+    margin-left: 9.5rem;
+  }
 }
 
 .list-admin-element {

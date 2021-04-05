@@ -139,7 +139,12 @@ const Search = ( { pathName, showResults, className } ) => {
             )
           }
         </div>
-        <div className='search-wrapper' key='search-wrapper'>
+        <div  className={
+                `${showResults ?
+                  'search-wrapper' :
+                  'search-wrapper-home'} search-total-style`
+              }
+              key='search-wrapper'>
           <Select
             name='brand'
             className='brand-select dark-color'
@@ -179,7 +184,7 @@ const Search = ( { pathName, showResults, className } ) => {
             placeholder='Km'
             type='number'
             inputName='km'
-            value={numberWithDots(selectState.km)}
+            value={selectState.km}
             labelClassName='label-input-name'
             onChange={handleInput}
             onBlur={ (e) => {
@@ -195,7 +200,7 @@ const Search = ( { pathName, showResults, className } ) => {
             placeholder='Año'
             type='number'
             inputName='year'
-            value={numberWithDots(selectState.year)}
+            value={selectState.year}
             labelClassName='label-input-name'
             onChange={handleInput}
             onBlur={ (e) => {
@@ -211,7 +216,7 @@ const Search = ( { pathName, showResults, className } ) => {
             placeholder='Precio'
             type='number'
             inputName='price'
-            value={numberWithDots(selectState.price)}
+            value={selectState.price}
             labelClassName='label-input-name'
             onChange={handleInput}
             onBlur={ (e) => {

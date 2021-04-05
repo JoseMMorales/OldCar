@@ -1,14 +1,27 @@
 .hero {
-  @include flex-structure(none, none, flex-start, center);
+  @include flex-structure(none, none, flex-end, flex-end);
 
   height: 93vh;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
 }
 
 .search-home {
-  width: 75%;
+  width: 30%;
   margin-top: .5rem;
+}
+
+@media (max-width: $medium-device) {
+  .search-home {
+    width: 100%;
+  }
+}
+
+@media (max-width: $small-device) {
+  .hero {
+    height: 160vh;
+    background-position: -514px;
+  }
 }
