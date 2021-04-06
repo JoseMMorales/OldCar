@@ -9,7 +9,7 @@ const PublishHeading = ({
         (CarNotPublished || !user)  &&
         <div className='heading-publish'>
           <h1 className='main-heading grey-color'>
-            Publica tu anunio en Old
+            Publica tu anuncio en Old
             <span className='main-color'>Car</span>
           </h1>
           <p>
@@ -27,7 +27,7 @@ const PublishHeading = ({
         (user && !CarNotPublished) &&
         <div className='heading-publish'>
           <h1 className='main-heading grey-color'>
-            Edita tu anunio en Old
+            Edita tu anuncio en Old
             <span className='main-color'>Car</span>
           </h1>
           <p>

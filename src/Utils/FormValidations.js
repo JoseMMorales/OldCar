@@ -105,8 +105,8 @@ export const isValidNumber = (e) => {
 export const isValidShortDescription = (e) => {
   const textValue = e.target.value.length;
 
-  if (textValue >= 50) {
-    alert('Solo se aceptan 50 caracteres en la descripción');
+  if (textValue >= 80) {
+    alert('Solo se aceptan 80 caracteres en la descripción');
     return false;
   }
   return true;
@@ -115,8 +115,8 @@ export const isValidShortDescription = (e) => {
 export const isValidLongDescription = (e) => {
   const textValue = e.target.value.length;
 
-  if (textValue >= 150) {
-    alert('Solo se aceptan 150 caracteres en la descripción');
+  if (textValue >= 250) {
+    alert('Solo se aceptan 250 caracteres en la descripción');
     return false;
   }
   return true;
